@@ -1,0 +1,38 @@
+/*
+Custom Css
+*/
+@font-face {
+    font-family: Pokemon-Hollow;
+    src: url("../webfonts/Pokemon-Hollow.woff") format('woff');
+}
+@font-face {
+    font-family: Pokemon-Solid;
+    src: url("../webfonts/Pokemon-Solid.woff") format('woff');
+}
+
+:root {
+    --pokemon-blue: #3565AE;
+    --pokemon-yellow: #FFCB05;
+}
+
+/* 메인 헤더 로고 */
+.pokemon {
+    font-family: Pokemon-Solid !important;
+    color: var(--pokemon-yellow) !important;
+
+    font-weight: bold !important;
+}
+.pokemon::before {
+    position: absolute;
+    content: attr(data-before-text);
+    font-family: Pokemon-Hollow !important;
+    color: var(--pokemon-blue) !important;
+}
+/* 메인 헤더 로고 소제목 */
+.pokemon#subtitle {
+    margin-left: 4rem;
+}
+/* 푸터 로고 소제목 */
+#tempaltemo_footer .pokemon#subtitle {
+    margin-left: 30px;
+}

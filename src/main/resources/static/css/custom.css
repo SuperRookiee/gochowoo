@@ -3,11 +3,11 @@ Custom Css
 */
 @font-face {
     font-family: Pokemon-Hollow;
-    src: url("Pokemon-Hollow.woff") format('woff');
+    src: url("../webfonts/Pokemon-Hollow.woff") format('woff');
 }
 @font-face {
     font-family: Pokemon-Solid;
-    src: url("Pokemon-Solid.woff") format('woff');
+    src: url("../webfonts/Pokemon-Solid.woff") format('woff');
 }
 
 :root {
@@ -17,7 +17,7 @@ Custom Css
 
 /* 메인 헤더 로고 */
 .pokemon {
-    font-family: Pokemon-Solid !important;
+    font-family: Pokemon-Solid, serif !important;
     color: var(--pokemon-yellow) !important;
 
     font-weight: bold !important;
@@ -25,14 +25,15 @@ Custom Css
 .pokemon::before {
     position: absolute;
     content: attr(data-before-text);
-    font-family: Pokemon-Hollow !important;
+    font-family: Pokemon-Hollow, serif !important;
     color: var(--pokemon-blue) !important;
 }
 /* 메인 헤더 로고 소제목 */
-.pokemon#subtitle {
+.pokemon.subtitle {
     margin-left: 4rem;
+    margin-bottom: 0;
 }
 /* 푸터 로고 소제목 */
-#tempaltemo_footer .pokemon#subtitle {
+#tempaltemo_footer .pokemon.subtitle {
     margin-left: 30px;
 }

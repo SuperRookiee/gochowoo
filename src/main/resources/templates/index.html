@@ -1,11 +1,229 @@
 <!DOCTYPE html>
-<html xmlns: xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
-<body>
-<p th:text="'안녕하세요. ' + ${data}" >안녕하세요. 손님</p>
-</body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+    <!-- Start Banner Hero -->
+    <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="row p-5">
+                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                            <img class="img-fluid-banner" th:src="@{/img/pockemon/이상해씨.png}" alt="">
+                        </div>
+                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                            <div class="text-align-left align-self-center">
+                                <h1 class="h1 text-success"><b>이상해씨</b> 0001</h1>
+                                <h3 class="h2">풀 속성 포켓몬</h3>
+                                <p>
+                                    이상해씨는 포켓몬스터(Pokémon) 시리즈에 등장하는 풀 속성의 포켓몬입니다.
+                                    그 독특한 모습과 생김새로 많은 이들의 마음을 사로잡았습니다.
+                                    <a class="text-success" href="https://pokemonkorea.co.kr/pokedex/view/1?word=&characters=&area=&snumber=1&snumber2=1010&typetextcs=&sortselval=number%20asc,number_count%20asc">
+                                        이상해씨</a>는 작은 몸체에 큰 잎을 가지고 있으며, 햇빛을 받으면 성장하는 특성을 가지고 있습니다.
+                                    초목을 가득히 품고 있는 등의 외모와는 다르게 매우 온화하고 친근한 성격을 가지고 있습니다.
+                                    이상해씨는 시간이 흐르면 이상해풀로 진화하고, 더욱 강력한 특성과 능력을 획득하게 됩니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="row p-5">
+                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                            <img class="img-fluid-banner" th:src="@{/img/pockemon/파이리.png}" alt="">
+                        </div>
+                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                            <div class="text-align-left align-self-center">
+                                <h1 class="h1 text-success"><b>파이리</b> 0004</h1>
+                                <h3 class="h2">불 속성 포켓몬</h3>
+                                <p>
+                                    파이리는 포켓몬스터(Pokémon) 시리즈에 등장하는 불 속성의 포켓몬입니다.
+                                    이 작고 귀여운 포켓몬은 작은 꼬리의 불꽃을 태우고 있어 불꽃을 뿜을 때 불꽃을 내뿜습니다.
+                                    불 속성 특유의 열정과 에너지를 지닌 파이리는 매력적인 포켓몬 중 하나입니다.
+                                    <a class="text-success" href="https://pokemonkorea.co.kr/pokedex/view/6?word=&characters=&area=&snumber=1&snumber2=1010&typetextcs=&sortselval=number%20asc,number_count%20asc">
+                                        파이리</a>는 불꽃을 조절하여 자신을 보호하거나 공격하는 데 사용합니다.
+                                    화염을 다루는 능력을 가진 파이리는 시간이 흐르면 불꽃을 내뿜는 힘이 강해져 진화하여 리자드, 그리고 최종 진화로는 리자몽으로 진화할 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="row p-5">
+                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                            <img class="img-fluid-banner" th:src="@{/img/pockemon/꼬부기.png}" alt="">
+                        </div>
+                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                            <div class="text-align-left align-self-center">
+                                <h1 class="h1 text-success"><b>꼬부기</b> 0007</h1>
+                                <h3 class="h2">물 속성 포켓몬</h3>
+                                <p>
+                                    꼬부기는 포켓몬스터(Pokémon) 시리즈에 등장하는 물 속성의 포켓몬입니다.
+                                    등에 큰 껍질을 쓴 모습이 특징이며, 이 껍질은 자신을 보호하는 역할을 합니다.
+                                    <a class="text-success" href="https://pokemonkorea.co.kr/pokedex/view/12?word=&characters=&area=&snumber=1&snumber2=1010&typetextcs=&sortselval=number%20asc,number_count%20asc">
+                                        꼬부기</a>는 자연적인 수영 능력을 가지고 있어 물에서 뛰어난 힘과 민첩성을 발휘합니다.
+                                    성장하면서 껍질도 함께 커지며, 최종 진화로는 거북왕으로 진화할 수 있습니다.
+                                    꼬부기는 안정적이고 신중한 성격을 가지고 있는 포켓몬 중 하나입니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+    <!-- End Banner Hero -->
+
+
+    <!-- Start Categories of The Month -->
+    <section class="container py-5">
+        <div class="row text-center pt-3">
+            <div class="col-lg-8 m-auto">
+                <h1 class="h1">Categories of The Pokémon</h1>
+                <p>
+                    "Categories of The Pokémon" provides insights into the diverse classifications of Pokémon, offering players a glimpse into their unique traits and aiding strategic exploration.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#normal">
+                    <div class="icon normal">
+                        <img th:src="@{/img/type/normal.svg}"/>
+                    </div>
+                </a>
+                <h5 class="text-center mt-3 mb-3">Normal</h5>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#fire">
+                    <div class="icon fire">
+                        <img th:src="@{/img/type/fire.svg}"/>
+                    </div>
+                </a>
+                <h5 class="text-center mt-3 mb-3">Fire</h5>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#grass">
+                    <div class="icon grass">
+                        <img th:src="@{/img/type/grass.svg}"/>
+                    </div>
+                </a>
+                <h5 class="text-center mt-3 mb-3">Grass</h5>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#water">
+                    <div class="icon water">
+                        <img th:src="@{/img/type/water.svg}"/>
+                    </div>
+                </a>
+                <h5 class="text-center mt-3 mb-3">Water</h5>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#electric">
+                    <div class="icon electric">
+                        <img th:src="@{/img/type/electric.svg}"/>
+                    </div>
+                </a>
+                <h5 class="text-center mt-3 mb-3">Electric</h5>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#rock">
+                    <div class="icon rock">
+                        <img th:src="@{/img/type/rock.svg}"/>
+                    </div>
+                </a>
+                <h5 class="text-center mt-3 mb-3">Rock</h5>
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+
+
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-8 m-auto">
+                    <h1 class="h1">Popular Pokémon</h1>
+                    <p>
+                        Discover the Trendiest Selections That Everyone Loves.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a class="p-2" href="shop-single.html">
+                            <img th:src="@{/img//pockemon/피카츄.png}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body electric">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li><b>전기</b> 타입</li>
+                                <li class="text-muted text-right">₽240</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">피카츄</a>
+                            <p class="card-text">
+                                양 볼에는 전기를 저장하는 주머니가 있다. 화가 나면 저장한 전기를 단숨에 방출한다.                            </p>
+                            <p class="text-muted">Reviews (24)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a class="p-2" href="shop-single.html">
+                            <img th:src="@{/img//pockemon/뮤.png}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body psychic">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li><b>에스퍼</b> 타입</li>
+                                <li class="text-muted text-right">₽480</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">뮤</a>
+                            <p class="card-text">
+                                모든 기술을 사용하기 때문에 포켓몬의 조상이라고 생각하는 학자가 많다.
+                            </p>
+                            <p class="text-muted">Reviews (48)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a class="p-2" href="shop-single.html">
+                            <img th:src="@{/img//pockemon/잠만보.png}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body normal">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li><b>노말</b> 타입</li>
+                                <li class="text-muted text-right">₽360</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">잠만보</a>
+                            <p class="card-text">
+                                빨간 더듬이로부터 냄새를 내어 상대를 쫓아 버린다. 탈피를 반복하여 자라난다.
+                            </p>
+                            <p class="text-muted">Reviews (74)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Featured Product -->
+</main>
 </html>

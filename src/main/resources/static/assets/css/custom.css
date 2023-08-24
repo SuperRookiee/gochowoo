@@ -3,11 +3,11 @@ Custom Css
 */
 @font-face {
     font-family: Pokemon-Hollow;
-    src: url("../webfonts/Pokemon-Hollow.woff") format('woff');
+    src: url("Pokemon-Hollow.woff") format('woff');
 }
 @font-face {
     font-family: Pokemon-Solid;
-    src: url("../webfonts/Pokemon-Solid.woff") format('woff');
+    src: url("Pokemon-Solid.woff") format('woff');
 }
 
 :root {

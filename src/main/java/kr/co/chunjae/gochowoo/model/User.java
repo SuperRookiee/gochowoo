@@ -1,17 +1,16 @@
 package kr.co.chunjae.gochowoo.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "t_user")
-@Getter@Setter
-public class User {
+@Entity @Table(name = "t_user")
+@Getter @Setter
+@Builder @NoArgsConstructor @AllArgsConstructor
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -22,11 +21,7 @@ public class User {
     private String password;
     @Column(nullable = false, unique = true, length = 30)
     private String email;
-    @CreatedDate
-    private LocalDateTime createdDate;
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
-    @Column(nullable = false)
+    @Column @Builder.Default
     private Long cash = 0L;
 
 }

@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <h2 class="mb-4">로그인</h2>
-                <form>
+                <form action="/api/user/login" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">이메일</label>
                         <input name="email" type="email" class="form-control" id="email"
@@ -19,7 +19,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
-                <p class="mt-3">Don't have an account? <a href="/user/join">Sign Up</a></p>
+                <p class="mt-3">계정이 없으세요? <a href="/user/join">넌 내꺼야!</a></p>
             </div>
         </div>
     </div>

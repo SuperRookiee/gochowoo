@@ -37,3 +37,7 @@ Custom Css
 #tempaltemo_footer .pokemon.subtitle {
     margin-left: 30px;
 }
+
+.hidden {
+    display: none;
+}

@@ -27,5 +27,4 @@ public enum Type {
 
     final String ko;
     final String eng;
-
 }

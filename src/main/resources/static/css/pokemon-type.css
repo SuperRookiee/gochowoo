@@ -18,74 +18,57 @@
     margin: 20%;
 }
 
-.bug {
-    background: #92BC2C;
-}
+/* Color */
+.bg_bug { background: #92BC2C !important; }
+.tx_bug { color: #92BC2C !important; }
 
-.dark {
-    background: #595761;
-}
+.bg_dark { background: #595761 !important; }
+.tx_dark { color: #595761 !important; }
 
-.dragon {
-    background: #0C69C8;
-}
+.bg_dragon { background: #0C69C8 !important; }
+.tx_dragon { color: #0C69C8 !important; }
 
-.electric {
-    background: #F2D94E;
-}
+.bg_electric { background: #F2D94E !important; }
+.tx_electric { color: #F2D94E !important; }
 
-.fire {
-    background: #FBA54C;
-}
+.bg_fire { background: #FBA54C !important; }
+.tx_fire { color: #FBA54C !important; }
 
-.fairy {
-    background: #EE90E6;
-}
+.bg_fairy { background: #EE90E6 !important; }
+.tx_fairy { color: #EE90E6 !important; }
 
-.fighting {
-    background: #D3425F;
-}
+.bg_fighting { background: #D3425F !important; }
+.tx_fighting { color: #D3425F !important; }
 
-.flying {
-    background: #A1BBEC;
-}
+.bg_flying { background: #A1BBEC !important; }
+.tx_flying { color: #A1BBEC !important; }
 
-.ghost {
-    background: #5F6DBC;
-}
+.bg_ghost { background: #5F6DBC !important; }
+.tx_ghost { color: #5F6DBC !important; }
 
-.grass {
-    background: #5FBD58;
-}
+.bg_grass {background: #5FBD58 !important; }
+.tx_grass { color: #5FBD58 !important; }
 
-.ground {
-    background: #DA7C4D;
-}
+.bg_ground { background: #DA7C4D !important; }
+.tx_ground { color: #DA7C4D !important; }
 
-.ice {
-    background: #75D0C1;
-}
+.bg_ice { background: #75D0C1 !important; }
+.tx_ice { color: #75D0C1 !important; }
 
-.normal {
-    background: #A0A29F;
-}
+.bg_normal { background: #A0A29F !important; }
+.tx_normal { color: #A0A29F !important; }
 
-.poison {
-    background: #B763CF;
-}
+.bg_poison { background: #B763CF !important; }
+.tx_poison { color: #B763CF !important; }
 
-.psychic {
-    background: #FA8581;
-}
+.bg_psychic { background: #FA8581 !important; }
+.tx_psychic { color: #FA8581 !important; }
 
-.rock {
-    background: #C9BB8A;
-}
+.bg_rock { background: #C9BB8A !important; }
+.tx_rock {color: #C9BB8A !important; }
 
-.steel {
-    background: #5695A3;
-}
+.bg_steel { background: #5695A3 !important; }
+.tx_steel { color: #5695A3 !important; }
 
-.water {
-    background: #539DDF;
-}
+.bg_water { background: #539DDF !important; }
+.tx_water { color: #539DDF !important; }

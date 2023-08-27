@@ -2,63 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{layout/layout}">
-
 <main layout:fragment="content">
     <!-- Start Content -->
     <section class="container py-5">
         <div class="row">
-
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Categories</h1>
                 <ul class="list-unstyled templatemo-accordion">
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            ₽rice
+                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul id="collapsePrice" class="collapse list-unstyled pl-3">
+                            <li><input type="radio" name="price-range" value="all" id="price_all" class="text-decoration-none" checked><label for="price_all" class="text-decoration-none">All</label></li>
+                            <li><input type="radio" name="price-range" value="low" id="price_low" class="text-decoration-none"><label for="price_low" class="text-decoration-none">~ ₽500</label></li>
+                            <li><input type="radio" name="price-range" value="medium" id="price_medium" class="text-decoration-none"><label for="price_medium" class="text-decoration-none">₽501 ~ 999</label></li>
+                            <li><input type="radio" name="price-range" value="high" id="price_high" class="text-decoration-none"><label for="price_high" class="text-decoration-none">₽1000 ~</label></li>
+                        </ul>
+                    </li>
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Type
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none tx_normal icon_normal" href="#normal">노멀 (Normal)</a></li>
-                            <li><a class="text-decoration-none tx_fire" href="#fire">불 (Fire)</a></li>
-                            <li><a class="text-decoration-none tx_water" href="#water">물 (Water)</a></li>
-                            <li><a class="text-decoration-none tx_electric" href="#electric">전기 (Electric)</a></li>
-                            <li><a class="text-decoration-none tx_grass" href="#grass">풀 (Grass)</a></li>
-                            <li><a class="text-decoration-none tx_ice" href="#ice">얼음 (Ice)</a></li>
-                            <li><a class="text-decoration-none tx_fighting" href="#fighting">격투 (Fighting)</a></li>
-                            <li><a class="text-decoration-none tx_poison" href="#poison">독 (Poison)</a></li>
-                            <li><a class="text-decoration-none tx_ground" href="#ground">땅 (Ground)</a></li>
-                            <li><a class="text-decoration-none tx_flying" href="#flying">비행 (Flying)</a></li>
-                            <li><a class="text-decoration-none tx_psychic" href="#psychic">에스퍼 (Psychic)</a></li>
-                            <li><a class="text-decoration-none tx_bug" href="#bug">벌레 (Bug)</a></li>
-                            <li><a class="text-decoration-none tx_rock" href="#rock">바위 (Rock)</a></li>
-                            <li><a class="text-decoration-none tx_ghost" href="#ghost">고스트 (Ghost)</a></li>
-                            <li><a class="text-decoration-none tx_dragon" href="#dragon">드래곤 (Dragon)</a></li>
-                            <li><a class="text-decoration-none tx_dark" href="#dark">악 (Dark)</a></li>
-                            <li><a class="text-decoration-none tx_steel" href="#steel">강철 (Steel)</a></li>
-                            <li><a class="text-decoration-none tx_fairy" href="#fairy">페어리 (Fairy)</a></li>
+                        <ul class="collapse show list-unstyled pl-3" id="Categories_Type">
+                            <li class="tx_normal"><input type="checkbox" value="NORMAL" id="chk_normal">        <label for="chk_normal">노멀 (Normal)</label></li>
+                            <li class="tx_fire"><input type="checkbox" value="FIRE" id="chk_fire">              <label for="chk_fire">불 (Fire)</label></li>
+                            <li class="tx_water"><input type="checkbox" value="WATER" id="chk_water">           <label for="chk_water">물 (Water)</label></li>
+                            <li class="tx_electric"><input type="checkbox" value="ELECTRIC" id="chk_electric">  <label for="chk_electric">전기 (Electric)</label></li>
+                            <li class="tx_grass"><input type="checkbox" value="GRASS" id="chk_grass">           <label for="chk_grass">풀 (Grass)</label></li>
+                            <li class="tx_ice"><input type="checkbox" value="ICE" id="chk_ice">                 <label for="chk_ice">얼음 (Ice)</label></li>
+                            <li class="tx_fighting"><input type="checkbox" value="FIGHTING" id="chk_fighting">  <label for="chk_fighting">격투 (Fighting)</label></li>
+                            <li class="tx_poison"><input type="checkbox" value="POISON" id="chk_poison">        <label for="chk_poison">독 (Poison)</label></li>
+                            <li class="tx_ground"><input type="checkbox" value="GROUND" id="chk_ground">        <label for="chk_ground">땅 (Ground)</label></li>
+                            <li class="tx_flying"><input type="checkbox" value="FLYING" id="chk_flying">        <label for="chk_flying">비행 (Flying)</label></li>
+                            <li class="tx_psychic"><input type="checkbox" value="PSYCHIC" id="chk_psychic">     <label for="chk_psychic">에스퍼 (Psychic)</label></li>
+                            <li class="tx_bug"><input type="checkbox" value="BUG" id="chk_bug">                 <label for="chk_bug">벌레 (Bug)</label></li>
+                            <li class="tx_rock"><input type="checkbox" value="ROCK" id="chk_rock">              <label for="chk_rock">바위 (Rock)</label></li>
+                            <li class="tx_ghost"><input type="checkbox" value="GHOST" id="chk_ghost">           <label for="chk_ghost">고스트 (Ghost)</label></li>
+                            <li class="tx_dragon"><input type="checkbox" value="DRAGON" id="chk_dragon">        <label for="chk_dragon">드래곤 (Dragon)</label></li>
+                            <li class="tx_dark"> <input type="checkbox" value="DARK" id="chk_dark">              <label for="chk_dark">악 (Dark)</label></li>
+                            <li class="tx_steel"><input type="checkbox" value="STEEL" id="chk_steel">           <label for="chk_steel">강철 (Steel)</label></li>
+                            <li class="tx_fairy"><input type="checkbox" value="FAIRY" id="chk_fairy">           <label for="chk_fairy">페어리(Fairy)</label></li>
                         </ul>
                     </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Sale
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Sport</a></li>
-                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                        </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Product
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Bag</a></li>
-                            <li><a class="text-decoration-none" href="#">Sweather</a></li>
-                            <li><a class="text-decoration-none" href="#">Sunglass</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                                    </ul>
             </div>
 
             <div class="col-lg-9">
@@ -66,60 +55,59 @@
                     <div class="col-md-6">
                         <ul class="list-inline shop-top-menu pb-3 pt-1">
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
+                                <a class="h3 text-dark text-decoration-none mr-3" href="javascript:void(0)" onclick="location.reload()">All</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
+                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Pokémon's</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+                                <a class="h3 text-dark text-decoration-none" href="#">Item's</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-6 pb-4">
                         <div class="d-flex">
-                            <select class="form-control">
-                                <option>Featured</option>
-                                <option>A to Z</option>
-                                <option>Item</option>
-                            </select>
+                            <label>
+                                <select class="form-control">
+                                    <option>정렬</option>
+                                    <option>A to Z</option>
+                                    <option>높은 가격순</option>
+                                    <option>낮은 가격순</option>
+                                </select>
+                            </label>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4" th:each="pokemon : ${pokemonList}">
-                        <div class="card mb-4 product-wap rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
-                                     th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(pokemon.name, ' ', '')})}"
-                                     th:alt="${pokemon.name}">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                <div class="row" id="pokemonContainer">
+                    <th:block th:each="pokemon : ${pokemonList}">
+                        <div th:id="${pokemon.id}" th:class="${'col-md-4 pokemonCard '+ pokemon.type +' '+ (pokemon.price <= 500 ? 'low' : (pokemon.price > 500 && pokemon.price < 1000 ? 'medium' : 'high'))}">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0 p-2">
+                                    <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
+                                         th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(pokemon.name, ' ', '')})}"
+                                         th:alt="${pokemon.name}">
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="fas fa-cart-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <a th:href="@{'/pokemon/' + ${pokemon.id}}" class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
+                                    <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                        <li th:text="${pokemon.type.ko+' 타입'}" th:class="${'tx_'+pokemon.type.eng}"></li>
+                                        <li th:text="'NO.' + ${#numbers.formatInteger(pokemon.number, '0000')}">NO.0000</li>
                                     </ul>
+                                    <p class="text-center mb-0" th:text="'₽' + ${pokemon.price}">₽1000</p>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <a th:href="@{'/pokemon/' + ${pokemon.id}}" class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
-                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                    <li th:text="${pokemon.type.ko+' 타입'}" th:class="${'tx_'+pokemon.type.eng}"></li>
-                                    <li th:text="'NO.' + ${#numbers.formatInteger(pokemon.number, '0000')}">NO.0000</li>
-                                </ul>
-                                <p class="text-center mb-0" th:text="'₽' + ${pokemon.price}">₽1000</p>
-                            </div>
                         </div>
-                    </div>
+                    </th:block>
                 </div>
-                <div div="row">
-                    <ul class="pagination pagination-lg justify-content-end">
-                        <li th:each="pageNum : ${#numbers.sequence(1, totalPages)}" class="page-item"
-                            th:class="${pageNum == currentPage ? 'active' : ''}">
-                            <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-                               th:href="@{/shop(page=${pageNum})}" th:text="${pageNum}"></a>
-                        </li>
-                    </ul>
+                <div class="row">
+                    <ul class="pagination pagination-lg justify-content-end" id="pagination"></ul>
                 </div>
             </div>
 
@@ -153,64 +141,18 @@
                             <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
                                 <!--Slides-->
                                 <div class="carousel-inner product-links-wap" role="listbox">
-
-                                    <!--First slide-->
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_04.png" alt="Brand Logo"></a>
+                                    <th:block th:each="slideNumber : ${#numbers.sequence(0, 2)}">
+                                        <div class="carousel-item" th:classappend="${slideNumber == 0} ? 'active'">
+                                            <div class="row">
+                                                <!-- Loop through each brand -->
+                                                <th:block th:each="brandNumber : ${#numbers.sequence(1, 4)}">
+                                                    <div class="col-3 p-md-5">
+                                                        <a href="#"><img class="img-fluid brand-img" th:src="@{'/img/brand_0'+${brandNumber}+'.png'}" alt="Brand Logo"></a>
+                                                    </div>
+                                                </th:block>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--End First slide-->
-
-                                    <!--Second slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Second slide-->
-
-                                    <!--Third slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="../img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Third slide-->
-
+                                    </th:block>
                                 </div>
                                 <!--End Slides-->
                             </div>
@@ -230,6 +172,85 @@
         </div>
     </section>
     <!--End Brands-->
+    <script>
+        $(document).ready(function() {
+            applyFilters();
+            Pagination();
 
+            $('input[name="price-range"], #Categories_Type input[type="checkbox"]').on('change',() => {
+                applyFilters();
+                Pagination();
+            });
+        });
+
+        const Pagination = () => {
+            const itemsPerPage = 9;
+            const visibleCards = $('.pokemonCard:visible');
+            const totalCards = visibleCards.length;
+            const totalPages = Math.ceil(totalCards / itemsPerPage);
+
+            $('#pagination').empty();
+
+            for (let i = 1; i <= totalPages; i++) {
+                $('#pagination').append(`<li class="page-item"><a class="page-link" href="#">${i}</a></li>`);
+            }
+
+            showPage(1);
+
+            $('#pagination').on('click', '.page-link', function (e) {
+                e.preventDefault();
+                const pageNumber = parseInt($(this).text());
+                showPage(pageNumber);
+            });
+
+            function showPage(pageNumber) {
+                const startIndex = (pageNumber - 1) * itemsPerPage;
+                const endIndex = Math.min(startIndex + itemsPerPage, totalCards);
+
+                visibleCards.hide();
+                visibleCards.slice(startIndex, endIndex).show();
+
+                $('#pagination').find('.page-item').removeClass('active');
+                $('#pagination').find(`.page-item:nth-child(${pageNumber})`).addClass('active');
+
+                $('html, body').scrollTop(0);
+            }
+        }
+
+        const applyFilters = () => {
+            const selectedPriceRange = $('input[name="price-range"]:checked').val();
+            const selectedTypes = [];
+            $('#Categories_Type input[type="checkbox"]:checked').each(function() {
+                selectedTypes.push($(this).val());
+            });
+
+            const PriceArray = [];
+            const TypeArray = [];
+
+            $('.pokemonCard').each(function() {
+                const itemId = $(this).attr('id');
+                const itemClasses = $(this).attr('class').split(' ');
+
+                if (selectedPriceRange === 'all' || $(this).hasClass(selectedPriceRange)) {
+                    PriceArray.push(itemId);
+                }
+
+                if (selectedTypes.length === 0) {
+                    TypeArray.push(itemId);
+                } else {
+                    const typeMatch = itemClasses.some(cls => selectedTypes.includes(cls));
+                    if (typeMatch) {
+                        TypeArray.push(itemId);
+                    }
+                }
+            });
+            const intersection = PriceArray.filter(value => TypeArray.includes(value));
+
+            $('.pokemonCard').hide();
+            intersection.forEach(itemId => {
+                $('#' + itemId).show();
+            });
+        }
+    </script>
 </main>
 </html>

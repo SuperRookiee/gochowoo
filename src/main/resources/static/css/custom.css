@@ -41,3 +41,17 @@ Custom Css
 .hidden {
     display: none;
 }
+
+/*** Shop ***/
+/* 카테고리 타입 */
+ul#Categories_Type > li > label {
+    cursor: pointer;
+}
+ul#Categories_Type > li > input,
+#collapsePrice > li > input {
+    display: none;
+}
+ul#Categories_Type > li > input:checked + label,
+#collapsePrice > li > input:checked + label {
+    font-weight: bold !important;
+}

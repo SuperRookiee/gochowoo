@@ -7,4 +7,6 @@ import java.util.List;
 public interface PokemonService {
 
     List<Pokemon> getAllPokemon();
+
+    Pokemon getPokemonById(Long id);
 }

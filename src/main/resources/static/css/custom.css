@@ -15,6 +15,10 @@ Custom Css
     --pokemon-yellow: #FFCB05;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* 메인 헤더 로고 */
 .pokemon {
     font-family: Pokemon-Solid, serif !important;

@@ -47,7 +47,7 @@
                             <li class="tx_fairy"><input type="checkbox" value="FAIRY" id="chk_fairy">           <label for="chk_fairy">페어리(Fairy)</label></li>
                         </ul>
                     </li>
-                                    </ul>
+                </ul>
             </div>
 
             <div class="col-lg-9">
@@ -67,14 +67,12 @@
                     </div>
                     <div class="col-md-6 pb-4">
                         <div class="d-flex">
-                            <label>
-                                <select class="form-control">
-                                    <option>정렬</option>
-                                    <option>A to Z</option>
-                                    <option>높은 가격순</option>
-                                    <option>낮은 가격순</option>
-                                </select>
-                            </label>
+                            <select id="featured" class="form-control">
+                                <option selected disabled>정렬</option>
+                                <option>A to Z</option>
+                                <option>높은 가격순</option>
+                                <option>낮은 가격순</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -94,8 +92,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <a th:href="@{'/pokemon/' + ${pokemon.id}}" class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
+                                <div class="card-body pointer" th:onclick="|location.href='/shop/'+${pokemon.id}|">
+                                    <a class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                         <li th:text="${pokemon.type.ko+' 타입'}" th:class="${'tx_'+pokemon.type.eng}"></li>
                                         <li th:text="'NO.' + ${#numbers.formatInteger(pokemon.number, '0000')}">NO.0000</li>

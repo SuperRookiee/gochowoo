@@ -20,14 +20,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
 
-    <!-- Start Script -->
-    <script th:src="@{/js/jquery-1.11.0.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/jquery-migrate-1.2.1.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
-    <script th:src="@{/js/templatemo.js}" type="text/javascript"></script>
-    <script th:src="@{/js/custom.js}" type="text/javascript"></script>
+    <!-- Google JQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- End Script -->
 </head>
 <body>
   <header th:replace="fragments/header :: header"></header>
@@ -36,4 +30,9 @@
 
   <footer th:replace="fragments/footer :: footer"></footer>
 </body>
+<!--    <script th:src="@{/js/jquery-1.11.0.min.js}" type="text/javascript"></script>-->
+<!--    <script th:src="@{/js/jquery-migrate-1.2.1.min.js}" type="text/javascript"></script>-->
+    <script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/templatemo.js}" type="text/javascript"></script>
+    <script th:src="@{/js/custom.js}" type="text/javascript"></script>
 </html>

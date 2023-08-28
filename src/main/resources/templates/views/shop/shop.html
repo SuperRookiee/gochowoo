@@ -55,13 +55,16 @@
                     <div class="col-md-6">
                         <ul class="list-inline shop-top-menu pb-3 pt-1">
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="javascript:void(0)" onclick="location.reload()">All</a>
+                                <input id="kind_all" type="radio" name="kind" class="filter-checkbox d-none" value="all" checked>
+                                <label class="h3 text-dark text-decoration-none mr-3" for="kind_all">All</label>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Pokémon's</a>
+                                <input id="kind_pokemon" type="radio" name="kind" class="filter-checkbox d-none" value="pokemon">
+                                <label class="h3 text-dark text-decoration-none mr-3" for="kind_pokemon">Pokémon's</label>
                             </li>
                             <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="#">Item's</a>
+                                <input id="kind_item" type="radio" name="kind" class="filter-checkbox d-none" value="item">
+                                <label class="h3 text-dark text-decoration-none" for="kind_item">Item's</label>
                             </li>
                         </ul>
                     </div>
@@ -78,11 +81,11 @@
                 </div>
                 <div class="row" id="pokemonContainer">
                     <th:block th:each="pokemon : ${pokemonList}">
-                        <div th:id="${pokemon.id}" th:class="${'col-md-4 pokemonCard '+ pokemon.type +' '+ (pokemon.price <= 500 ? 'low' : (pokemon.price > 500 && pokemon.price < 1000 ? 'medium' : 'high'))}">
+                        <div th:id="'p_'+${pokemon.id}" th:class="${'col-md-4 pokemonCard '+ pokemon.type +' '+ (pokemon.price <= 500 ? 'low' : (pokemon.price > 500 && pokemon.price < 1000 ? 'medium' : 'high'))}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0 p-2">
                                     <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
-                                         th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(pokemon.name, ' ', '')})}"
+                                         th:src="@{/img/pockemon/{name}.png(name=${pokemon.name})}"
                                          th:alt="${pokemon.name}">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
@@ -92,7 +95,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body pointer" th:onclick="|location.href='/shop/pokemon'+${pokemon.id}|">
+                                <div class="card-body pointer" th:onclick="|location.href='/shop/pokemon/'+${pokemon.id}|">
                                     <a class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                         <li th:text="${pokemon.type.ko+' 타입'}" th:class="${'tx_'+pokemon.type.eng}"></li>
@@ -103,7 +106,37 @@
                             </div>
                         </div>
                     </th:block>
+                    <th:block th:each="item : ${itemList}">
+                        <div th:id="'i_'+${item.id}" th:class="${'col-md-4 itemCard items ' +' '+ (item.price <= 500 ? 'low' : (item.price > 500 && item.price < 1000 ? 'medium' : 'high'))}">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0 p-2">
+                                    <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
+                                         th:src="@{/img/item/{name}.png(name=${item.name})}"
+                                         th:alt="${item.name}">
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="fas fa-cart-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body pointer" th:onclick="|location.href='/shop/item/'+${item.id}|">
+                                    <a class="h3 text-decoration-none" th:text="${item.name}">이름</a>
+                                    <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                        <li th:text="${item.type}"></li>
+                                        <li th:text="'ITEM.' + ${item.number}">NO.0000</li>
+                                    </ul>
+                                    <p class="text-center mb-0" th:text="'₽' + ${item.price}">₽1000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+
                 </div>
+
+                <!--  아이템 불러오기...   -->
+
                 <div class="row">
                     <ul class="pagination pagination-lg justify-content-end" id="pagination"></ul>
                 </div>
@@ -175,15 +208,22 @@
             applyFilters();
             Pagination();
 
-            $('input[name="price-range"], #Categories_Type input[type="checkbox"]').on('change',() => {
+            $('input[name="price-range"], #Categories_Type input[type="checkbox"], input[name="kind"]').on('change', () => {
                 applyFilters();
                 Pagination();
             });
+
+            $('#pagination').on('click', '.page-link', function (e) {
+                e.preventDefault();
+                const pageNumber = parseInt($(this).text());
+                applyFilters();
+                Pagination(pageNumber);
+            });
         });
 
-        const Pagination = () => {
+        const Pagination = (targetPage = 1) => {
             const itemsPerPage = 9;
-            const visibleCards = $('.pokemonCard:visible');
+            const visibleCards = $('.pokemonCard:visible, .itemCard:visible');
             const totalCards = visibleCards.length;
             const totalPages = Math.ceil(totalCards / itemsPerPage);
 
@@ -193,13 +233,7 @@
                 $('#pagination').append(`<li class="page-item"><a class="page-link" href="#">${i}</a></li>`);
             }
 
-            showPage(1);
-
-            $('#pagination').on('click', '.page-link', function (e) {
-                e.preventDefault();
-                const pageNumber = parseInt($(this).text());
-                showPage(pageNumber);
-            });
+            showPage(targetPage);
 
             function showPage(pageNumber) {
                 const startIndex = (pageNumber - 1) * itemsPerPage;
@@ -221,11 +255,13 @@
             $('#Categories_Type input[type="checkbox"]:checked').each(function() {
                 selectedTypes.push($(this).val());
             });
+            const selectedKind = $('input[name="kind"]:checked').val();
 
             const PriceArray = [];
             const TypeArray = [];
+            const KindArray = [];
 
-            $('.pokemonCard').each(function() {
+            $('.pokemonCard, .itemCard').each(function() {
                 const itemId = $(this).attr('id');
                 const itemClasses = $(this).attr('class').split(' ');
 
@@ -241,10 +277,15 @@
                         TypeArray.push(itemId);
                     }
                 }
-            });
-            const intersection = PriceArray.filter(value => TypeArray.includes(value));
 
-            $('.pokemonCard').hide();
+                if (selectedKind === 'all' || (selectedKind === 'pokemon' && $(this).hasClass('pokemonCard')) || (selectedKind === 'item' && $(this).hasClass('itemCard'))) {
+                    KindArray.push(itemId);
+                }
+            });
+
+            const intersection = PriceArray.filter(value => TypeArray.includes(value)).filter(value => KindArray.includes(value));
+
+            $('.pokemonCard, .itemCard').hide();
             intersection.forEach(itemId => {
                 $('#' + itemId).show();
             });

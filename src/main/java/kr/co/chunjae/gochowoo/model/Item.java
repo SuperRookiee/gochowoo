@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "t_pokemon")
+@Table(name = "t_item")
 @Data
-public class Pokemon {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,8 @@ public class Pokemon {
     @Column(nullable = false, unique = true, length = 30)
     private String name;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Type type;
+    private String type;
 
     @Column(nullable = false, length = 500)
     private String description;

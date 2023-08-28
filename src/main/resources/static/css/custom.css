@@ -56,6 +56,7 @@ ul#Categories_Type > li > input,
     display: none;
 }
 ul#Categories_Type > li > input:checked + label,
-#collapsePrice > li > input:checked + label {
+#collapsePrice > li > input:checked + label,
+ul.shop-top-menu > li  input:checked + label {
     font-weight: bold !important;
 }

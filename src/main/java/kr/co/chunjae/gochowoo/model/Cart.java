@@ -1,6 +1,5 @@
 package kr.co.chunjae.gochowoo.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

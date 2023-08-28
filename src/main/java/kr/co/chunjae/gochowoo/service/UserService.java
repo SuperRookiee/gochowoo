@@ -6,6 +6,6 @@ public interface UserService {
     User joinUser(User user);
     User login(String email, String password);
     User userInfo(String email);
-    User updateUser(User user);
+    void updateUser(User user);
 
 }

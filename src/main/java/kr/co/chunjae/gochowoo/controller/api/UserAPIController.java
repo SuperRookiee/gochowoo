@@ -68,11 +68,13 @@ public class UserAPIController {
         }
     }
     @PostMapping("/updateProfile")
-    public String updateProfile(@RequestParam String email, @RequestParam String nickname) {
+    public String updateProfile(@RequestParam String email, @RequestParam String nickname, HttpServletRequest request) {
         User user = userService.userInfo(email);
 
         if (user != null) {
+            HttpSession session = request.getSession();
             user.setNickName(nickname);
+            session.setAttribute("nickName", user.getNickName());
             userService.updateUser(user);
             return "redirect:/mypage";
         } else {

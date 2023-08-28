@@ -205,6 +205,7 @@
     <!--End Brands-->
     <script>
         $(document).ready(function() {
+            checkURL();
             applyFilters();
             Pagination();
 
@@ -289,6 +290,18 @@
             intersection.forEach(itemId => {
                 $('#' + itemId).show();
             });
+        }
+
+        const checkURL = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const kind = urlParams.get("kind");
+            if (kind) {
+                const radioButton = $("#kind_"+kind);
+                if (radioButton) {
+                    console.log(radioButton)
+                    radioButton.prop("checked", true);
+                }
+            }
         }
     </script>
 </main>

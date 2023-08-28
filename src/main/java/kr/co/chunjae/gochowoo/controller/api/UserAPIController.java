@@ -48,6 +48,12 @@ public class UserAPIController {
         model.addAttribute("user", user);
         return "/index";
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession session, Model model) {
+        session.invalidate(); // 세션 무효화
+        model.addAttribute("logoutSuccess", true);
+        return "/index"; // index로 리다이렉트
+    }
     @GetMapping("/profile")
     public String userProfile(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email");

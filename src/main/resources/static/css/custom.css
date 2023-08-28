@@ -46,6 +46,11 @@ Custom Css
     display: none;
 }
 
+.Products,
+.Further {
+    margin-top: 30px;
+}
+
 /*** Shop ***/
 /* 카테고리 타입 */
 ul#Categories_Type > li > label {

@@ -8,12 +8,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity @Table(name = "t_user")
-@Getter @Setter
+@Data
 @Builder @NoArgsConstructor @AllArgsConstructor
 public class User extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true, length = 30)
     private String nickName;

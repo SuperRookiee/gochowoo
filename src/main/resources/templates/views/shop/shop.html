@@ -92,7 +92,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body pointer" th:onclick="|location.href='/shop/'+${pokemon.id}|">
+                                <div class="card-body pointer" th:onclick="|location.href='/shop/pokemon'+${pokemon.id}|">
                                     <a class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                         <li th:text="${pokemon.type.ko+' 타입'}" th:class="${'tx_'+pokemon.type.eng}"></li>

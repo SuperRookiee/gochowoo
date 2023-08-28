@@ -24,4 +24,9 @@ public class ItemServiceImpl implements ItemService {
     public Item getItemById(Long id) {
         return itemRepository.findById(id).orElseThrow(() -> new RuntimeException("Item not found with ID: " + id));
     }
+
+    @Override
+    public List<Item> getLatestItem() {
+        return itemRepository.findTop8ByOrderByIdDesc();
+    }
 }

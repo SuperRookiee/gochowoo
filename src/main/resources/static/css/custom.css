@@ -60,3 +60,15 @@ ul#Categories_Type > li > input:checked + label,
 ul.shop-top-menu > li  input:checked + label {
     font-weight: bold !important;
 }
+
+/*** Shop > Product ***/
+p#description {
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+}

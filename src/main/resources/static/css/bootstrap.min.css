@@ -611,10 +611,6 @@ progress {
     height: auto;
 }
 
-#shop_defaultImg.img-fluid {
-    height: 302px;
-}
-
 @media screen and (min-width: 1400px) {
     .img-fluid-banner {
 

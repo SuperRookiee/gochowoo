@@ -26,4 +26,9 @@ public class PokemonServiceImpl implements PokemonService {
     public Pokemon getPokemonById(Long id) {
         return pokemonRepository.findById(id).orElseThrow(() -> new RuntimeException("Pokemon not found with ID: " + id));
     }
+
+    @Override
+    public List<Pokemon> getLatestPokemon() {
+        return pokemonRepository.findTop8ByOrderByIdDesc();
+    }
 }

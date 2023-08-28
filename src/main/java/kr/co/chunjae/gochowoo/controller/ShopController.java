@@ -36,15 +36,18 @@ public class ShopController {
         return "views/shop/shop";
     }
 
-    @GetMapping("{productType}/{id}")
-    public String showProduct(@PathVariable String productType, @PathVariable Long id, Model model) {
-        if(productType.equals("pokemon")) {
+    @GetMapping("{productKind}/{id}")
+    public String showProductPage(@PathVariable String productKind, @PathVariable Long id, Model model) {
+        if(productKind.equals("pokemon")) {
             model.addAttribute("product", pokemonService.getPokemonById(id));
+            model.addAttribute("recentList", pokemonService.getLatestPokemon());
         }
-        else if(productType.equals("item")) {
-            model.addAttribute("item", itemService.getItemById(id));
+        else if(productKind.equals("item")) {
+            model.addAttribute("product", itemService.getItemById(id));
+            model.addAttribute("recentList", itemService.getLatestItem());
         }
-        model.addAttribute("productType", productType);
+
+        model.addAttribute("productKind", productKind);
 
         return "views/shop/product";
     }

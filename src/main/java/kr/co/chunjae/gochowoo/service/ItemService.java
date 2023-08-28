@@ -7,4 +7,6 @@ import java.util.List;
 public interface ItemService {
     List<Item> getAllItem();
     Item getItemById(Long id);
+
+    List<Item> getLatestItem();
 }

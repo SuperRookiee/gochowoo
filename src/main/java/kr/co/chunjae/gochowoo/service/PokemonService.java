@@ -9,4 +9,6 @@ public interface PokemonService {
     List<Pokemon> getAllPokemon();
 
     Pokemon getPokemonById(Long id);
+
+    List<Pokemon> getLatestPokemon();
 }

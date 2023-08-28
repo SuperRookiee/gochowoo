@@ -72,9 +72,10 @@
                         <div class="d-flex">
                             <select id="featured" class="form-control">
                                 <option selected disabled>정렬</option>
-                                <option>A to Z</option>
-                                <option>높은 가격순</option>
-                                <option>낮은 가격순</option>
+                                <option value="az">A to Z</option>
+                                <option value="za">Z to A</option>
+                                <option value="high">높은 가격순</option>
+                                <option value="low">낮은 가격순</option>
                             </select>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                         </div>
                     </th:block>
                     <th:block th:each="item : ${itemList}">
-                        <div th:id="'i_'+${item.id}" th:class="${'col-md-4 itemCard items ' +' '+ (item.price <= 500 ? 'low' : (item.price > 500 && item.price < 1000 ? 'medium' : 'high'))}">
+                        <div th:id="'i_'+${item.id}" th:class="${'col-md-4 itemCard ' +' '+ (item.price <= 500 ? 'low' : (item.price > 500 && item.price < 1000 ? 'medium' : 'high'))}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0 p-2">
                                     <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
@@ -132,7 +133,6 @@
                             </div>
                         </div>
                     </th:block>
-
                 </div>
 
                 <!--  아이템 불러오기...   -->
@@ -207,6 +207,7 @@
         $(document).ready(function() {
             applyFilters();
             Pagination();
+            feature();
 
             $('input[name="price-range"], #Categories_Type input[type="checkbox"], input[name="kind"]').on('change', () => {
                 applyFilters();
@@ -285,9 +286,52 @@
 
             const intersection = PriceArray.filter(value => TypeArray.includes(value)).filter(value => KindArray.includes(value));
 
+
             $('.pokemonCard, .itemCard').hide();
             intersection.forEach(itemId => {
                 $('#' + itemId).show();
+            });
+        }
+
+        const feature = () => {
+            const featuredSelect = $("#featured");
+            const pokemonContainer = $("#pokemonContainer");
+
+            featuredSelect.on("change", function() {
+                const selectedValue = featuredSelect.val();
+                const cards = $(".pokemonCard, .itemCard");
+                if (selectedValue === "az") {
+                    cards.sort((a, b) => {
+                        const nameA = $(a).find(".h3.text-decoration-none").text();
+                        const nameB = $(b).find(".h3.text-decoration-none").text();
+                        return nameA.localeCompare(nameB);
+                    });
+                } else if (selectedValue === "za") {
+                    cards.sort((a, b) => {
+                        const nameA = $(a).find(".h3.text-decoration-none").text();
+                        const nameB = $(b).find(".h3.text-decoration-none").text();
+                        return nameB.localeCompare(nameA);
+                    });
+                } else if (selectedValue === "high") {
+                    cards.sort((a, b) => {
+                        const priceA = parseInt($(a).find(".text-center.mb-0").text().slice(1));
+                        const priceB = parseInt($(b).find(".text-center.mb-0").text().slice(1));
+                        return priceB - priceA;
+                    });
+                } else if (selectedValue === "low") {
+                    cards.sort((a, b) => {
+                        const priceA = parseInt($(a).find(".text-center.mb-0").text().slice(1));
+                        const priceB = parseInt($(b).find(".text-center.mb-0").text().slice(1));
+                        return priceA - priceB;
+                    });
+                }
+
+                for (const card of cards) {
+                    pokemonContainer.append(card);
+                }
+                cards.show();
+                applyFilters();
+                Pagination();
             });
         }
     </script>

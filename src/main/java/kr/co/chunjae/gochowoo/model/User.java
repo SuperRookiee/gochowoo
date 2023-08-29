@@ -1,5 +1,6 @@
 package kr.co.chunjae.gochowoo.model;
 
+import kr.co.chunjae.gochowoo.model.base.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

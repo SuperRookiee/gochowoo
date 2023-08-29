@@ -1,4 +1,4 @@
-package kr.co.chunjae.gochowoo.model;
+package kr.co.chunjae.gochowoo.model.base;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

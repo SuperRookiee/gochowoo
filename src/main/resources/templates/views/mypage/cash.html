@@ -92,9 +92,9 @@
     </script>
     <section class="container pt-3">
         <label class="pointer fw-bold" onclick="location.href='/mypage'">
-            <i class="fa-solid fa-backward"></i>
-            Back
+            <i class="fa-solid fa-backward"></i> Back
         </label>
+        <span class="fw-bold d-flex justify-content-center" th:text="${session.nickName}+'님의 Wallet'"></span>
     </section>
     <section class="container py-3">
         <div class="row mb-4">
@@ -121,7 +121,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1 fw-bold">
-                                    ₽ 1Coin</div>
+                                    ₽ Coin 환율 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">₩100</div>
                             </div>
                             <div class="col-auto">

@@ -2,14 +2,11 @@ package kr.co.chunjae.gochowoo.controller.api;
 
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 
 
 @Controller
@@ -44,17 +41,24 @@ public class UserAPIController {
         HttpSession session = request.getSession();
         session.setAttribute("email", email);
         session.setAttribute("nickName", user.getNickName());
+        session.setAttribute("cash", user.getCash());
 
-        model.addAttribute("user", user);
         return "/index";
     }
-    @GetMapping("/logout")
+
+    @PostMapping("/logout")
     public String logout(HttpSession session, Model model) {
+        if (session.getAttribute("email") == null) {
+            // 세션에 유저 정보가 없는 경우 에러 메시지 추가
+            model.addAttribute("errorMessage", "세션에 저장된 데이터가 없습니다.");
+            return "redirect:/mypage"; // 에러 페이지로 리다이렉트 또는 포워드
+        }
         session.invalidate(); // 세션 무효화
         model.addAttribute("logoutSuccess", true);
-        return "/index"; // index로 리다이렉트
+        return "redirect:/mypage";
     }
-    @GetMapping("/profile")
+
+    @PostMapping("/profile")
     public String userProfile(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email");
 
@@ -73,6 +77,7 @@ public class UserAPIController {
             return "/index";
         }
     }
+
     @PostMapping("/updateProfile")
     public String updateProfile(@RequestParam String email, @RequestParam String nickname, HttpServletRequest request) {
         User user = userService.userInfo(email);
@@ -87,5 +92,31 @@ public class UserAPIController {
             return "/index";
         }
     }
+    @PostMapping("/cash")
+    public String cash(){
+
+        return "/index";
+    }
+
+    @PostMapping("/chargeCash")
+    public String chargeCash(@RequestParam String email, @RequestParam Long cash, HttpServletRequest request) {
+        User user = userService.userInfo(email);
+
+        if(user != null){
+            HttpSession session = request.getSession();
+            user.setCash(cash);
+            session.setAttribute("cash", user.getCash());
+            userService.updateUser(user);
+            return "redirect:/mypage";
+        }else {
+            return "/index";
+        }
+    }
+
+    /*public String withdrawUser(@RequestParam String email, @RequestParam String password) {
+
+        UserRepository userRepository;
+        User userToWithdraw = UserRepository.findById(email);
+    }*/
 
 }

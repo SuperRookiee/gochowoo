@@ -8,4 +8,8 @@ public interface UserService {
     User userInfo(String email);
     void updateUser(User user);
 
+    User withdrawUser(String email, String password);
+
+
+
 }

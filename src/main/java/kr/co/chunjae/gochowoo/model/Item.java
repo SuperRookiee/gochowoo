@@ -1,11 +1,16 @@
 package kr.co.chunjae.gochowoo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "t_item")
+@NoArgsConstructor @AllArgsConstructor
+@Builder
 @Data
 public class Item {
 

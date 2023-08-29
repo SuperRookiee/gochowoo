@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+<main layout:fragment="content">
+    <script>
+        function updateTotalPrice() {
+            const totalPriceElem = document.getElementById("totalPrice");
+            const prices = document.getElementsByClassName("totalPrice");
+            let totalPrice = 0;
+            for (const price of prices) {
+                console.log(price.innerHTML)
+                totalPrice += +price.innerHTML;
+            }
+            totalPriceElem.innerText = totalPrice + "";
+        }
+
+        function updatePrice(id, amount) {
+            const price = +(document.getElementById(`${id}price`).innerHTML);
+            const total = document.getElementById(`${id}total`);
+            total.innerHTML = price * amount + "";
+            updateTotalPrice();
+        }
+
+        async function updateAmount(cart, id, amount) {
+            const response = await fetch(`/api/cart/${cart}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id,
+                    amount,
+                }),
+            })
+            return response.ok;
+        }
+
+        async function deleteCart(cart, id) {
+            const response = await fetch(`/api/cart/${cart}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id,
+                }),
+            })
+            return response.ok;
+        }
+
+        async function deleteButtonHandler(cart, id) {
+            const ok = await deleteCart(cart, id);
+            if (ok) {
+                location.reload();
+            } else {
+                alert("fail");
+            }
+        }
+
+        async function plusAmount(id) {
+            const cart = id.charAt(0) === 'p' ? "pokemon"
+                : id.charAt(0) === 'i' ? "item" : "";
+            if (cart === "") return ;
+            const amountElem = document.getElementById(`${id}amount`);
+            const amount = amountElem.value;
+            const newAmount = +amount + 1;
+            const ok = await updateAmount(cart, id.slice(1), newAmount);
+            if (ok) {
+                amountElem.value = newAmount;
+                updatePrice(id, newAmount);
+            }
+        }
+
+        async function minusAmount(id) {
+            const cart = id.charAt(0) === 'p' ? "pokemon"
+                : id.charAt(0) === 'i' ? "item" : "";
+            if (cart === "") return ;
+            const amountElem = document.getElementById(`${id}amount`);
+            const amount = amountElem.value;
+            if (amount <= 1) {
+                return;
+            }
+            const newAmount = +amount - 1;
+            const ok = await updateAmount(cart, id.slice(1), newAmount);
+            if (ok) {
+                amountElem.value = newAmount;
+                updatePrice(id, newAmount);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Your JavaScript function to execute
+            updateTotalPrice();
+        });
+
+    </script>
+    <div class="site-section">
+        <div class="container my-5">
+            <div class="row mb-5">
+                <div class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="product-thumbnail">Image</th>
+                                <th class="product-name">Product</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-total">Total</th>
+                                <th class="product-remove">Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="pokemonCart : ${pokemonCartList}">
+                                <tr th:id="'p'+${pokemonCart.pokemon.id}">
+                                    <td class="product-thumbnail"
+                                    >
+                                        <img th:src="@{/img/pockemon/{name}.png(name=${pokemonCart.pokemon.name})}"
+                                             style="height: auto; width: 100%; max-width: 300px"
+                                             th:alt="${pokemonCart.pokemon.name}" class="card-img rounded-0 img-fluid">
+                                    </td>
+                                    <td class="product-name">
+                                        <h2 class="h5 text-black" th:text="${pokemonCart.pokemon.name}">포켓몬 이름</h2>
+                                    </td>
+                                    <td th:text="${pokemonCart.pokemon.price}" th:id="'p'+${pokemonCart.id}+'price'">
+                                        가격
+                                    </td>
+                                    <td>
+                                        <div class="input-group mb-3" style="max-width: 120px;">
+                                            <div class="input-group-prepend">
+                                                <button
+                                                        th:onclick="|minusAmount('p'+${pokemonCart.id})|"
+                                                        class="btn btn-outline-primary js-btn-minus" type="button">
+                                                    &minus;
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control text-center"
+                                                   th:id="'p'+${pokemonCart.id}+'amount'"
+                                                   th:value="${pokemonCart.amount}" placeholder=""
+                                                   aria-label="Example text with button addon"
+                                                   aria-describedby="button-addon1">
+                                            <div class="input-group-append">
+                                                <button
+                                                        th:onclick="|plusAmount('p'+${pokemonCart.id})|"
+                                                        class="btn btn-outline-primary js-btn-plus" type="button">
+                                                    &plus;
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>₽<span th:id="'p'+${pokemonCart.id}+'total'"
+                                               th:text="${pokemonCart.pokemon.price*pokemonCart.amount}"
+                                               class="totalPrice">49.00</span>
+                                    </td>
+                                    <td><button
+                                            th:onclick="|deleteButtonHandler('pokemon', ${pokemonCart.id})|"
+                                            href="#" class="btn btn-primary btn-sm">X</button></td>
+                                </tr>
+                            </th:block>
+
+                            <th:block th:each="itemCart : ${itemCartList}">
+                                <tr th:id="'i'+${itemCart.item.id}">
+                                    <td class="product-thumbnail">
+                                        <img th:src="@{/img/item/{name}.png(name=${itemCart.item.name})}"
+                                             style="height: auto; width: 100%; max-width: 300px"
+                                             th:alt="${itemCart.item.name}" class="card-img rounded-0 img-fluid">
+                                    </td>
+                                    <td class="product-name">
+                                        <h2 class="h5 text-black" th:text="${itemCart.item.name}">포켓몬 이름</h2>
+                                    </td>
+                                    <td th:text="${itemCart.item.price}" th:id="'i'+${itemCart.id}+'price'">가격</td>
+
+                                    <td>
+
+                                        <div class="input-group mb-3" style="max-width: 120px;">
+                                            <div class="input-group-prepend">
+                                                <button
+                                                        th:onclick="|minusAmount('i'+${itemCart.id})|"
+                                                        class="btn btn-outline-primary js-btn-minus" type="button">
+                                                    &minus;
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control text-center"
+                                                   th:id="'i'+${itemCart.id}+'amount'"
+                                                   th:value="${itemCart.amount}" placeholder=""
+                                                   aria-label="Example text with button addon"
+                                                   aria-describedby="button-addon1">
+                                            <div class="input-group-append">
+                                                <button
+                                                        th:onclick="|plusAmount('i'+${itemCart.id})|"
+                                                        class="btn btn-outline-primary js-btn-plus" type="button">
+                                                    &plus;
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>₽<span th:id="'i'+${itemCart.id}+'total'"
+                                               th:text="${itemCart.item.price*itemCart.amount}"
+                                               class="totalPrice">49.00</span></td>
+                                    <td><button
+                                            th:onclick="|deleteButtonHandler('item', ${itemCart.id})|"
+                                            href="#" class="btn btn-primary btn-sm">X</button></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <!--                    <div class="row mb-5">-->
+                    <!--                        <div class="col-md-6 mb-3 mb-md-0">-->
+                    <!--                            <button class="btn btn-primary btn-sm btn-block">Update Cart</button>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="col-md-6">-->
+                    <!--                            <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-12">-->
+                    <!--                            <label class="text-black h4" for="coupon">Coupon</label>-->
+                    <!--                            <p>Enter your coupon code if you have one.</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="col-md-8 mb-3 mb-md-0">-->
+                    <!--                            <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">-->
+                    <!--                        </div>-->
+                    <!--                        <div class="col-md-4">-->
+                    <!--                            <button class="btn btn-primary btn-sm">Apply Coupon</button>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </div>
+                <div class="col-md-6 pl-5">
+                    <div class="row justify-content-end">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-12 text-right border-bottom mb-5">
+                                    <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <span class="text-black">Total</span>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <strong class="text-black">₽<span id="totalPrice">230.00</span></strong>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary btn-lg py-3 btn-block"
+                                            onclick="window.location='checkout.html'">Proceed To Checkout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</html>

@@ -10,11 +10,11 @@ public class MypageController {
 
     @GetMapping()
     public String showShopPage() {
-        return "views/user/mypage";
+        return "views/mypage/mypage";
     }
 
-    @GetMapping("/info")
-    public String showUserInfo() {
-        return "views/user/mypage";
+    @GetMapping("/cash")
+    public String showCashPage() {
+        return "views/mypage/cash";
     }
 }

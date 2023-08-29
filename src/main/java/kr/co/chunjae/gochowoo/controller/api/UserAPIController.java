@@ -97,31 +97,10 @@ public class UserAPIController {
             return "/index";
         }
     }
-    @PostMapping("/cash")
-    public String cash(){
-
-        return "/index";
-    }
-
-    @PostMapping("/chargeCash")
-    public String chargeCash(@RequestParam String email, @RequestParam Long cash, HttpServletRequest request) {
-        User user = userService.userInfo(email);
-
-        if(user != null){
-            HttpSession session = request.getSession();
-            user.setCash(cash);
-            session.setAttribute("cash", user.getCash());
-            userService.updateUser(user);
-            return "redirect:/mypage";
-        }else {
-            return "/index";
-        }
-    }
 
     /*public String withdrawUser(@RequestParam String email, @RequestParam String password) {
 
         UserRepository userRepository;
         User userToWithdraw = UserRepository.findById(email);
     }*/
-
 }

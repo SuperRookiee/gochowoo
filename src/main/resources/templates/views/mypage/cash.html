@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+<main layout:fragment="content">
+    <script>
+        $(document).ready(() => {
+            updateCashOnPage();
+
+            const coinInput = $("#coin-input");
+            const krwInput = $("#krw-input");
+
+            coinInput.on("input", () => {
+                const coinValue = parseInt(coinInput.val(), 10); // 입력 값에서 소수 부분 제거
+                if (!isNaN(coinValue)) {
+                    krwInput.val(coinValue * 100); // 정확한 계산 수행
+                } else {
+                    krwInput.val("");
+                }
+            });
+
+            krwInput.on("input", () => {
+                const krwValue = parseFloat(krwInput.val());
+                if (!isNaN(krwValue)) {
+                    coinInput.val(Math.floor(krwValue / 100)); // 100의 배수로 나눈 몫 사용
+                } else {
+                    coinInput.val("");
+                }
+            });
+
+        });
+
+        const fetchCurrentCash = async () => {
+            try {
+                const response = await fetch("/mypage/cash/currentCash", {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+
+                if (response.ok) {
+                    return await response.json();
+                } else {
+                    console.error("Failed to fetch current cash data");
+                    return null;
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);
+                return null;
+            }
+        };
+        const updateCashOnPage = async () => {
+            const cashValue = await fetchCurrentCash();
+            if (cashValue !== null) {
+                $("#currentCash").text(`₽${cashValue}`);
+            }
+        };
+
+        const chargeCash = async() => {
+            const coinValue = $("#coin-input").val();
+
+            if (coinValue < 1) {
+                alert("1코인이상부터 충전이 가능합니다")
+                return false;
+            }
+
+            if (!isNaN(coinValue)) {
+                const requestBody = {
+                    coin: coinValue
+                };
+                try {
+                    await fetch("/api/user/cash/charge", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(requestBody)
+                    }).then(response => {
+                        updateCashOnPage();
+                    }).catch(err => {
+                        alert("충전에 실패했습니다")
+                        console.error("충전 실패 "+ err);
+                        return false;
+                    });
+                } catch (error) {
+                    console.error("에러 발생", error);
+                    return false;
+                }
+            }
+        }
+    </script>
+    <section class="container pt-3">
+        <label class="pointer fw-bold" onclick="location.href='/mypage'">
+            <i class="fa-solid fa-backward"></i>
+            Back
+        </label>
+    </section>
+    <section class="container py-3">
+        <div class="row mb-4">
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card border-left-secondary shadow h-100 py-2 rounded-0">
+                    <div class="card-body px-5 px-1">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1 fw-bold">
+                                    현재 잔액</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentCash">₽0</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-ruble-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card border-left-secondary shadow h-100 py-2 rounded-0">
+                    <div class="card-body px-5 px-1">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1 fw-bold">
+                                    ₽ 1Coin</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">₩100</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-won-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-xl-12 col-md-12 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2 rounded-0">
+                        <div class="card-body px-5 px-1">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-2 fw-bold">
+                                        충전할 금액
+                                    </div>
+                                    <label class="d-block">
+                                        ₽ <input id="coin-input" type="number" min="1" class="form-control d-inline-block w-75 mb-3 m-1" placeholder="0" required>
+                                    </label>
+                                    <label class="d-block">
+                                        ₩ <input id="krw-input" type="number" min="100" class="form-control d-inline-block w-75" step="100" placeholder="충전할 금액을 입력해주세요" required>
+                                    </label>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-won-sign fa-2x text-gray-300"></i>
+                                    <i class="fa-solid fa-arrow-right fa-2x text-gray-300"></i>
+                                    <i class="fas fa-ruble-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-warning col-12" onclick="chargeCash()">충전하기</button>
+    </section>
+</main>
+</html>

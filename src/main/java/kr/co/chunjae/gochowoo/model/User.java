@@ -25,4 +25,7 @@ public class User extends BaseEntity {
     @Column @Builder.Default
     private Long cash = 0L;
 
+    public void updateCash(int cash) {
+        this.cash += cash;
+    }
 }

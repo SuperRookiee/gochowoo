@@ -3,26 +3,23 @@ package kr.co.chunjae.gochowoo.controller.api;
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import java.util.Map;
 
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/api/user")
 public class UserAPIController {
     final UserService userService;
-
-    public UserAPIController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/join")
     public String join(@RequestParam String email, @RequestParam String password, @RequestParam String nickName) {
@@ -98,31 +95,23 @@ public class UserAPIController {
             return "/index";
         }
     }
-    @PostMapping("/cash")
-    public String cash(){
 
-        return "/index";
-    }
+    @PostMapping("/cash/charge")
+    public ResponseEntity<Void> addUserCash(@RequestBody Map<String, String> requestBody, HttpSession session) {
+        String email = (String) session.getAttribute("email");
 
-    @PostMapping("/chargeCash")
-    public String chargeCash(@RequestParam String email, @RequestParam Long cash, HttpServletRequest request) {
-        User user = userService.userInfo(email);
-
-        if(user != null){
-            HttpSession session = request.getSession();
-            user.setCash(cash);
-            session.setAttribute("cash", user.getCash());
-            userService.updateUser(user);
-            return "redirect:/mypage";
-        }else {
-            return "/index";
+        if (email != null) {
+            userService.updateCashByEmail(email, Integer.parseInt(requestBody.get("coin")));
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
 
     /*public String withdrawUser(@RequestParam String email, @RequestParam String password) {
 
         UserRepository userRepository;
         User userToWithdraw = UserRepository.findById(email);
     }*/
-
 }

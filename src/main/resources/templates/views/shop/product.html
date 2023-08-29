@@ -239,7 +239,8 @@
                             <a th:if="${productKind eq 'item'}" th:href="@{}" class="h3 text-decoration-none"
                                th:text="${recent.name}">이름</a>
                             <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li th:class="'tx_'+${recent.type.eng}" th:text="${recent.type.ko}">타입</li>
+                                <li th:if="${productKind eq 'pokemon'}" th:class="'tx_'+${recent.type.eng}" th:text="${recent.type.ko}">타입</li>
+                                <li th:if="${productKind eq 'item'}" th:text="${recent.type}">타입</li>
                                 <li class="pt-2">
                                     <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
                                     <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>

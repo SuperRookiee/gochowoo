@@ -1,26 +1,19 @@
 package kr.co.chunjae.gochowoo.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import kr.co.chunjae.gochowoo.model.base.Cart;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+@Getter @Setter
 @Table(name = "t_pokemon_cart")
-@Getter@Setter
-public class PokemonCart {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne (cascade = CascadeType.ALL)
+public class PokemonCart extends Cart {
+    @ManyToOne
     @JoinColumn(name = "pokemon_id")
     private Pokemon pokemon;
-
-    @Column
-    private int amount = 1;
-
 }

@@ -2,6 +2,7 @@ package kr.co.chunjae.gochowoo.controller.api;
 
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ import java.util.Map;
 @AllArgsConstructor
 @RequestMapping("/api/user")
 public class UserAPIController {
-
     final UserService userService;
 
     @PostMapping("/join")
@@ -41,10 +41,11 @@ public class UserAPIController {
             return "redirect:/user/login?error=true";
         }
         HttpSession session = request.getSession();
+        session.setAttribute("id", user.getId());
         session.setAttribute("email", email);
         session.setAttribute("nickName", user.getNickName());
         session.setAttribute("cash", user.getCash());
-
+        session.setAttribute("user", user);
         return "/index";
     }
 

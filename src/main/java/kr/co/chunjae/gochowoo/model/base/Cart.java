@@ -10,12 +10,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@Getter @Setter
 public abstract class Cart {
     @Id
     @GeneratedValue
     protected Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     protected User user;
 

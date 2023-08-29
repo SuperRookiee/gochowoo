@@ -44,10 +44,11 @@ public class UserAPIController {
             return "redirect:/user/login?error=true";
         }
         HttpSession session = request.getSession();
+        session.setAttribute("id", user.getId());
         session.setAttribute("email", email);
         session.setAttribute("nickName", user.getNickName());
         session.setAttribute("cash", user.getCash());
-
+        session.setAttribute("user", user);
         return "/index";
     }
 

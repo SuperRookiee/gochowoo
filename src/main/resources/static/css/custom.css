@@ -52,6 +52,10 @@ Custom Css
 }
 
 /*** Shop ***/
+#shop_defaultImg {
+    height: 250px;
+}
+
 /* 카테고리 타입 */
 ul#Categories_Type > li > label {
     cursor: pointer;
@@ -77,3 +81,20 @@ p#description {
     -webkit-box-orient: vertical;
     line-height: 1.4;
 }
+
+/*** Mypage ***/
+/*** Mypage > 충전 ***/
+.border-left-primary {
+    border-left: 0.25rem solid #3565AE !important;
+}
+.border-left-secondary {
+    border-left: 0.25rem solid #FFCB05 !important;
+}
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+#coin-input::before {
+    content: "₽";
+}
+
+

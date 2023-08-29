@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public User getCash(String email) {
+        return userRepository.findCashByEmail(email);
+    }
+
     public User withdrawUser(String email, String password) {
         User user = userRepository.findByEmail(email);
 
@@ -41,6 +46,15 @@ public class UserServiceImpl implements UserService {
              userRepository.delete(user);
         }
         return null;
+    }
+
+    @Override
+    public void updateCashByEmail(String email, int cash) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.updateCash(cash);
+            userRepository.save(user);
+        }
     }
 
 }

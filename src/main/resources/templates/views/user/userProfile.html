@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/layout}">
+<main layout:fragment="content">
+    <h1>User Information</h1>
+    <p>Email: <span th:text="${user.email}"></span></p>
+
+    <p>Nickname: <span th:text="${user.nickName}"></span></p>
+
+    <form th:action="@{/api/user/updateProfile}" method="post">
+        <input type="hidden" name="email" th:value="${user.email}" />
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" th:value="${user.nickName}" />
+        <button type="submit">Update</button>
+    </form>
+</main>
+</html>

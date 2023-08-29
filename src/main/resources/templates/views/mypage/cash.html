@@ -30,6 +30,17 @@
 
         });
 
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
         const fetchCurrentCash = async () => {
             try {
                 const response = await fetch("/mypage/cash/currentCash", {
@@ -78,6 +89,10 @@
                         body: JSON.stringify(requestBody)
                     }).then(response => {
                         updateCashOnPage();
+                        Toast.fire({
+                            icon: 'success',
+                            title: `+ ₽ ${coinValue} 이 충전 되었습니다`
+                        })
                     }).catch(err => {
                         alert("충전에 실패했습니다")
                         console.error("충전 실패 "+ err);

@@ -18,11 +18,27 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
     @Override
     public User login(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             return user;
+        }
+        return null;
+    }
+    public User userInfo(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public User withdrawUser(String email, String password) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null && user.getPassword().equals(password)) {
+             userRepository.delete(user);
         }
         return null;
     }

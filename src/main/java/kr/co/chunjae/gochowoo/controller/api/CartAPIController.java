@@ -37,8 +37,8 @@ public class CartAPIController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) { return ResponseEntity.status(401).build(); }
-        Item targetPokemon = Item.builder().id(item_id).build();
-        itemCartService.addToCart(ItemCart.builder().user(user).item(targetPokemon).build());
+        Item item = Item.builder().id(item_id).build();
+        itemCartService.addToCart(ItemCart.builder().user(user).item(item).build());
         return ResponseEntity.noContent().build();
     }
 

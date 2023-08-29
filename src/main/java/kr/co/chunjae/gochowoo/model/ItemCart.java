@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+@SuperBuilder @Builder
 @Table(name = "t_item_cart")
 public class ItemCart extends Cart {
 

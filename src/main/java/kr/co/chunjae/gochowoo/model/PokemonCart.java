@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+@SuperBuilder @Builder
 @Table(name = "t_pokemon_cart")
 public class PokemonCart extends Cart {
     @ManyToOne (cascade = CascadeType.ALL)

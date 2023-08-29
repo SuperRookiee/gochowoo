@@ -51,11 +51,6 @@ public class UserAPIController {
 
     @PostMapping("/logout")
     public String logout(HttpSession session, Model model) {
-        if (session.getAttribute("email") == null) {
-            // 세션에 유저 정보가 없는 경우 에러 메시지 추가
-            model.addAttribute("errorMessage", "세션에 저장된 데이터가 없습니다.");
-            return "redirect:/mypage"; // 에러 페이지로 리다이렉트 또는 포워드
-        }
         session.invalidate(); // 세션 무효화
         model.addAttribute("logoutSuccess", true);
         return "redirect:/mypage";

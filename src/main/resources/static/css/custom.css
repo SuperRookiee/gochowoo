@@ -37,6 +37,24 @@ Custom Css
     margin-left: 4rem;
     margin-bottom: 0;
 }
+ul.nav.navbar-nav li a {
+    position: relative;
+}
+ul.nav.navbar-nav li a:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: #3565AE;
+    transition: all 0.3s ease;
+    left: 50%;
+    transform: translateX(-50%);
+}
+ul.nav.navbar-nav li a:hover:before{
+    width: 90%;
+}
 /* 푸터 로고 소제목 */
 #tempaltemo_footer .pokemon.subtitle {
     margin-left: 30px;

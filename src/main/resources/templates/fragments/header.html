@@ -44,11 +44,22 @@
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="/cart">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-<!--                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>-->
                     </a>
-                    <a href="/user" class="nav-icon position-relative text-decoration-none">
+                    <a th:if="${session.email} == null"  href="/user/login" class="nav-icon position-relative text-decoration-none">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
-<!--                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>-->
+                    </a>
+                    <a th:if="${session.email} != null"  href="#" class="nav-icon position-relative text-decoration-none" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <script>
+                            const logout = () => {
+                                const form = document.createElement('form');
+                                form.method = 'POST';
+                                form.action = '/api/user/logout';
+
+                                document.body.appendChild(form);
+                                form.submit();
+                            }
+                        </script>
                     </a>
                 </div>
             </div>

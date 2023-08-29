@@ -22,7 +22,11 @@ public class MypageController {
     final UserService userService;
 
     @GetMapping()
-    public String showShopPage(@SessionAttribute(name = "email") String email, Model model) {
+    public String showShopPage(HttpSession session, Model model) {
+        String email = (String) session.getAttribute("email");
+        if(email == null) {
+            return "views/user/login";
+        }
         User user = userService.userInfo(email);
         model.addAttribute("user", user);
         return "views/mypage/mypage";

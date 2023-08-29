@@ -104,7 +104,7 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#normal">
+                <a href="/shop?type=normal">
                     <div class="icon bg_normal">
                         <img th:src="@{/img/type/normal.svg}"/>
                     </div>
@@ -112,7 +112,7 @@
                 <h5 class="text-center mt-3 mb-3">Normal</h5>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#fire">
+                <a href="/shop?type=fire">
                     <div class="icon bg_fire">
                         <img th:src="@{/img/type/fire.svg}"/>
                     </div>
@@ -120,7 +120,7 @@
                 <h5 class="text-center mt-3 mb-3">Fire</h5>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#grass">
+                <a href="/shop?type=grass">
                     <div class="icon bg_grass">
                         <img th:src="@{/img/type/grass.svg}"/>
                     </div>
@@ -128,7 +128,7 @@
                 <h5 class="text-center mt-3 mb-3">Grass</h5>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#water">
+                <a href="/shop?type=water">
                     <div class="icon bg_water">
                         <img th:src="@{/img/type/water.svg}"/>
                     </div>
@@ -136,7 +136,7 @@
                 <h5 class="text-center mt-3 mb-3">Water</h5>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#electric">
+                <a href="/shop?type=electric">
                     <div class="icon bg_electric">
                         <img th:src="@{/img/type/electric.svg}"/>
                     </div>
@@ -144,7 +144,7 @@
                 <h5 class="text-center mt-3 mb-3">Electric</h5>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#rock">
+                <a href="/shop?type=rock">
                     <div class="icon bg_rock">
                         <img th:src="@{/img/type/rock.svg}"/>
                     </div>
@@ -225,5 +225,11 @@
         </div>
     </section>
     <!-- End Featured Product -->
+
+    <!-- Start Team -->
+    <section class="py-5">
+        <th:block th:include="fragments/team"></th:block>
+    </section>
+    <!--End Team-->
 </main>
 </html>

@@ -32,6 +32,10 @@ Custom Css
     font-family: Pokemon-Hollow, serif !important;
     color: var(--pokemon-blue) !important;
 }
+/* 메인 검색 */
+#icon_ball_b {
+    width: 40px !important;
+}
 /* 메인 헤더 로고 소제목 */
 .pokemon.subtitle {
     margin-left: 4rem;
@@ -58,6 +62,21 @@ ul.nav.navbar-nav li a:hover:before{
 /* 푸터 로고 소제목 */
 #tempaltemo_footer .pokemon.subtitle {
     margin-left: 20px;
+}
+
+/* 카드 이미지 */
+.img-fluid,
+.img-fluid-banner {
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 1400px) {
+    .img-fluid-banner {
+
+        width: 500px;
+        margin-left: 6rem;
+    }
 }
 
 .hidden {

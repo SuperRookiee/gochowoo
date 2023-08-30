@@ -64,6 +64,21 @@ ul.nav.navbar-nav li a:hover:before{
     margin-left: 20px;
 }
 
+/* 카드 이미지 */
+.img-fluid,
+.img-fluid-banner {
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 1400px) {
+    .img-fluid-banner {
+
+        width: 500px;
+        margin-left: 6rem;
+    }
+}
+
 .hidden {
     display: none;
 }

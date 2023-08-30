@@ -2,25 +2,88 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
         layout:decorate="~{layout/layout}">
-
 <main layout:fragment="content">
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+    </script>
+    <div style="padding: 32px">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">수령인</th>
+                <th scope="col">주소</th>
+                <th scope="col">연락처</th>
+                <th scope="col">요청사항</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="address, i: ${addressList}">
+                <tr>
+                    <td th:text="${address.recipient}"></td>
+                    <td th:text="${address.address}"></td>
+                    <td th:text="${address.phoneNumber}"></td>
+                    <td th:text="${address.deliveryRequest}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
     <div class="container my-5">
         <h2>배송지 추가</h2>
-        <form class="d-grid gap-2">
+        <form id="form" class="d-grid gap-2" action="/api/user/userAddress" method="post">
             <div class="form-group">
-                <label for="name">수령인 이름</label>
-                <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요" required>
+                <label for="recipient">수령인 이름</label>
+                <input name="recipient" type="text" class="form-control" id="recipient" placeholder="이름을 입력하세요" required>
             </div>
             <div class="form-group">
                 <label for="address">주소</label>
-                <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요" required>
+                <input name="address" type="text" class="form-control" id="address" placeholder="주소를 입력하세요" required>
             </div>
             <div class="form-group">
                 <label for="phone">전화번호</label>
-                <input type="tel" class="form-control" id="phone" placeholder="전화번호를 입력하세요" required>
+                <input name="phoneNumber" type="tel" class="form-control" id="phone" placeholder="전화번호를 입력하세요" required>
+            </div>
+            <div class="form-group">
+                <label for="deliveryRequest">요청사항</label>
+                <input name="deliveryRequest" type="text" class="form-control" id="deliveryRequest" placeholder="배송시 요청사항을 입력하세요" required>
             </div>
             <button type="submit" class="btn btn-primary">추가</button>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('form');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = new URLSearchParams(new FormData(form));
+                const response = await fetch("/api/user/userAddress", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                    },
+                    body: formData.toString(),
+                });
+                if (response.ok) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: "배송지가 추가 되었어요."
+                    });
+                }
+            });
+        });
+    </script>
 </main>
 </html>

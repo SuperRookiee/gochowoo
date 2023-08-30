@@ -3,9 +3,11 @@ package kr.co.chunjae.gochowoo.controller;
 import kr.co.chunjae.gochowoo.model.ItemCart;
 import kr.co.chunjae.gochowoo.model.PokemonCart;
 import kr.co.chunjae.gochowoo.model.User;
+import kr.co.chunjae.gochowoo.model.UserAddress;
 import kr.co.chunjae.gochowoo.model.base.Cart;
 import kr.co.chunjae.gochowoo.service.ItemService;
 import kr.co.chunjae.gochowoo.service.PokemonService;
+import kr.co.chunjae.gochowoo.service.UserAddressService;
 import kr.co.chunjae.gochowoo.service.cart.ItemCartService;
 import kr.co.chunjae.gochowoo.service.cart.PokemonCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,13 @@ public class CartController {
 
     private final PokemonCartService pokemonCartService;
     private final ItemCartService itemCartService;
+    private final UserAddressService userAddressService;
 
     @Autowired
-    public CartController(PokemonCartService pokemonCartService, ItemCartService itemCartService) {
+    public CartController(PokemonCartService pokemonCartService, ItemCartService itemCartService, UserAddressService userAddressService) {
         this.pokemonCartService = pokemonCartService;
         this.itemCartService = itemCartService;
+        this.userAddressService = userAddressService;
     }
     @GetMapping()
     public String showCartPage(HttpServletRequest request, Model model) {
@@ -37,6 +41,8 @@ public class CartController {
         if (user == null) {return "redirect:/user/login";}
         List<PokemonCart> pokemonCartList = pokemonCartService.getAllCarts(user.getId());
         List<ItemCart> itemCartList = itemCartService.getAllCarts(user.getId());
+        List<UserAddress> addressList =  userAddressService.getMyAllUserAddress(user.getId());
+        model.addAttribute("addressList", addressList);
         httpSession.setAttribute("cash", user.getCash());
         model.addAttribute("pokemonCartList", pokemonCartList);
         model.addAttribute("itemCartList", itemCartList);

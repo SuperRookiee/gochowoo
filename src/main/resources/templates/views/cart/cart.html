@@ -61,7 +61,7 @@
         async function plusAmount(id) {
             const cart = id.charAt(0) === 'p' ? "pokemon"
                 : id.charAt(0) === 'i' ? "item" : "";
-            if (cart === "") return ;
+            if (cart === "") return;
             const amountElem = document.getElementById(`${id}amount`);
             const amount = amountElem.value;
             const newAmount = +amount + 1;
@@ -75,7 +75,7 @@
         async function minusAmount(id) {
             const cart = id.charAt(0) === 'p' ? "pokemon"
                 : id.charAt(0) === 'i' ? "item" : "";
-            if (cart === "") return ;
+            if (cart === "") return;
             const amountElem = document.getElementById(`${id}amount`);
             const amount = amountElem.value;
             if (amount <= 1) {
@@ -89,16 +89,72 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
+        const fetchCurrentCash = async () => {
+            try {
+                const response = await fetch("/mypage/cash/currentCash", {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+
+                if (response.ok) {
+                    return await response.json();
+                } else {
+                    console.error("Failed to fetch current cash data");
+                    return null;
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);
+                return null;
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", async function () {
             // Your JavaScript function to execute
             updateTotalPrice();
+            document.getElementById("cash").innerHTML = await fetchCurrentCash();
         });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        function onSubmitHandler(formElem) {
+            const selectedRadio = document.querySelector('input[name="address"]:checked');
+            if (!selectedRadio) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '어디로 보낼꺼에요?'
+                })
+                return false;
+            }
+            const currentCash = document.getElementById("cash").innerHTML;
+            const totalPrice = document.getElementById("totalPrice").innerHTML;
+            if (currentCash - totalPrice > 0) {
+                return true;
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: '지송한데, 돈이 없으세요.'
+                })
+                return false;
+            }
+        }
 
     </script>
     <div class="site-section">
         <div class="container my-5">
             <div class="row mb-5">
-                <div class="col-md-12" method="post">
+                <div class="col-md-12">
                     <div class="site-blocks-table">
                         <table class="table table-bordered">
                             <thead>
@@ -154,9 +210,12 @@
                                                th:text="${pokemonCart.pokemon.price*pokemonCart.amount}"
                                                class="totalPrice">49.00</span>
                                     </td>
-                                    <td><button
-                                            th:onclick="|deleteButtonHandler('pokemon', ${pokemonCart.id})|"
-                                            href="#" class="btn btn-primary btn-sm">X</button></td>
+                                    <td>
+                                        <button
+                                                th:onclick="|deleteButtonHandler('pokemon', ${pokemonCart.id})|"
+                                                href="#" class="btn btn-primary btn-sm">X
+                                        </button>
+                                    </td>
                                 </tr>
                             </th:block>
 
@@ -200,9 +259,12 @@
                                     <td>₽<span th:id="'i'+${itemCart.id}+'total'"
                                                th:text="${itemCart.item.price*itemCart.amount}"
                                                class="totalPrice">49.00</span></td>
-                                    <td><button
-                                            th:onclick="|deleteButtonHandler('item', ${itemCart.id})|"
-                                            href="#" class="btn btn-primary btn-sm">X</button></td>
+                                    <td>
+                                        <button
+                                                th:onclick="|deleteButtonHandler('item', ${itemCart.id})|"
+                                                href="#" class="btn btn-primary btn-sm">X
+                                        </button>
+                                    </td>
                                 </tr>
                             </th:block>
                             </tbody>
@@ -211,28 +273,53 @@
                 </div>
             </div>
 
-            <div class="row">
+            <form class="row" method="post" onsubmit="return onSubmitHandler(this)" action="/api/payment">
                 <div class="col-md-6">
                     <div class="row mb-5">
                         <div class="col-md-6 mb-3 mb-md-0">
-                            보유중인 코인 : <span th:text="${session.get('cash')}"></span>
+                            보유중인 코인 : ₽<span id="cash" th:text="${session.get('cash')}"></span>
                         </div>
                         <div class="col-md-6">
                             <button
                                     onclick="location.href='/mypage/cash'"
-                                    class="btn btn-outline-primary btn-sm btn-block">충전하기</button>
+                                    class="btn btn-outline-primary btn-sm btn-block">충전하기
+                            </button>
                         </div>
                     </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                배송지
-                                                <p>등록된 배송지가 없어요</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <button class="btn btn-primary btn-sm"
-                                                        onclick="window.location='/mypage/shipping'">배송지 추가하기</button>
-                                            </div>
-                                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            배송지
+                            <div style="padding: 32px">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">수령인</th>
+                                        <th scope="col">주소</th>
+                                        <th scope="col">연락처</th>
+                                        <th scope="col">요청사항</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="address, i: ${addressList}">
+                                        <tr>
+                                            <th><input type="radio" th:name="address" th:value="${address.id}"/></th>
+                                            <td th:text="${address.recipient}"></td>
+                                            <td th:text="${address.address}"></td>
+                                            <td th:text="${address.phoneNumber}"></td>
+                                            <td th:text="${address.deliveryRequest}"></td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary btn-sm"
+                                    onclick="window.location='/mypage/shipping'">배송지 추가하기
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 pl-5">
                     <div class="row justify-content-end">
@@ -254,14 +341,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-primary btn-lg py-3 btn-block"
-                                            onclick="window.location='checkout.html'">Proceed To Checkout
+                                            type="submit">Proceed To Checkout
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

@@ -37,9 +37,9 @@ public class MypageController {
     }
 
     @GetMapping("/purchase")
-    public String showPurchasePage(@SessionAttribute(name = "id", required = false) Long id, Model model) {
-        if (id != null) {
-            List<Purchase> purchaseList = purchaseService.getAllPurchases();
+    public String showPurchasePage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
+        if (userId != null) {
+            List<Purchase> purchaseList = purchaseService.getAllPurchasesById(userId);
             model.addAttribute("purchaseList", purchaseList);
             return "views/mypage/purchase/purchase";
         }

@@ -1,11 +1,10 @@
 package kr.co.chunjae.gochowoo.model;
 
 import kr.co.chunjae.gochowoo.model.base.BaseEntity;
-import kr.co.chunjae.gochowoo.model.converter.OrderHistoryConverter;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,9 +19,8 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Convert(converter = OrderHistoryConverter.class)
-    @Column(columnDefinition = "json")
-    private OrderHistory orderHistory;
+    @Transient
+    private List<OrderHistory> orderHistory;
 
     @ManyToOne
     @JoinColumn(name = "user_address_id")

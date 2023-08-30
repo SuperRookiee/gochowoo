@@ -24,7 +24,7 @@
           </form>
         </div>
         <div class="col-md-5">
-          <img th:if="${user.team} == null" th:src="@{'/img/team/Logo.png'}" alt="User's Team">
+          <img th:if="${user.team} == null" th:src="@{'/img/team/Logo.png'}" class="w-100" alt="User's Team">
           <img th:unless="${user.team} == null" th:src="@{'/img/team/Team ' + ${user.team} + '.svg'}" alt="User's Team">
         </div>
       </div>

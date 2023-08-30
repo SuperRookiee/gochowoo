@@ -2,7 +2,6 @@ package kr.co.chunjae.gochowoo.controller.api;
 
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

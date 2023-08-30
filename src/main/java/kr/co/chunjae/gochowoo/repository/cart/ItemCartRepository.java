@@ -1,8 +1,6 @@
 package kr.co.chunjae.gochowoo.repository.cart;
 
 import kr.co.chunjae.gochowoo.model.ItemCart;
-import kr.co.chunjae.gochowoo.model.PokemonCart;
-import kr.co.chunjae.gochowoo.model.base.Cart;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

@@ -59,35 +59,51 @@
             }
         }
     </script>
-    <h1 class="mt-5">User Information</h1>
-    <p>Email: <span th:text="${user.email}"></span></p>
-
-    <p>Nickname: <span th:text="${user.nickName}"></span></p>
-
-    <p>Team: <span id="showTeamName" th:text="${user.team}"></span></p>
-
-    <form class="mb-5" th:action="@{/api/user/updateProfile}" method="post">
-        <h2>Choose Your Team</h2>
-        <div class="row w-75">
-            <div class="col-4 p-md-5" onclick="selectTeam('Mystic')">
-                <img id="Mystic" class="teams img-fluid brand-img" th:src="@{'/img/team/Team Mystic.svg'}"
-                     alt="Team Mystic"/>
-            </div>
-            <div class="col-4 p-md-5" onclick="selectTeam('Instinct')">
-                <img id="Instinct" class="teams img-fluid brand-img" th:src="@{'/img/team/Team Instinct.svg'}"
-                     alt="Team Instinct"/>
-            </div>
-            <div class="col-4 p-md-5" onclick="selectTeam('Valor')">
-                <img id="Valor" class="teams img-fluid brand-img" th:src="@{'/img/team/Team Valor.svg'}"
-                     alt="Team Valor"/>
+    <section class="container py-3">
+        <label class="pointer fw-bold position-absolute" onclick="location.href='/mypage'">
+            <i class="fa-solid fa-left-long"></i> Back
+        </label>
+    </section>
+    <section class="container">
+        <div class="card my-4">
+            <div class="card-body">
+                <h1>User Information</h1>
+                <p><b>Email: </b><span th:text="${user.email}"></span></p>
+                <p><b>Nickname: </b><span th:text="${user.nickName}"></span></p>
+                <p><b>Team: </b><span id="showTeamName" th:text="${user.team}"></span></p>
             </div>
         </div>
-        <input id="teamName" type="hidden" name="teamName"/>
-        <input type="hidden" name="email" th:value="${user.email}"/>
-        <h2>닉네임 변경</h2>
-        <label for="nickname">Nickname:</label>
-        <input type="text" id="nickname" name="nickname" th:value="${user.nickName}"/>
-        <button type="submit">Update</button>
-    </form>
+        <form th:action="@{/api/user/updateProfile}" method="post">
+            <div class="card my-4">
+                <div class="card-body">
+                    <h2>Choose Your Team</h2>
+                    <div class="row">
+                        <div class="col-4 p-md-5 d-flex justify-content-center" onclick="selectTeam('Mystic')">
+                            <img id="Mystic" class="teams img-fluid brand-img w-75" th:src="@{'/img/team/Team Mystic.svg'}"
+                                 alt="Team Mystic"/>
+                        </div>
+                        <div class="col-4 p-md-5 d-flex justify-content-center" onclick="selectTeam('Instinct')">
+                            <img id="Instinct" class="teams img-fluid brand-img w-75" th:src="@{'/img/team/Team Instinct.svg'}"
+                                 alt="Team Instinct"/>
+                        </div>
+                        <div class="col-4 p-md-5 d-flex justify-content-center" onclick="selectTeam('Valor')">
+                            <img id="Valor" class="teams img-fluid brand-img w-75" th:src="@{'/img/team/Team Valor.svg'}"
+                                 alt="Team Valor"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-4">
+                <div class="card-body">
+                <input id="teamName" type="hidden" name="teamName"/>
+                <input type="hidden" name="email" th:value="${user.email}"/>
+                <h2>닉네임 변경</h2>
+                <label for="nickname"><b>Nickname:</b></label>
+                <input type="text" id="nickname" name="nickname" th:value="${user.nickName}" class="form-control d-inline-block w-50"/>
+                <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </form>
+    </section>
 </main>
 </html>

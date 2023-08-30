@@ -1,7 +1,9 @@
 package kr.co.chunjae.gochowoo.controller;
 
+import kr.co.chunjae.gochowoo.dto.PurchaseDTO;
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
+import kr.co.chunjae.gochowoo.service.order.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -20,6 +23,7 @@ import javax.servlet.http.HttpSession;
 public class MypageController {
 
     final UserService userService;
+    private final OrderService orderService;
 
     @GetMapping()
     public String showShopPage(HttpSession session, Model model) {
@@ -30,6 +34,19 @@ public class MypageController {
         User user = userService.userInfo(email);
         model.addAttribute("user", user);
         return "views/mypage/mypage";
+    }
+
+    @GetMapping("/purchase")
+    public String showPurchasePage(@SessionAttribute(name="id" ,required = false) Long id, Model model){
+        List<PurchaseDTO> purchaseList = null;
+        if(id != null){
+            purchaseList =  orderService.getOrderList(id);
+            for(PurchaseDTO purchase : purchaseList) {
+                System.out.println(purchase.getOrderHistory());
+            }
+            model.addAttribute("purchaseList", purchaseList);
+        }
+        return "views/mypage/purchase/purchase";
     }
 
     @GetMapping("/cash")
@@ -46,6 +63,4 @@ public class MypageController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(0L);
         }
     }
-    @GetMapping("/shipping")
-    public String showShippingPage() {return "views/mypage/shipping";}
 }

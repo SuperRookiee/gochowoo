@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+    <th:block th:include="fragments/nav"></th:block>
+    <section class="py-3">
+
+        <th:block th:each="purchase : ${purchaseList}">
+            <div class="container">
+                <div class="row">
+                    <div class="card card-body">
+<!--                        <label>ID: <span th:text="${purchase.getId()}">ID</span></label>-->
+<!--                        <label>COUPON: <span th:text="${purchase.getCoupon()}">COUPON</span></label>-->
+                        <label>SHOPPING LIST: <span th:text="${purchase.getOrderHistory()}">SHOPPING LIST</span></label>
+                        <label>STATUS: <span th:text="${purchase.getStatus()}">STATUS</span></label>
+                        <label>PRICE: <span th:text="${purchase.getTotalPrice()}">PRICE</span></label>
+                        <label>ADDRESS ID: <span th:text="${purchase.getUserAddressId()}">ADDRESS ID</span></label>
+<!--                        <label>USER ID: <span th:text="${purchase.getUserId()}">USER ID</span></label>-->
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </section>
+</main>
+</html>

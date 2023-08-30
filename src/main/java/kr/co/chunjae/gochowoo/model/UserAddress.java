@@ -1,18 +1,19 @@
 package kr.co.chunjae.gochowoo.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "t_user_address")
 @Getter@Setter
+@NoArgsConstructor @AllArgsConstructor
+@Builder
 public class UserAddress {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

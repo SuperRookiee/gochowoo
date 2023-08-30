@@ -17,6 +17,8 @@ public class UserAddress {
     private User user;
 
     @Column(nullable = false, length = 15)
+    private String recipient;
+    @Column(nullable = false, length = 15)
     private String phoneNumber;
     @Column(nullable = false)
     private String address;

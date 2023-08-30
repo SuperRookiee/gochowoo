@@ -14,7 +14,8 @@
           <h4 th:text="${user.getNickName()}+'님, 안녕하세요'"></h4>
           <p class="py-3">
             Email: <span th:text="${user.getEmail()}"></span><br>
-            닉네임 <span th:text="${user.getNickName()}"></span><br>
+            닉네임: <span th:text="${user.getNickName()}"></span><br>
+            TEAM: <span th:text="${user.team}"></span><br>
             현재 잔액:  ₽<span th:text="${user.getCash()}"></span><br>
           </p>
           <form th:action="@{/api/user/logout}" method="post">
@@ -22,7 +23,7 @@
           </form>
         </div>
         <div class="col-md-4">
-          <img th:src="@{/img/about-hero.svg}" alt="About Hero">
+          <img th:src="@{'/img/team/Team ' + ${user.team} + '.svg'}" alt="User's Team">
         </div>
       </div>
     </div>

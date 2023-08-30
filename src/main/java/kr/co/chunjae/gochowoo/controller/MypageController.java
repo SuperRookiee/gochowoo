@@ -46,4 +46,6 @@ public class MypageController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(0L);
         }
     }
+    @GetMapping("/shipping")
+    public String showShippingPage() {return "views/mypage/shipping";}
 }

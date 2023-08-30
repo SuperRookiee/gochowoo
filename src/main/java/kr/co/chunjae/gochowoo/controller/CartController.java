@@ -37,6 +37,7 @@ public class CartController {
         if (user == null) {return "redirect:/user/login";}
         List<PokemonCart> pokemonCartList = pokemonCartService.getAllCarts(user.getId());
         List<ItemCart> itemCartList = itemCartService.getAllCarts(user.getId());
+        httpSession.setAttribute("cash", user.getCash());
         model.addAttribute("pokemonCartList", pokemonCartList);
         model.addAttribute("itemCartList", itemCartList);
         return "views/cart/cart";

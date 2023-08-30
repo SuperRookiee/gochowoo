@@ -10,4 +10,5 @@ public interface UserService {
     User getCash(String email);
     User withdrawUser(String email, String password);
     void updateCashByEmail(String email, int cash);
+    void changeTeam(String email,String team);
 }

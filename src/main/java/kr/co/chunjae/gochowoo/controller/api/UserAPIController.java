@@ -103,6 +103,17 @@ public class UserAPIController {
         }
     }
 
+    @PostMapping("/changeTeam")
+    public ResponseEntity<Void> changeTeam(@RequestBody Map<String, String> requestBody, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        String teamName = requestBody.get("teamName");
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        userService.changeTeam(email, teamName);
+        return ResponseEntity.ok().build();
+    }
+
 
     /*public String withdrawUser(@RequestParam String email, @RequestParam String password) {
 

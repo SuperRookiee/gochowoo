@@ -36,7 +36,7 @@ public class CartAPIController {
     }
 
     @PostMapping("/item")
-    public ResponseEntity<Void> addToItemCart(HttpServletRequest request,  @RequestBody AddCartDTO dto) {
+    public ResponseEntity<Void> addToItemCart(HttpServletRequest request, @RequestBody AddCartDTO dto) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {

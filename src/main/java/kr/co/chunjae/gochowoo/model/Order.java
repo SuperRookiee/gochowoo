@@ -4,7 +4,6 @@ import kr.co.chunjae.gochowoo.model.base.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,8 +18,8 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Transient
-    private List<OrderHistory> orderHistory;
+    @Column(columnDefinition = "json")
+    private String orderHistory;
 
     @ManyToOne
     @JoinColumn(name = "user_address_id")

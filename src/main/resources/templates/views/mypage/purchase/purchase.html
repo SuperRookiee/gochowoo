@@ -6,40 +6,30 @@
 <main layout:fragment="content">
     <th:block th:include="fragments/nav"></th:block>
     <section class="py-3">
-        <th:block th:each="purchase : ${purchaseList}">
-            <div class="container">
-                <div class="row">
-                    <div class="card card-body">
-                        <label>ORDER ID: <span th:text="${purchase.orderId}"></span></label>
-                        <label>CREATED TIME: <span th:text="${purchase.createdTime}"></span></label>
-                        <label>LAST MODIFIED TIME: <span th:text="${purchase.lastModifiedTime}"></span></label>
-                        <label>COUPON: <span th:text="${purchase.coupon}"></span></label>
-<!--                        <label>ORDER HISTORY: <span th:text="${purchase.orderHistory}"></span></label>-->
-
-<!--                        <label>ORDER HISTORY:</label>-->
-<!--                            <span th:each="orderHistory : ${purchase.orderHistoryList}">-->
-<!--                            <span th:text="${orderHistory.name}"></span>-->
-<!--                            <span th:if="${!orderHistory.last}">, </span>-->
-<!--                        </span>-->
-
-                        <label>STATUS: <span th:text="${purchase.status}"></span></label>
-                        <label>TOTAL PRICE: <span th:text="${purchase.totalPrice}"></span></label>
-                        <label>ADDRESS ID: <span th:text="${purchase.addressId}"></span></label>
-                        <label>ADDRESS: <span th:text="${purchase.address}"></span></label>
-                        <label>DELIVERY REQUEST: <span th:text="${purchase.deliveryRequest}"></span></label>
-                        <label>PHONE NUMBER: <span th:text="${purchase.phoneNumber}"></span></label>
-                        <label>RECIPIENT: <span th:text="${purchase.recipient}"></span></label>
+        <div class="container" th:each="purchase : ${purchaseList}">
+            <div class="row">
+                <div class="card card-body">
+                    <label>ORDER ID: <span th:text="${purchase.orderId}"></span></label>
+                    <label>CREATED TIME: <span th:text="${purchase.createdTime}"></span></label>
+                    <label>LAST MODIFIED TIME: <span th:text="${purchase.lastModifiedTime}"></span></label>
+                    <label>COUPON: <span th:text="${purchase.coupon}"></span></label>
+                    <label>STATUS: <span th:text="${purchase.status}"></span></label>
+                    <label>TOTAL PRICE: <span th:text="${purchase.totalPrice}"></span></label>
+                    <label>ADDRESS ID: <span th:text="${purchase.addressId}"></span></label>
+                    <label>ADDRESS: <span th:text="${purchase.address}"></span></label>
+                    <label>DELIVERY REQUEST: <span th:text="${purchase.deliveryRequest}"></span></label>
+                    <label>PHONE NUMBER: <span th:text="${purchase.phoneNumber}"></span></label>
+                    <label>RECIPIENT: <span th:text="${purchase.recipient}"></span></label>
+                    <label>ORDER HISTORY:</label>
+                    <div th:each="orderHistory : ${purchase.orderHistoryAsList}">
+                        <label>PRODUCT ID: <span th:text="${orderHistory.product_id}"></span></label>
+                        <label>NAME: <span th:text="${orderHistory.name}"></span></label>
+                        <label>PRICE: <span th:text="${orderHistory.price}"></span></label>
+                        <label>AMOUNT: <span th:text="${orderHistory.amount}"></span></label>
                     </div>
                 </div>
             </div>
-
-            <th:block th:each="orderHistory : ${orderHistoryList}">
-                <label>PRODUCT ID: <span th:text="${orderHistory.product_id}"></span></label>
-                <label>NAME: <span th:text="${orderHistory.name}"></span></label>
-                <label>PRICE: <span th:text="${orderHistory.price}"></span></label>
-                <label>AMOUNT: <span th:text="${orderHistory.amount}"></span></label>
-            </th:block>
-        </th:block>
+        </div>
     </section>
 </main>
 </html>

@@ -32,6 +32,10 @@ Custom Css
     font-family: Pokemon-Hollow, serif !important;
     color: var(--pokemon-blue) !important;
 }
+/* 메인 검색 */
+#icon_ball_b {
+    width: 40px !important;
+}
 /* 메인 헤더 로고 소제목 */
 .pokemon.subtitle {
     margin-left: 4rem;

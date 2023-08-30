@@ -233,8 +233,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <a th:href="|/shop/${productKind}/${recent.id}|" class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
+                        <div class="card-body pointer"  th:attr="data-product-kind=${productKind}, data-recent-id=${recent.id}"
+                             th:onclick="|recentProduct(this.getAttribute('data-product-kind'), this.getAttribute('data-recent-id'))|">
+                        <a class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
                             <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                 <li th:if="${productKind eq 'pokemon'}" th:class="'tx_'+${recent.type.eng}" th:text="${recent.type.ko}">타입</li>
                                 <li th:if="${productKind eq 'item'}" th:text="${recent.type}">타입</li>
@@ -294,6 +295,10 @@
                     }
                 }]
         });
+
+        const recentProduct = (productKind, recentId) => {
+            location.href = '/shop/' + productKind + '/' + recentId;
+        }
     </script>
 </main>
 

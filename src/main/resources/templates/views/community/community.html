@@ -7,19 +7,18 @@
 <main layout:fragment="content">
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-        <p class="mb-4">
-            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+        <h1 class="h3 mb-2 text-gray-800"></h1>
+        <p class="my-4">
+            커뮤니티 규칙을 준수하세요.
         </p>
 
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-            </div>
+        <div class="dcard shadow mb-4" style="pading: 16px">
+                <a href="/community/write">글쓰기</a>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                    <table class="table table-bordered" id="dataTable">
                         <thead>
                         <tr>
                             <th>No.</th><!--닉네임-->
@@ -29,7 +28,7 @@
                             <th>작성일</th>
                         </tr>
                         </thead>
-                        <tfoot>
+                        <tbody>
                             <tr th:each="community : ${communityList}">
                                 <td th:text="${community.id}">Id</td>
                                 <td th:text="${community.getTitle()}">제목</td>
@@ -37,7 +36,7 @@
                                 <td th:text="${community.getHits()}">조회수</td>
                                 <td th:text="${community.getCreatedTime()}">작성일</td>
                             </tr>
-                        </tfoot>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -45,10 +44,13 @@
     </div>
 
     <!-- Page level script -->
-    <script th:src="@{/js/jquery.dataTables.min.js}"></script>
     <script >
         $(document).ready(function() {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable(
+                {
+                    aaSorting : []
+                }
+            );
         });
     </script>
 </main>

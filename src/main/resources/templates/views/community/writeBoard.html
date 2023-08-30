@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1000,
+            // timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        function onSubmitHandler (formElem) {
+            const elems = Object.values(formElem);
+            for (const elem of elems) {
+                if (elem.name && !elem.value) {
+                    Toast.fire({
+                        icon: "error",
+                        title: '입력하세요'
+                    })
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+    <div class="container my-5">
+        <h1>Create New Community</h1>
+        <form action="/api/community/write" method="post" onsubmit="return onSubmitHandler(this)">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title"><br>
+
+            <label for="content">Content:</label><br>
+            <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
+
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</main>
+</html>

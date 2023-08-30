@@ -1,6 +1,7 @@
 package kr.co.chunjae.gochowoo.model;
 
 
+import kr.co.chunjae.gochowoo.model.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,14 +26,16 @@ public class Community extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User writer;
 
     @Column(nullable = false)
-    private int hits;
+    @Builder.Default
+    private int hits = 0;
 
     @Column(nullable = false)
-    private char deleteYn;
+    @Builder.Default
+    private char deleteYn = 'N';
 
 }

@@ -1,10 +1,11 @@
 package kr.co.chunjae.gochowoo.model.converter;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.chunjae.gochowoo.model.OrderHistory;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
 @Converter
 public class OrderHistoryConverter implements AttributeConverter<OrderHistory, String> {

@@ -3,7 +3,6 @@ package kr.co.chunjae.gochowoo.model;
 import kr.co.chunjae.gochowoo.model.base.BaseEntity;
 import kr.co.chunjae.gochowoo.model.converter.OrderHistoryConverter;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 

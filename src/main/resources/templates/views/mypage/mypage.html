@@ -9,10 +9,10 @@
   <section class="bg-success py-5">
     <div class="container">
       <div class="row align-items-center py-5">
-        <div class="col-md-8 text-white">
+        <div class="col-md-7 text-white">
           <h1>Profile Overview</h1>
           <h5 th:text="${user.getNickName()}+'님, 안녕하세요'"></h5>
-          <h5 th:text="'저희와 '+${T(java.time.LocalDate).now().minusDays(user.getCreatedTime().toLocalDate().toEpochDay()).toEpochDay()}+'일 동안 함께 하셨어요'"></h5>
+          <h5 th:text="'저희와 '+${T(java.time.LocalDate).now().minusDays(user.getCreatedTime().toLocalDate().toEpochDay()).toEpochDay()+1}+'일 동안 함께 하셨어요'"></h5>
           <p class="py-3">
             Email: <span th:text="${user.getEmail()}"></span><br>
             닉네임: <span th:text="${user.getNickName()}"></span><br>
@@ -23,8 +23,9 @@
             <button th:if="${session.email} != null"  type="submit" class="w-100 btn btn-primary">로그아웃</button>
           </form>
         </div>
-        <div class="col-md-4">
-          <img th:src="@{'/img/team/Team ' + ${user.team} + '.svg'}" alt="User's Team">
+        <div class="col-md-5">
+          <img th:if="${user.team} == null" th:src="@{'/img/team/Logo.png'}" alt="User's Team">
+          <img th:unless="${user.team} == null" th:src="@{'/img/team/Team ' + ${user.team} + '.svg'}" alt="User's Team">
         </div>
       </div>
     </div>
@@ -43,31 +44,31 @@
     </div>
     <div class="row">
 
-      <div class="col-md-6 col-lg-3 pb-5 pointer">
+      <div class="col-md-6 col-lg-3 pb-5 pointer" th:onclick="|location.href='/mypage/purchase'|">
         <div class="h-100 py-5 services-icon-wap shadow">
-          <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
-          <h2 class="h5 mt-4 text-center">Delivery Services</h2>
+          <div class="h1 text-success text-center"><i class="fa-brands fa-shopify fa-lg"></i></div>
+          <h2 class="h5 mt-4 text-center fw-bold">주문 리스트</h2>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-3 pb-5 pointer">
         <div class="h-100 py-5 services-icon-wap shadow">
           <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
-          <h2 class="h5 mt-4 text-center">Shipping & Return</h2>
+          <h2 class="h5 mt-4 text-center fw-bold">Shipping & Return</h2>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-3 pb-5 pointer" th:onclick="|location.href='/mypage/cash'|">
         <div class="h-100 py-5 services-icon-wap shadow">
           <div class="h1 text-success text-center"><i class="fa-solid fa-peseta-sign"></i></div>
-          <h2 class="h5 mt-4 text-center">캐시 충전</h2>
+          <h2 class="h5 mt-4 text-center fw-bold">캐시 충전</h2>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-3 pb-5 pointer" th:onclick="|location.href='/api/user/profile'|">
         <div class="h-100 py-5 services-icon-wap shadow">
           <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
-          <h2 class="h5 mt-4 text-center">회원 정보 수정</h2>
+          <h2 class="h5 mt-4 text-center fw-bold">회원 정보 수정</h2>
         </div>
       </div>
     </div>

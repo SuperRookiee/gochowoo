@@ -19,6 +19,9 @@ Custom Css
     cursor: pointer;
 }
 
+.bg-pokemon-primary {background-color: var(--pokemon-blue)}
+.bg-pokemon-secondary {background-color: var(--pokemon-yellow)}
+
 /* 메인 헤더 로고 */
 .pokemon {
     font-family: Pokemon-Solid, serif !important;

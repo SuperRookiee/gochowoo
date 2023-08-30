@@ -32,14 +32,51 @@ Custom Css
     font-family: Pokemon-Hollow, serif !important;
     color: var(--pokemon-blue) !important;
 }
+/* 메인 검색 */
+#icon_ball_b {
+    width: 40px !important;
+}
 /* 메인 헤더 로고 소제목 */
 .pokemon.subtitle {
     margin-left: 4rem;
     margin-bottom: 0;
 }
+ul.nav.navbar-nav li a {
+    position: relative;
+}
+ul.nav.navbar-nav li a:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: #3565AE;
+    transition: all 0.3s ease;
+    left: 50%;
+    transform: translateX(-50%);
+}
+ul.nav.navbar-nav li a:hover:before{
+    width: 90%;
+}
 /* 푸터 로고 소제목 */
 #tempaltemo_footer .pokemon.subtitle {
-    margin-left: 30px;
+    margin-left: 20px;
+}
+
+/* 카드 이미지 */
+.img-fluid,
+.img-fluid-banner {
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 1400px) {
+    .img-fluid-banner {
+
+        width: 500px;
+        margin-left: 6rem;
+    }
 }
 
 .hidden {
@@ -52,6 +89,10 @@ Custom Css
 }
 
 /*** Shop ***/
+#shop_defaultImg {
+    height: 250px;
+}
+
 /* 카테고리 타입 */
 ul#Categories_Type > li > label {
     cursor: pointer;
@@ -77,3 +118,20 @@ p#description {
     -webkit-box-orient: vertical;
     line-height: 1.4;
 }
+
+/*** Mypage ***/
+/*** Mypage > 충전 ***/
+.border-left-primary {
+    border-left: 0.25rem solid #3565AE !important;
+}
+.border-left-secondary {
+    border-left: 0.25rem solid #FFCB05 !important;
+}
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+#coin-input::before {
+    content: "₽";
+}
+
+

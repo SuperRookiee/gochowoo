@@ -1,5 +1,6 @@
 package kr.co.chunjae.gochowoo.service;
 
+import kr.co.chunjae.gochowoo.model.Team;
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public User getCash(String email) {
+        return userRepository.findCashByEmail(email);
+    }
+
     public User withdrawUser(String email, String password) {
         User user = userRepository.findByEmail(email);
 
@@ -42,5 +48,24 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public void updateCashByEmail(String email, int cash) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.updateCash(cash);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void changeTeam(String email, String teamName) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.setTeam(Team.getTeam(teamName));
+            userRepository.save(user);
+        }
+    }
+
 
 }

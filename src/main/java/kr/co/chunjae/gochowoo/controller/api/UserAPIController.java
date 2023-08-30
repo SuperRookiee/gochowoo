@@ -2,27 +2,24 @@ package kr.co.chunjae.gochowoo.controller.api;
 
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import java.util.Map;
 
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/api/user")
 public class UserAPIController {
-
     final UserService userService;
-
-    public UserAPIController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/join")
     public String join(@RequestParam String email, @RequestParam String password, @RequestParam String nickName) {
@@ -44,20 +41,16 @@ public class UserAPIController {
             return "redirect:/user/login?error=true";
         }
         HttpSession session = request.getSession();
+        session.setAttribute("id", user.getId());
         session.setAttribute("email", email);
         session.setAttribute("nickName", user.getNickName());
         session.setAttribute("cash", user.getCash());
-
+        session.setAttribute("user", user);
         return "/index";
     }
 
     @PostMapping("/logout")
     public String logout(HttpSession session, Model model) {
-        if (session.getAttribute("email") == null) {
-            // 세션에 유저 정보가 없는 경우 에러 메시지 추가
-            model.addAttribute("errorMessage", "세션에 저장된 데이터가 없습니다.");
-            return "redirect:/mypage"; // 에러 페이지로 리다이렉트 또는 포워드
-        }
         session.invalidate(); // 세션 무효화
         model.addAttribute("logoutSuccess", true);
         return "redirect:/mypage";
@@ -97,6 +90,30 @@ public class UserAPIController {
             return "/index";
         }
     }
+
+    @PostMapping("/cash/charge")
+    public ResponseEntity<Void> addUserCash(@RequestBody Map<String, String> requestBody, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+
+        if (email != null) {
+            userService.updateCashByEmail(email, Integer.parseInt(requestBody.get("coin")));
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PostMapping("/changeTeam")
+    public ResponseEntity<Void> changeTeam(@RequestBody Map<String, String> requestBody, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        String teamName = requestBody.get("teamName");
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        userService.changeTeam(email, teamName);
+        return ResponseEntity.ok().build();
+    }
+
 
     /*public String withdrawUser(@RequestParam String email, @RequestParam String password) {
 

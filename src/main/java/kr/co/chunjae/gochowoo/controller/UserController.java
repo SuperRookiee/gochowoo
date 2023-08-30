@@ -8,14 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("")
-    public String showUserPage() { return "views/user/index"; }
-
     @GetMapping("/login")
-    public String showLoginPage() {
-
-        return "views/user/login";
-    }
+    public String showLoginPage() {return "views/user/login";}
 
     @GetMapping("/join")
     public String showJoinPage() { return "views/user/join"; }

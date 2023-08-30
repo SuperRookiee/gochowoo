@@ -1,14 +1,12 @@
 package kr.co.chunjae.gochowoo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import kr.co.chunjae.gochowoo.model.base.BaseEntity;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity @Table(name = "t_user")
-@Data
+@Setter @Getter
 @Builder @NoArgsConstructor @AllArgsConstructor
 public class User extends BaseEntity {
 
@@ -23,10 +21,10 @@ public class User extends BaseEntity {
     private String email;
     @Column @Builder.Default
     private Long cash = 0L;
+    @Column
+    private Team team;
 
-//    @Override
-//    public String toString() {
-//        return this.nickName;
-//    }
-
+    public void updateCash(int cash) {
+        this.cash += cash;
+    }
 }

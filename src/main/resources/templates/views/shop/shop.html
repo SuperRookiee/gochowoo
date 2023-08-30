@@ -15,10 +15,21 @@
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul id="collapsePrice" class="collapse list-unstyled pl-3">
-                            <li><input type="radio" name="price-range" value="all" id="price_all" class="text-decoration-none" checked><label for="price_all" class="text-decoration-none">All</label></li>
-                            <li><input type="radio" name="price-range" value="low" id="price_low" class="text-decoration-none"><label for="price_low" class="text-decoration-none">~ ₽500</label></li>
-                            <li><input type="radio" name="price-range" value="medium" id="price_medium" class="text-decoration-none"><label for="price_medium" class="text-decoration-none">₽501 ~ 999</label></li>
-                            <li><input type="radio" name="price-range" value="high" id="price_high" class="text-decoration-none"><label for="price_high" class="text-decoration-none">₽1000 ~</label></li>
+                            <li><input type="radio" name="price-range" value="all" id="price_all"
+                                       class="text-decoration-none" checked><label for="price_all"
+                                                                                   class="text-decoration-none">All</label>
+                            </li>
+                            <li><input type="radio" name="price-range" value="low" id="price_low"
+                                       class="text-decoration-none"><label for="price_low" class="text-decoration-none">~
+                                ₽500</label></li>
+                            <li><input type="radio" name="price-range" value="medium" id="price_medium"
+                                       class="text-decoration-none"><label for="price_medium"
+                                                                           class="text-decoration-none">₽501 ~
+                                999</label></li>
+                            <li><input type="radio" name="price-range" value="high" id="price_high"
+                                       class="text-decoration-none"><label for="price_high"
+                                                                           class="text-decoration-none">₽1000 ~</label>
+                            </li>
                         </ul>
                     </li>
                     <li class="pb-3">
@@ -27,24 +38,42 @@
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul class="collapse show list-unstyled pl-3" id="Categories_Type">
-                            <li class="tx_normal"><input type="checkbox" value="NORMAL" id="chk_normal">        <label for="chk_normal">노멀 (Normal)</label></li>
-                            <li class="tx_fire"><input type="checkbox" value="FIRE" id="chk_fire">              <label for="chk_fire">불 (Fire)</label></li>
-                            <li class="tx_water"><input type="checkbox" value="WATER" id="chk_water">           <label for="chk_water">물 (Water)</label></li>
-                            <li class="tx_electric"><input type="checkbox" value="ELECTRIC" id="chk_electric">  <label for="chk_electric">전기 (Electric)</label></li>
-                            <li class="tx_grass"><input type="checkbox" value="GRASS" id="chk_grass">           <label for="chk_grass">풀 (Grass)</label></li>
-                            <li class="tx_ice"><input type="checkbox" value="ICE" id="chk_ice">                 <label for="chk_ice">얼음 (Ice)</label></li>
-                            <li class="tx_fighting"><input type="checkbox" value="FIGHTING" id="chk_fighting">  <label for="chk_fighting">격투 (Fighting)</label></li>
-                            <li class="tx_poison"><input type="checkbox" value="POISON" id="chk_poison">        <label for="chk_poison">독 (Poison)</label></li>
-                            <li class="tx_ground"><input type="checkbox" value="GROUND" id="chk_ground">        <label for="chk_ground">땅 (Ground)</label></li>
-                            <li class="tx_flying"><input type="checkbox" value="FLYING" id="chk_flying">        <label for="chk_flying">비행 (Flying)</label></li>
-                            <li class="tx_psychic"><input type="checkbox" value="PSYCHIC" id="chk_psychic">     <label for="chk_psychic">에스퍼 (Psychic)</label></li>
-                            <li class="tx_bug"><input type="checkbox" value="BUG" id="chk_bug">                 <label for="chk_bug">벌레 (Bug)</label></li>
-                            <li class="tx_rock"><input type="checkbox" value="ROCK" id="chk_rock">              <label for="chk_rock">바위 (Rock)</label></li>
-                            <li class="tx_ghost"><input type="checkbox" value="GHOST" id="chk_ghost">           <label for="chk_ghost">고스트 (Ghost)</label></li>
-                            <li class="tx_dragon"><input type="checkbox" value="DRAGON" id="chk_dragon">        <label for="chk_dragon">드래곤 (Dragon)</label></li>
-                            <li class="tx_dark"> <input type="checkbox" value="DARK" id="chk_dark">              <label for="chk_dark">악 (Dark)</label></li>
-                            <li class="tx_steel"><input type="checkbox" value="STEEL" id="chk_steel">           <label for="chk_steel">강철 (Steel)</label></li>
-                            <li class="tx_fairy"><input type="checkbox" value="FAIRY" id="chk_fairy">           <label for="chk_fairy">페어리(Fairy)</label></li>
+                            <li class="tx_normal"><input type="checkbox" value="NORMAL" id="chk_normal"> <label
+                                    for="chk_normal">노멀 (Normal)</label></li>
+                            <li class="tx_fire"><input type="checkbox" value="FIRE" id="chk_fire"> <label
+                                    for="chk_fire">불 (Fire)</label></li>
+                            <li class="tx_water"><input type="checkbox" value="WATER" id="chk_water"> <label
+                                    for="chk_water">물 (Water)</label></li>
+                            <li class="tx_electric"><input type="checkbox" value="ELECTRIC" id="chk_electric"> <label
+                                    for="chk_electric">전기 (Electric)</label></li>
+                            <li class="tx_grass"><input type="checkbox" value="GRASS" id="chk_grass"> <label
+                                    for="chk_grass">풀 (Grass)</label></li>
+                            <li class="tx_ice"><input type="checkbox" value="ICE" id="chk_ice"> <label for="chk_ice">얼음
+                                (Ice)</label></li>
+                            <li class="tx_fighting"><input type="checkbox" value="FIGHTING" id="chk_fighting"> <label
+                                    for="chk_fighting">격투 (Fighting)</label></li>
+                            <li class="tx_poison"><input type="checkbox" value="POISON" id="chk_poison"> <label
+                                    for="chk_poison">독 (Poison)</label></li>
+                            <li class="tx_ground"><input type="checkbox" value="GROUND" id="chk_ground"> <label
+                                    for="chk_ground">땅 (Ground)</label></li>
+                            <li class="tx_flying"><input type="checkbox" value="FLYING" id="chk_flying"> <label
+                                    for="chk_flying">비행 (Flying)</label></li>
+                            <li class="tx_psychic"><input type="checkbox" value="PSYCHIC" id="chk_psychic"> <label
+                                    for="chk_psychic">에스퍼 (Psychic)</label></li>
+                            <li class="tx_bug"><input type="checkbox" value="BUG" id="chk_bug"> <label for="chk_bug">벌레
+                                (Bug)</label></li>
+                            <li class="tx_rock"><input type="checkbox" value="ROCK" id="chk_rock"> <label
+                                    for="chk_rock">바위 (Rock)</label></li>
+                            <li class="tx_ghost"><input type="checkbox" value="GHOST" id="chk_ghost"> <label
+                                    for="chk_ghost">고스트 (Ghost)</label></li>
+                            <li class="tx_dragon"><input type="checkbox" value="DRAGON" id="chk_dragon"> <label
+                                    for="chk_dragon">드래곤 (Dragon)</label></li>
+                            <li class="tx_dark"><input type="checkbox" value="DARK" id="chk_dark"> <label
+                                    for="chk_dark">악 (Dark)</label></li>
+                            <li class="tx_steel"><input type="checkbox" value="STEEL" id="chk_steel"> <label
+                                    for="chk_steel">강철 (Steel)</label></li>
+                            <li class="tx_fairy"><input type="checkbox" value="FAIRY" id="chk_fairy"> <label
+                                    for="chk_fairy">페어리(Fairy)</label></li>
                         </ul>
                     </li>
                 </ul>
@@ -55,15 +84,19 @@
                     <div class="col-md-6">
                         <ul class="list-inline shop-top-menu pb-3 pt-1">
                             <li class="list-inline-item">
-                                <input id="kind_all" type="radio" name="kind" class="filter-checkbox d-none" value="all" checked>
+                                <input id="kind_all" type="radio" name="kind" class="filter-checkbox d-none" value="all"
+                                       checked>
                                 <label class="h3 text-dark text-decoration-none mr-3" for="kind_all">All</label>
                             </li>
                             <li class="list-inline-item">
-                                <input id="kind_pokemon" type="radio" name="kind" class="filter-checkbox d-none" value="pokemon">
-                                <label class="h3 text-dark text-decoration-none mr-3" for="kind_pokemon">Pokémon's</label>
+                                <input id="kind_pokemon" type="radio" name="kind" class="filter-checkbox d-none"
+                                       value="pokemon">
+                                <label class="h3 text-dark text-decoration-none mr-3"
+                                       for="kind_pokemon">Pokémon's</label>
                             </li>
                             <li class="list-inline-item">
-                                <input id="kind_item" type="radio" name="kind" class="filter-checkbox d-none" value="item">
+                                <input id="kind_item" type="radio" name="kind" class="filter-checkbox d-none"
+                                       value="item">
                                 <label class="h3 text-dark text-decoration-none" for="kind_item">Item's</label>
                             </li>
                         </ul>
@@ -82,25 +115,34 @@
                 </div>
                 <div class="row" id="pokemonContainer">
                     <th:block th:each="pokemon : ${pokemonList}">
-                        <div th:id="'p_'+${pokemon.id}" th:class="${'col-md-4 pokemonCard '+ pokemon.type +' '+ (pokemon.price <= 500 ? 'low' : (pokemon.price > 500 && pokemon.price < 1000 ? 'medium' : 'high'))}">
+                        <div th:id="'p_'+${pokemon.id}"
+                             th:class="${'col-md-4 pokemonCard '+ pokemon.type +' '+ (pokemon.price <= 500 ? 'low' : (pokemon.price > 500 && pokemon.price < 1000 ? 'medium' : 'high'))}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0 p-2">
                                     <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
-                                    th:src="@{/img/pockemon/{name}.png(name=${pokemon.name})}"
+                                         th:src="@{/img/pockemon/{name}.png(name=${pokemon.name})}"
                                          th:alt="${pokemon.name}">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="fas fa-cart-plus"></i></a></li>
+                                            <li><a class="btn btn-success text-white" href="#"><i
+                                                    class="far fa-heart"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href="#"><i
+                                                    class="far fa-eye"></i></a></li>
+                                            <li th:onclick="'addToPokemonCart(\'' + ${pokemon.id} + '\')'"
+                                            ><a class="btn btn-success text-white mt-2" href="#"><i
+                                                    class="fas fa-cart-plus"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body pointer" th:onclick="|location.href='/shop/pokemon/'+${pokemon.id}|">
+                                <div class="card-body pointer"
+                                     th:onclick="|location.href='/shop/pokemon/'+${pokemon.id}|">
                                     <a class="h3 text-decoration-none" th:text="${pokemon.name}">이름</a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                        <li th:text="${pokemon.type.ko+' 타입'}" th:class="${'tx_'+pokemon.type.eng}"></li>
-                                        <li th:text="'NO.' + ${#numbers.formatInteger(pokemon.number, '0000')}">NO.0000</li>
+                                        <li th:text="${pokemon.type.ko+' 타입'}"
+                                            th:class="${'tx_'+pokemon.type.eng}"></li>
+                                        <li th:text="'NO.' + ${#numbers.formatInteger(pokemon.number, '0000')}">
+                                            NO.0000
+                                        </li>
                                     </ul>
                                     <p class="text-center mb-0" th:text="'₽' + ${pokemon.price}">₽1000</p>
                                 </div>
@@ -108,7 +150,8 @@
                         </div>
                     </th:block>
                     <th:block th:each="item : ${itemList}">
-                        <div th:id="'i_'+${item.id}" th:class="${'col-md-4 itemCard ' +' '+ (item.price <= 500 ? 'low' : (item.price > 500 && item.price < 1000 ? 'medium' : 'high'))}">
+                        <div th:id="'i_'+${item.id}"
+                             th:class="${'col-md-4 itemCard ' +' '+ (item.price <= 500 ? 'low' : (item.price > 500 && item.price < 1000 ? 'medium' : 'high'))}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0 p-2">
                                     <img class="card-img rounded-0 img-fluid" id="shop_defaultImg"
@@ -116,9 +159,14 @@
                                          th:alt="${item.name}">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a class="btn btn-success text-white" href="#"><i class="far fa-heart"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="#"><i class="fas fa-cart-plus"></i></a></li>
+                                            <li><a class="btn btn-success text-white" href="#"><i
+                                                    class="far fa-heart"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href="#"><i
+                                                    class="far fa-eye"></i></a></li>
+                                            <li
+                                                    th:onclick="'addToItemCart(\'' + ${item.id} + '\')'"
+                                            ><a class="btn btn-success text-white mt-2" href="#"><i
+                                                    class="fas fa-cart-plus"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -153,7 +201,43 @@
     <!--End Team-->
 
     <script>
-        $(document).ready(function() {
+        async function addToPokemonCart(pokemonId) {
+            const response = await fetch("/api/cart/pokemon", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    productId:  pokemonId,
+                    amount: 1,
+                }),
+            })
+            if (response.ok) {
+                alert("ok");
+            } else {
+                alert("fail");
+            }
+        }
+
+        async function addToItemCart(itemId) {
+            const response = await fetch("/api/cart/item", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    productId: itemId,
+                    amount: 1,
+                }),
+            })
+            if (response.ok) {
+                alert("ok");
+            } else {
+                alert("fail");
+            }
+        }
+
+        $(document).ready(function () {
             checkURL();
             applyFilters();
             Pagination();
@@ -203,7 +287,7 @@
         const applyFilters = () => {
             const selectedPriceRange = $('input[name="price-range"]:checked').val();
             const selectedTypes = [];
-            $('#Categories_Type input[type="checkbox"]:checked').each(function() {
+            $('#Categories_Type input[type="checkbox"]:checked').each(function () {
                 selectedTypes.push($(this).val());
             });
             const selectedKind = $('input[name="kind"]:checked').val();
@@ -212,7 +296,7 @@
             const TypeArray = [];
             const KindArray = [];
 
-            $('.pokemonCard, .itemCard').each(function() {
+            $('.pokemonCard, .itemCard').each(function () {
                 const itemId = $(this).attr('id');
                 const itemClasses = $(this).attr('class').split(' ');
 
@@ -284,7 +368,7 @@
                 Pagination();
             });
         }
-        
+
         const checkURL = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const kind = urlParams.get("kind");

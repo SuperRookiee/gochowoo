@@ -3,6 +3,51 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{layout/layout}">
 <main layout:fragment="content">
+    <script>
+        async function addToPokemonCart() {
+            const currentURL = window.location.href;
+            const urlParts = currentURL.split('/');
+            const id = urlParts[urlParts.length - 1];
+            const amount = +document.getElementById("var-value").innerHTML;
+            const response = await fetch("/api/cart/pokemon", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    productId: id,
+                    amount,
+                }),
+            })
+            if (response.ok) {
+                alert("ok");
+            } else {
+                alert("fail");
+            }
+        }
+
+        async function addToItemCart() {
+            const currentURL = window.location.href;
+            const urlParts = currentURL.split('/');
+            const id = urlParts[urlParts.length - 1];
+            const amount = +document.getElementById("var-value").innerHTML;
+            const response = await fetch("/api/cart/item", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    productId: id,
+                    amount,
+                }),
+            })
+            if (response.ok) {
+                alert("ok");
+            } else {
+                alert("fail");
+            }
+        }
+    </script>
     <!-- Slick -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/slick.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/slick-theme.css}">
@@ -13,8 +58,12 @@
                 <div class="row">
                     <div class="col-lg-5 mt-5">
                         <div class="card mb-3">
-                            <img th:if="${productKind eq 'pokemon'}" class="card-img img-fluid" th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}" alt="Card image cap" id="product-detail">
-                            <img th:if="${productKind eq 'item'}" class="card-img img-fluid" th:src="@{/img/item/{name}.png(name=${#strings.replace(p.name, ' ', '')})}" alt="Card image cap" id="product-detail">
+                            <img th:if="${productKind eq 'pokemon'}" class="card-img img-fluid"
+                                 th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
+                                 alt="Card image cap" id="product-detail">
+                            <img th:if="${productKind eq 'item'}" class="card-img img-fluid"
+                                 th:src="@{/img/item/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
+                                 alt="Card image cap" id="product-detail">
                         </div>
                         <div class="row">
                             <!--Start Controls-->
@@ -26,16 +75,23 @@
                             </div>
                             <!--End Controls-->
                             <!--Start Carousel Wrapper-->
-                            <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                            <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item"
+                                 data-bs-ride="carousel">
                                 <!--Start Slides-->
                                 <div class="carousel-inner product-links-wap" role="listbox">
 
-                                    <div th:each="slideIndex : ${#numbers.sequence(0, 1)}" th:classappend="${slideIndex == 0} ? 'carousel-item active' : 'carousel-item'">
+                                    <div th:each="slideIndex : ${#numbers.sequence(0, 1)}"
+                                         th:classappend="${slideIndex == 0} ? 'carousel-item active' : 'carousel-item'">
                                         <div class="row">
-                                            <div th:each="imageIndex : ${#numbers.sequence(slideIndex * 3 + 1, slideIndex * 3 + 3)}" class="col-4">
+                                            <div th:each="imageIndex : ${#numbers.sequence(slideIndex * 3 + 1, slideIndex * 3 + 3)}"
+                                                 class="col-4">
                                                 <a href="#">
-                                                    <img th:if="${productKind eq 'pokemon'}" class="card-img img-fluid" th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}" alt="Card image cap" id="product-detail">
-                                                    <img th:if="${productKind eq 'item'}" class="card-img img-fluid" th:src="@{/img/item/{name}.png(name=${#strings.replace(p.name, ' ', '')})}" alt="Card image cap" id="product-detail">
+                                                    <img th:if="${productKind eq 'pokemon'}" class="card-img img-fluid"
+                                                         th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
+                                                         alt="Card image cap" id="product-detail">
+                                                    <img th:if="${productKind eq 'item'}" class="card-img img-fluid"
+                                                         th:src="@{/img/item/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
+                                                         alt="Card image cap" id="product-detail">
                                                 </a>
                                             </div>
                                         </div>
@@ -74,7 +130,8 @@
                                         <h6>Type :</h6>
                                     </li>
                                     <li class="list-inline-item">
-                                        <p class="text-muted"><strong th:class="${'tx_'+p.type.eng}" th:text="${p.type.ko}">타입</strong></p>
+                                        <p class="text-muted"><strong th:class="${'tx_'+p.type.eng}"
+                                                                      th:text="${p.type.ko}">타입</strong></p>
                                     </li>
                                 </ul>
                                 <ul class="list-inline">
@@ -94,25 +151,44 @@
                                             <ul class="list-inline pb-3">
                                                 <li class="list-inline-item text-right">
                                                     Quantity
-                                                    <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                                                    <input type="hidden" name="product-quanity" id="product-quanity"
+                                                           value="1">
                                                 </li>
-                                                <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                                <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                                <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                                <li class="list-inline-item"><span class="btn btn-success"
+                                                                                   id="btn-minus">-</span></li>
+                                                <li class="list-inline-item"><span class="badge bg-secondary"
+                                                                                   id="var-value">1</span></li>
+                                                <li class="list-inline-item"><span class="btn btn-success"
+                                                                                   id="btn-plus">+</span></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="row pb-3">
                                         <div class="col d-grid">
-                                            <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                            <button type="submit" class="btn btn-success btn-lg" name="submit"
+                                                    value="buy">Buy
+                                            </button>
                                         </div>
                                         <div class="col d-grid">
-                                            <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+                                            <button type="button"
+                                                    th:if="${productKind eq 'pokemon'}"
+                                                    th:onclick="|addToPokemonCart()|"
+                                                    class="btn btn-success btn-lg" name="submit" value="addtocard">Add
+                                                To Cart
+                                            </button>
+                                            <button type="button"
+                                                    th:if="${productKind eq 'item'}"
+                                                    th:onclick="|addToItemCart()|"
+                                                    class="btn btn-success btn-lg" name="submit" value="addtocard">Add
+                                                To Cart
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="row pb-3">
                                         <div class="col d-grid">
-                                            <button type="button" class="btn btn-secondary btn-lg" onclick="location.href='/shop'">목록으로</button>
+                                            <button type="button" class="btn btn-secondary btn-lg"
+                                                    onclick="location.href='/shop'">목록으로
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -139,21 +215,30 @@
                 <div th:each="recent : ${recentList}" class="p-2 pb-3">
                     <div class="product-wap card rounded-0">
                         <div class="card rounded-0">
-                            <img th:if="${productKind eq 'pokemon'}" id="shop_defaultImg" class="card-img rounded-0 img-fluid" th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(recent.name, ' ', '')})}" th:alt="${recent}">
-                            <img th:if="${productKind eq 'item'}" id="shop_defaultImg" class="card-img rounded-0 img-fluid" th:src="@{/img/item/{name}.png(name=${recent.name})}" th:alt="${recent}">
+                            <img th:if="${productKind eq 'pokemon'}" id="shop_defaultImg"
+                                 class="card-img rounded-0 img-fluid"
+                                 th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(recent.name, ' ', '')})}"
+                                 th:alt="${recent}">
+                            <img th:if="${productKind eq 'item'}" id="shop_defaultImg"
+                                 class="card-img rounded-0 img-fluid"
+                                 th:src="@{/img/item/{name}.png(name=${recent.name})}" th:alt="${recent}">
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
-                                    <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                                    <li><a class="btn btn-success text-white" href="shop-single.html"><i
+                                            class="far fa-heart"></i></a></li>
+                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i
+                                            class="far fa-eye"></i></a></li>
+                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i
+                                            class="fas fa-cart-plus"></i></a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <a th:if="${productKind eq 'pokemon'}" th:href="|/shop/${productKind}/${recent.id}|" class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
-                            <a th:if="${productKind eq 'item'}" th:href="@{}" class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
+                        <div class="card-body pointer"  th:attr="data-product-kind=${productKind}, data-recent-id=${recent.id}"
+                             th:onclick="|recentProduct(this.getAttribute('data-product-kind'), this.getAttribute('data-recent-id'))|">
+                        <a class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
                             <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li th:class="'tx_'+${recent.type.eng}" th:text="${recent.type.ko}">타입</li>
+                                <li th:if="${productKind eq 'pokemon'}" th:class="'tx_'+${recent.type.eng}" th:text="${recent.type.ko}">타입</li>
+                                <li th:if="${productKind eq 'item'}" th:text="${recent.type}">타입</li>
                                 <li class="pt-2">
                                     <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
                                     <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
@@ -210,6 +295,10 @@
                     }
                 }]
         });
+
+        const recentProduct = (productKind, recentId) => {
+            location.href = '/shop/' + productKind + '/' + recentId;
+        }
     </script>
 </main>
 

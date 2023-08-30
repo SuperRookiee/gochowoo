@@ -42,7 +42,7 @@ public class MypageController {
         if(id != null){
             purchaseList =  orderService.getOrderList(id);
             for(PurchaseDTO purchase : purchaseList) {
-                System.out.println(purchase.getOrderHistory());
+                System.out.println(purchase);
             }
             model.addAttribute("purchaseList", purchaseList);
         }

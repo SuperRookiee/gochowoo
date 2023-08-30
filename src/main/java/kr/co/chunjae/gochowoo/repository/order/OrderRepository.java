@@ -13,5 +13,5 @@ public interface OrderRepository extends JpaRepository<Item, Long> {
 
     @Query("SELECT new kr.co.chunjae.gochowoo.dto.PurchaseDTO(o.id, o.orderHistory, ua.user.id, o.userAddress.id, o.status, o.totalPrice, o.coupon) " +
             "FROM Order o JOIN o.userAddress ua WHERE ua.user.id = :userId")
-    List<PurchaseDTO> findAllByUserId(Long userId); // 메서드의 매개변수 이름을 userId로 변경
+    List<PurchaseDTO> findAllByUserId(Long userId);
 }

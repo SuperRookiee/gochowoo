@@ -24,4 +24,9 @@ public class User extends BaseEntity {
     @Column @Builder.Default
     private Long cash = 0L;
 
+//    @Override
+//    public String toString() {
+//        return this.nickName;
+//    }
+
 }

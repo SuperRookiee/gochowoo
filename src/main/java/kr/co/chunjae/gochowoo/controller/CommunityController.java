@@ -21,9 +21,6 @@ public class CommunityController {
     public String showCommunityPage(Model model) {
         List<Community> communityList = communityService.getAllBoard();
         model.addAttribute("communityList", communityList);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(communityList.size());
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         return "views/community/community";
     }
 }

@@ -22,7 +22,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>No</th><!--닉네임-->
+                            <th>No.</th><!--닉네임-->
                             <th>제목</th>
                             <th>작성자</th>
                             <th>조회수</th>
@@ -31,11 +31,11 @@
                         </thead>
                         <tfoot>
                             <tr th:each="community : ${communityList}">
-                                <td th:text="${community.getId()}">Id</td>
+                                <td th:text="${community.id}">Id</td>
                                 <td th:text="${community.getTitle()}">제목</td>
-                                <td th:text="${community.getWriter()}">작성자</td>
+                                <td th:text="${community.getWriter().getNickName()}">작성자</td>
                                 <td th:text="${community.getHits()}">조회수</td>
-                                <td th:text="${community.getCreatedTime()()}">작성일</td>
+                                <td th:text="${community.getCreatedTime()}">작성일</td>
                             </tr>
                         </tfoot>
                     </table>

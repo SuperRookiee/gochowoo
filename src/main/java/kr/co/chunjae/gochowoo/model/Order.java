@@ -1,6 +1,7 @@
 package kr.co.chunjae.gochowoo.model;
 
 import kr.co.chunjae.gochowoo.model.base.BaseEntity;
+import kr.co.chunjae.gochowoo.model.converter.OrderHistoryConverter;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -19,7 +20,7 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @org.hibernate.annotations.Type(type="json")
+    @Convert(converter = OrderHistoryConverter.class)
     @Column(columnDefinition = "json")
     private OrderHistory orderHistory;
 

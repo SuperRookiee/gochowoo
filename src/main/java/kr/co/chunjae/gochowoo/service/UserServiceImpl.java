@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
     public User userInfo(String email) {
         return userRepository.findByEmail(email);
     }
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
 
         if (user != null && user.getPassword().equals(password)) {
-             userRepository.delete(user);
+            userRepository.delete(user);
         }
         return null;
     }
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
         if (user != null) {
             user.updateCash(cash);
-            userRepository.save(user);
+            userRepository.updateUserNameById(user.getCash(), user.getId());
         }
     }
 

@@ -138,7 +138,7 @@
             }
             const currentCash = document.getElementById("cash").innerHTML;
             const totalPrice = document.getElementById("totalPrice").innerHTML;
-            if (currentCash - totalPrice > 0) {
+            if (currentCash - totalPrice >= 0) {
                 const formData = new FormData(formElem);
                 formData.append("totalPrice", totalPrice);
                 return true;

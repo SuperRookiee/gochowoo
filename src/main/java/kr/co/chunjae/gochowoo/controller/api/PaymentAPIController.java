@@ -56,15 +56,19 @@ public class PaymentAPIController {
                     .build();
             orderHistoryList.add(orderHistory);
         });
-        if (totalPrice.get() > user.getCash()) {
+        User currentUserState = userService.userInfo(user.getEmail());
+        if (orderHistoryList.isEmpty()) {
+            return "redirect:/shop";
+        }
+        if (totalPrice.get() > currentUserState.getCash()) {
             return "redirect:/mypage/cash";
         }
         Gson gson = new Gson();
         String orderHistory = gson.toJson(orderHistoryList);
-        itemCartService.deleteAllCart(user.getId());
-        pokemonCartService.deleteAllCart(user.getId());
-        user.setCash(user.getCash() - totalPrice.get());
-        userService.updateUser(user);
+        itemCartService.deleteAllCart(currentUserState.getId());
+        pokemonCartService.deleteAllCart(currentUserState.getId());
+        currentUserState.setCash(currentUserState.getCash() - totalPrice.get());
+        userService.updateUser(currentUserState);
         orderService.saveOrder(Order.builder()
                 .orderHistory(orderHistory)
                 .totalPrice(totalPrice.get())

@@ -25,7 +25,8 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "user_address_id")
     private UserAddress userAddress;
 
-    @Column
+    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     private ShippingStatus status = ShippingStatus.PENDING;
 

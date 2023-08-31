@@ -8,6 +8,8 @@ import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -21,7 +23,8 @@ public class Purchase extends BaseEntity {
     private Long orderId;
     private String coupon;
     private String orderHistory;
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private ShippingStatus status;
     private Long totalPrice;
     private Long addressId;
     private String address;

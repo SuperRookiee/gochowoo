@@ -10,39 +10,22 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Order ID: <span th:text="${purchase.orderId}"></span></h5>
-                            <p class="card-text">Created Time: <span th:text="${purchase.createdTime}"></span></p>
-                            <p class="card-text">Coupon: <span th:text="${purchase.coupon}"></span></p>
-                            <p class="card-text">Status: <span th:text="${purchase.status}"></span></p>
-                            <p class="card-text">Total Price: <span th:text="${purchase.totalPrice}"></span></p>
-                            <p class="card-text">Address ID: <span th:text="${purchase.addressId}"></span></p>
-                            <p class="card-text">Address: <span th:text="${purchase.address}"></span></p>
-                            <p class="card-text">Delivery Request: <span th:text="${purchase.deliveryRequest}"></span></p>
-                            <p class="card-text">Phone Number: <span th:text="${purchase.phoneNumber}"></span></p>
-                            <p class="card-text">Recipient: <span th:text="${purchase.recipient}"></span></p>
-                            <h6 class="card-subtitle mt-3">Order History:</h6>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>Product ID</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="orderHistory : ${purchase.orderHistoryAsList}">
-                                        <td th:text="${orderHistory.product_id}"></td>
-                                        <td th:text="${orderHistory.name}"></td>
-                                        <td th:text="${orderHistory.price}"></td>
-                                        <td th:text="${orderHistory.amount}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                        <div class="card-body rounded shadow">
+                            <h5 class="card-text"><b><span th:text="${purchase.status.ko}" th:class="${purchase.status}">주문 상태</span></b></h5>
+                            <div th:each="product : ${purchase.orderHistoryAsList}">
+                                <div th:text="${product.productId}"></div>
+<!--                                <div th:if="${product.productId.startsWith('p')}">-->
+<!--                                    &lt;!&ndash; productType이 pokemon인 경우 &ndash;&gt;-->
+<!--                                    <img th:src="@{/img/pokemon/${product.name}}" th:alt="${product.name}">-->
+<!--                                </div>-->
+<!--                                <div th:if="${product.productId.startsWith('i')}">-->
+<!--                                    &lt;!&ndash; productType이 item인 경우 &ndash;&gt;-->
+<!--                                    <img th:src="@{/img/item/${product.name}}" th:alt="${product.name}">-->
+<!--                                </div>-->
+<!--                                <label th:text="${product.name} + ' × ' + ${product.amount}"></label>-->
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

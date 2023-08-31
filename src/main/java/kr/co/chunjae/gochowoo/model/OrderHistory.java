@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderHistory {
-    private String product_id;
+    private String productId;
     private String name;
     private Long price;
     private int amount;

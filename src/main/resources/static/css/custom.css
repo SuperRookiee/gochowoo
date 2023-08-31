@@ -137,4 +137,20 @@ p#description {
     content: "₽";
 }
 
+/*** Mypage > 주문 리스트 ***/
+.PENDING {
+    color: black;
+}
+.SHIPPED {
+    color: #3565AE;
+}
+.IN_TRANSIT {
+    color: #5FBD58;
+}
+.DELIVERED {
+    color: #929294;
+}
+.FAILED {
+    color: crimson;
+}
 

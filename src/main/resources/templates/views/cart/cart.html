@@ -14,6 +14,15 @@
             totalPriceElem.innerText = totalPrice + "";
         }
 
+        async function onChangeHandler(cart, id, amount) {
+            const ok = await updateAmount(cart, id, amount);
+            const prefix = cart === "pokemon" ? 'p'
+                : cart === "item" ? 'i' : "";
+            if (ok) {
+                updatePrice(`${prefix}${id}`, amount);
+            }
+        }
+
         function updatePrice(id, amount) {
             const price = +(document.getElementById(`${id}price`).innerHTML);
             const total = document.getElementById(`${id}total`);
@@ -153,6 +162,7 @@
 
     </script>
     <div class="site-section">
+            <th:block th:include="fragments/nav"></th:block>
         <div class="container my-5">
             <div class="row mb-5">
                 <div class="col-md-12">
@@ -196,6 +206,7 @@
                                                    th:id="'p'+${pokemonCart.id}+'amount'"
                                                    th:value="${pokemonCart.amount}" placeholder=""
                                                    aria-label="Example text with button addon"
+                                                   th:onChange="|onChangeHandler('pokemon', ${pokemonCart.id}, this.value)|"
                                                    aria-describedby="button-addon1">
                                             <div class="input-group-append">
                                                 <button
@@ -246,6 +257,7 @@
                                                    th:id="'i'+${itemCart.id}+'amount'"
                                                    th:value="${itemCart.amount}" placeholder=""
                                                    aria-label="Example text with button addon"
+                                                   th:onChange="|onChangeHandler('item', ${itemCart.id}, this.value)|"
                                                    aria-describedby="button-addon1">
                                             <div class="input-group-append">
                                                 <button

@@ -1,7 +1,9 @@
 package kr.co.chunjae.gochowoo.controller;
 
+import kr.co.chunjae.gochowoo.model.Community;
 import kr.co.chunjae.gochowoo.model.Purchase;
 import kr.co.chunjae.gochowoo.model.User;
+import kr.co.chunjae.gochowoo.service.CommunityService;
 import kr.co.chunjae.gochowoo.service.UserService;
 import kr.co.chunjae.gochowoo.service.order.PurchaseService;
 import lombok.AllArgsConstructor;
@@ -22,8 +24,9 @@ import java.util.List;
 @RequestMapping("/mypage")
 public class MypageController {
 
-    final UserService userService;
+    private final UserService userService;
     private final PurchaseService purchaseService;
+    private final CommunityService communityService;
 
     @GetMapping()
     public String showShopPage(HttpSession session, Model model) {
@@ -59,5 +62,16 @@ public class MypageController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(0L);
         }
+    }
+
+    @GetMapping("/post")
+    public String showPostPage(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/user/login";
+        }
+        List<Community> postList = communityService.getAllBoardByUserId(user.getId());
+        model.addAttribute("postList", postList);
+        return "/views/mypage/post";
     }
 }

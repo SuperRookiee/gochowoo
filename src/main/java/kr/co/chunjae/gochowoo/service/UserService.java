@@ -12,4 +12,6 @@ public interface UserService {
     void updateCashByEmail(String email, int cash);
     void changeTeam(String email,String team);
 
+    User getUserById(Long id);
+
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content" class="my-5">
+    <h1>내가 쓴 글 보기</h1>
+    <div class="dcard shadow mb-4" style="pading: 16px">
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>No.</th><!--닉네임-->
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>조회수</th>
+                        <th>작성일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="community : ${postList}">
+                        <td th:text="${community.id}">Id</td>
+                        <td><a th:href="@{/community/{id}(id=${community.id})}" th:text="${community.getTitle()}">제목</a></td>
+                        <td th:text="${community.getWriter().getNickName()}">작성자</td>
+                        <td th:text="${community.getHits()}">조회수</td>
+                        <td th:text="${community.getCreatedTime()}">작성일</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Page level script -->
+    <script >
+        $(document).ready(function() {
+            $('#dataTable').DataTable(
+                {
+                    aaSorting : []
+                }
+            );
+        });
+    </script>
+</main>
+</html>

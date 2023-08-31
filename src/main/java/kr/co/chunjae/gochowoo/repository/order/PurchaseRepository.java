@@ -10,4 +10,5 @@ import java.util.List;
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
     List<Purchase> findAllByUserIdOrderByCreatedTimeDesc(Long userId);
+    List<Purchase> findAllByOrderByCreatedTimeDesc();
 }

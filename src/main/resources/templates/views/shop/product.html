@@ -6,9 +6,11 @@
     <script>
         const Toast = Swal.mixin({
             toast: true,
-            position: 'top',
+            position: 'center',
             showConfirmButton: false,
-            timer: 1000,
+            confirmButtonColor: "#3565AE",
+            timer: 3000,
+            timerProgressBar: true,
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -31,13 +33,22 @@
                 }),
             })
             if (response.status === 401) {
-                window.location.href="/user/login";
+                window.location.href = "/user/login";
                 return false;
             }
             if (response.ok) {
-                doToast && Toast.fire({
+                doToast &&
+                await Toast.fire({
                     icon: "success",
                     title: "장바구니에 담겼어요",
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: '장바구니 가기',
+                    cancelButtonText: `취소`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/cart";
+                    }
                 })
                 return true;
             } else {
@@ -65,13 +76,21 @@
                 }),
             })
             if (response.status === 401) {
-                window.location.href="/user/login";
+                window.location.href = "/user/login";
                 return false;
             }
             if (response.ok) {
-                doToast && Toast.fire({
+                doToast && await Toast.fire({
                     icon: "success",
                     title: "장바구니에 담겼어요",
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: '장바구니 가기',
+                    cancelButtonText: `취소`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/cart";
+                    }
                 })
                 return true;
             } else {

@@ -2,6 +2,7 @@ package kr.co.chunjae.gochowoo.service;
 
 
 import kr.co.chunjae.gochowoo.model.Community;
+import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.repository.CommunityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +34,10 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public void saveCommunity(Community community) {
         communityRepository.save(community);
+    }
+
+    @Override
+    public List<Community> getAllBoardByUserId(Long userId) {
+        return communityRepository.findAllByWriter(User.builder().id(userId).build());
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+    <section class="bg-success py-5">
+        <div class="container">
+            <div class="row align-items-center py-5">
+                <div class="col-md-7 text-white">
+                    <h1 th:text="${user.getNickName()}"></h1>
+                    <div class=" py-3">
+                        Email: <span th:text="${user.getEmail()}"></span><br>
+                        닉네임: <span th:text="${user.getNickName()}"></span><br>
+                        TEAM: <span th:text="${user.team}"></span><br>
+                        현재 잔액: ₽<span th:text="${user.getCash()}"></span><br>
+                            <button class="btn btn-danger mt-2">유저삭제</button>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img th:if="${user.team} == null" th:src="@{'/img/team/Logo.png'}" class="w-100" alt="User's Team">
+                    <img th:unless="${user.team} == null" th:src="@{'/img/team/Team ' + ${user.team} + '.svg'}"
+                         alt="User's Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+</html>

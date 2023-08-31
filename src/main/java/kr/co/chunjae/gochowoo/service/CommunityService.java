@@ -10,4 +10,5 @@ public interface CommunityService {
     Community write (Community write);
     Community getCommunityById(Long id);
     void saveCommunity(Community community);
+    List<Community> getAllBoardByUserId(Long userId);
 }

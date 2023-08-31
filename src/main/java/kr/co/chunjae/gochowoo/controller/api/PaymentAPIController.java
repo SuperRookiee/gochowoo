@@ -39,7 +39,7 @@ public class PaymentAPIController {
         pokemonCartList.forEach((p) -> {
             totalPrice.addAndGet((long) p.getPokemon().getPrice() * p.getAmount());
             OrderHistory orderHistory = OrderHistory.builder()
-                    .product_id("p" + p.getId())
+                    .productId("p" + p.getId())
                     .name(p.getPokemon().getName())
                     .price((long) p.getPokemon().getPrice())
                     .amount(p.getAmount())
@@ -49,7 +49,7 @@ public class PaymentAPIController {
         itemCartList.forEach((p) -> {
             totalPrice.addAndGet((long) p.getItem().getPrice() * p.getAmount());
             OrderHistory orderHistory = OrderHistory.builder()
-                    .product_id("p" + p.getId())
+                    .productId("p" + p.getId())
                     .name(p.getItem().getName())
                     .price((long) p.getItem().getPrice())
                     .amount(p.getAmount())
@@ -68,6 +68,7 @@ public class PaymentAPIController {
         orderService.saveOrder(Order.builder()
                 .orderHistory(orderHistory)
                 .totalPrice(totalPrice.get())
+                .status(ShippingStatus.PENDING)
                 .userAddress(UserAddress.builder().id(address).build())
                 .build());
         return "redirect:/mypage/purchase";

@@ -4,7 +4,7 @@
         layout:decorate="~{layout/layout}">
 
 <main layout:fragment="content">
-    <!--<script>
+    <script>
         const Toast = Swal.mixin({
             toast: true,
             position: 'top',
@@ -16,7 +16,8 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-        function onSubmitHandler (formElem) {
+
+        function onSubmitHandler(formElem) {
             const elems = Object.values(formElem);
             for (const elem of elems) {
                 if (elem.name && !elem.value) {
@@ -29,18 +30,20 @@
             }
             return true;
         }
-    </script>-->
-    <div class="container mt-4">
-      <!--  <h1 th:include=""></h1>-->
-        <h1 th:text="${community.title}">board title</h1>
-        <p class="text-muted">작성자 : <span th:text="${community.writer.nickName}">nickname</span></p>
-        <p class="text-muted">조회 수 : <span th:text="${community.hits}">0</span></p>
-        <hr>
-        <div th:utext="${community.content}">board content</div>
-        <div class="mt-4">
-            <a th:href="@{/community/update/{id}(id=${community.id})}" class="btn btn-primary mr-2">update</a>
-            <a th:href="@{/api/community/delete/{id}(id=${community.id})}" class="btn btn-danger">delete</a>
+    </script>
+    <form th:action="@{/api/community/{id}(id=${community.id})}" method="post">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" th:value="${community.title}" required>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+          <!--  <input type="text" class="form-control" id="content" name="content" th:value="${community.content}" rows="5" required>-->
+            <textarea class="form-control" id="content" name="content" rows="5" required th:utext="${community.content}"></textarea>
+        </div>
+        <!-- 필요한 수정 폼 필드 추가 -->
+
+        <button type="submit" class="btn btn-primary">수정</button>
+    </form>
 </main>
 </html>

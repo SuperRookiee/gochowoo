@@ -79,7 +79,7 @@
                     <div class="col-lg-5 mt-5">
                         <div class="card mb-3">
                             <img th:if="${productKind eq 'pokemon'}" class="card-img img-fluid"
-                                 th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
+                                 th:src="@{/img/pokemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
                                  alt="Card image cap" id="product-detail">
                             <img th:if="${productKind eq 'item'}" class="card-img img-fluid"
                                  th:src="@{/img/item/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
@@ -107,7 +107,7 @@
                                                  class="col-4">
                                                 <a href="#">
                                                     <img th:if="${productKind eq 'pokemon'}" class="card-img img-fluid"
-                                                         th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
+                                                         th:src="@{/img/pokemon/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
                                                          alt="Card image cap" id="product-detail">
                                                     <img th:if="${productKind eq 'item'}" class="card-img img-fluid"
                                                          th:src="@{/img/item/{name}.png(name=${#strings.replace(p.name, ' ', '')})}"
@@ -237,7 +237,7 @@
                         <div class="card rounded-0">
                             <img th:if="${productKind eq 'pokemon'}" id="shop_defaultImg"
                                  class="card-img rounded-0 img-fluid"
-                                 th:src="@{/img/pockemon/{name}.png(name=${#strings.replace(recent.name, ' ', '')})}"
+                                 th:src="@{/img/pokemon/{name}.png(name=${#strings.replace(recent.name, ' ', '')})}"
                                  th:alt="${recent}">
                             <img th:if="${productKind eq 'item'}" id="shop_defaultImg"
                                  class="card-img rounded-0 img-fluid"

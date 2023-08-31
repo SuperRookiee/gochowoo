@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 @RequestMapping("/api/cart")
@@ -29,8 +32,13 @@ public class CartAPIController {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
+        PokemonCart pokemonCart = pokemonCartService.findCartById(dto.getProductId());
         Pokemon pokemon = Pokemon.builder().id(dto.getProductId()).build();
+        if (pokemonCart == null) {
         pokemonCartService.addToCart(PokemonCart.builder().pokemon(pokemon).user(user).amount(dto.getAmount()).build());
+        } else {
+            pokemonCartService.updateAmount(dto.getProductId(), pokemonCart.getAmount() + dto.getAmount());
+        }
         return ResponseEntity.noContent().build();
     }
 
@@ -41,8 +49,13 @@ public class CartAPIController {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
+        ItemCart itemCart = itemCartService.findCartById(dto.getProductId());
         Item item = Item.builder().id(dto.getProductId()).build();
-        itemCartService.addToCart(ItemCart.builder().item(item).user(user).amount(dto.getAmount()).build());
+        if (itemCart == null) {
+            itemCartService.addToCart(ItemCart.builder().item(item).user(user).amount(dto.getAmount()).build());
+        } else {
+            itemCartService.updateAmount(dto.getProductId(), itemCart.getAmount() + dto.getAmount());
+        }
         return ResponseEntity.noContent().build();
     }
 

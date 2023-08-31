@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemCartServiceImpl implements ItemCartService{
     @Autowired
     private ItemCartRepository itemCartRepository;
     @Override
-    public Cart addToCart(Cart cart) {
-        return itemCartRepository.save((ItemCart) cart);
+    public ItemCart addToCart(ItemCart cart) {
+        return itemCartRepository.save(cart);
     }
 
     @Override
@@ -25,6 +26,16 @@ public class ItemCartServiceImpl implements ItemCartService{
     @Override
     public void removeCart(Long id) {
         itemCartRepository.deleteById(id);
+    }
+
+    @Override
+    public ItemCart findCartById(Long id) {
+        return itemCartRepository.findByItemId(id).orElse(null);
+    }
+
+    @Override
+    public void deleteAllCart(Long id) {
+        itemCartRepository.deleteAllByUserId(id);
     }
 
     @Override

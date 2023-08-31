@@ -71,7 +71,7 @@ public class UserAPIController {
             return "/views/user/userProfile"; // userProfile.html 템플릿을 렌더링
         } else {
             // 사용자 정보가 없을 경우 에러 처리
-            return "/index";
+            return "redirect:/user/login";
         }
     }
 

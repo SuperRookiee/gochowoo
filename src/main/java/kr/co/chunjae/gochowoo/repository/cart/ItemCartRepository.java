@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ItemCartRepository extends JpaRepository<ItemCart, Long> {
@@ -19,4 +20,9 @@ public interface ItemCartRepository extends JpaRepository<ItemCart, Long> {
     @Query("update ItemCart c set c.amount = :amount where c.id = :id")
     void updateAmountById(@Param(value = "id") Long id, @Param(value = "amount")int amount);
 
+    Optional<ItemCart> findByItemId(Long id);
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    void deleteAllByUserId(Long id);
 }

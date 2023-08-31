@@ -3,6 +3,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{layout/layout}">
 <main layout:fragment="content">
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1000,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+    </script>
     <!-- Start Content -->
     <section class="container py-5">
         <div class="row">
@@ -213,9 +225,15 @@
                 }),
             })
             if (response.ok) {
-                alert("ok");
+                Toast.fire({
+                    icon: "success",
+                    title: "장바구니에 담겼어요",
+                })
             } else {
-                alert("fail");
+                Toast.fire({
+                    icon: "error",
+                    title: "뭔가 오류에요",
+                })
             }
         }
 
@@ -231,9 +249,14 @@
                 }),
             })
             if (response.ok) {
-                alert("ok");
-            } else {
-                alert("fail");
+                Toast.fire({
+                    icon: "success",
+                    title: "장바구니에 담겼어요",
+                })            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: "뭔가 오류에요",
+                })
             }
         }
 

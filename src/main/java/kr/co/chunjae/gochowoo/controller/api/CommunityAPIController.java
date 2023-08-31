@@ -66,7 +66,7 @@ public class CommunityAPIController {
         String sessionUserEmail = (String) session.getAttribute("email");
 
         if(community.getWriter().getEmail().equals(sessionUserEmail)){
-            communityService.deleteCommunityById(id);
+//            communityService.deleteCommunityById(id);
             return "redirect:/community"; // 삭제 후 홈 페이지로 리다이렉트
         }
         return "redirect:/error"; // error 페이지

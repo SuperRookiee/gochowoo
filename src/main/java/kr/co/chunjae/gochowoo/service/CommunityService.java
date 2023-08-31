@@ -10,4 +10,6 @@ public interface CommunityService {
     Community write (Community write);
     Community getCommunityById(Long id);
     void saveCommunity(Community community);
+/*    Community updateCommunity(Community community);*/
+    void deleteCommunityById(Long id);
 }

@@ -44,4 +44,15 @@ public class CommunityController {
         return "views/community/boardDetail";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateBoard(@PathVariable Long id, Model model) {
+        Community community = communityService.getCommunityById(id);
+        if (community != null) {
+            String replaced = community.getContent().replace("<br>", "\r\n"); // 엔터키를 <br>태그로 db에 저장
+            community.setContent(replaced);
+            model.addAttribute("community", community);
+        }
+        return "views/community/updateBoard";
+    }
+
 }

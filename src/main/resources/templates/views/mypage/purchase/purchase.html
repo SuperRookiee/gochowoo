@@ -8,21 +8,22 @@
     <section class="py-3">
         <div class="container" th:each="purchase : ${purchaseList}">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mx-auto">
                     <div class="card mb-4">
                         <div class="card-body rounded shadow">
-                            <h5 class="card-text"><b><span th:text="${purchase.status.ko}" th:class="${purchase.status}">주문 상태</span></b></h5>
-                            <div th:each="product : ${purchase.orderHistoryAsList}">
-                                <div th:text="${product.productId}"></div>
-<!--                                <div th:if="${product.productId.startsWith('p')}">-->
-<!--                                    &lt;!&ndash; productType이 pokemon인 경우 &ndash;&gt;-->
-<!--                                    <img th:src="@{/img/pokemon/${product.name}}" th:alt="${product.name}">-->
-<!--                                </div>-->
-<!--                                <div th:if="${product.productId.startsWith('i')}">-->
-<!--                                    &lt;!&ndash; productType이 item인 경우 &ndash;&gt;-->
-<!--                                    <img th:src="@{/img/item/${product.name}}" th:alt="${product.name}">-->
-<!--                                </div>-->
-<!--                                <label th:text="${product.name} + ' × ' + ${product.amount}"></label>-->
+                            <div>
+                                <h5 class="card-text pb-2"><b><span th:text="${purchase.status.ko}" th:class="${purchase.status}">주문 상태</span></b></h5>
+                            </div>
+                            <div class="d-flex p-2" th:each="product : ${purchase.orderHistoryAsList}">
+                                <div class="rounded">
+                                    <img th:if="${product.productId.startsWith('p')}" class="product_img" th:src="@{'/img/pokemon/'+${product.name}+'.png'}" th:alt="${product.name}">
+                                    <img th:if="${product.productId.startsWith('i')}" class="product_img" th:src="@{'/img/item/'+${product.name}+'.png'}" th:alt="${product.name}">
+                                </div>
+                                <div class="d-flex flex-column px-3">
+                                    <span class="product_date" th:text="(${#temporals.format(purchase.createdTime, 'yyyy') == #temporals.format(#temporals.createNow(), 'yyyy')} ? ${#temporals.format(purchase.createdTime, 'MM. dd.')}+' 결재' : ${#temporals.format(purchase.createdTime, 'yyyy. MM. dd.')}+' 결재')">날짜 표시</span>
+                                    <strong><span th:text="${product.amount == 1 ? product.name : product.name + ' × ' + product.amount}"></span></strong>
+                                    <span class="product_total_price" th:text="'₽' + ${#numbers.formatDecimal(product.price * product.amount, 0, 'COMMA', 0, 'POINT')}"></span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -15,6 +15,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public List<Purchase> getAllPurchasesById(Long userId) {
-        return purchaseRepository.findAllByUserId(userId);
+        return purchaseRepository.findAllByUserIdOrderByCreatedTimeDesc(userId);
     }
 }

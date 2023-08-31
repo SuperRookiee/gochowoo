@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,9 +40,20 @@ public class MypageController {
     @GetMapping("/purchase")
     public String showPurchasePage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
         if (userId != null) {
-            List<Purchase> purchaseList = purchaseService.getAllPurchasesById(userId);
+            List<Purchase> purchaseList = purchaseService.getAllPurchasesByUserId(userId);
             model.addAttribute("purchaseList", purchaseList);
             return "views/mypage/purchase/purchase";
+        }
+        return "views/user/login";
+    }
+
+    @GetMapping("/purchase/{id}")
+    public String showPurchaseDetailPage(@SessionAttribute(name = "id", required = false) Long userId, Model model, @PathVariable Long id) {
+        if (userId != null) {
+            Purchase purchase = purchaseService.getPurchaseByOrderId(id);
+            System.out.println(purchase);
+            model.addAttribute("purchase", purchase);
+            return "views/mypage/purchase/purchaseDetail";
         }
         return "views/user/login";
     }

@@ -5,12 +5,13 @@
 
 <main layout:fragment="content">
     <th:block th:include="fragments/nav"></th:block>
+    <h1 class="text-center fw-bold">Purchase List</h1>
     <section class="py-3">
         <div class="container" th:each="purchase : ${purchaseList}">
             <div class="row">
-                <div class="col-md-12 mx-auto">
-                    <div class="card mb-4">
-                        <div class="card-body rounded shadow">
+                <div class="cardcol-md-12 mx-auto mb-4">
+                    <div class="rounded-3 shadow purchase_card row">
+                        <div class="card-body col-10">
                             <div>
                                 <h5 class="card-text pb-2"><b><span th:text="${purchase.status.ko}" th:class="${purchase.status}">주문 상태</span></b></h5>
                             </div>
@@ -26,7 +27,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div th:class="'bg_'+${purchase.status}+' purchase_detail card-body rounded-end col-2 align-middle text-white d-flex justify-content-center align-items-center pointer'"
+                             th:onclick="|location.href='/mypage/purchase/'+${purchase.orderId}|">
+                            <label>Detail <i class="fa-solid fa-chevron-right"></i></label>
+                        </div>
                     </div>
                 </div>
             </div>

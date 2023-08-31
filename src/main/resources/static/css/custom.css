@@ -2,6 +2,12 @@
 Custom Css
 */
 @font-face {
+    font-family: Orbit;
+    src: url('../webfonts/Orbit.woff');
+    unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
     font-family: Pokemon-Hollow;
     src: url("../webfonts/Pokemon-Hollow.woff") format('woff');
 }
@@ -13,6 +19,10 @@ Custom Css
 :root {
     --pokemon-blue: #3565AE;
     --pokemon-yellow: #FFCB05;
+}
+
+* {
+    font-family: Orbit, sans-serif;
 }
 
 .pointer {
@@ -47,21 +57,23 @@ Custom Css
 ul.nav.navbar-nav li a {
     position: relative;
 }
-ul.nav.navbar-nav li a:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 0%;
-    background-color: #3565AE;
-    transition: all 0.3s ease;
-    left: 50%;
-    transform: translateX(-50%);
+@media screen and (min-width: 992px) {
+    ul.nav.navbar-nav li a:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 0%;
+        background-color: #3565AE;
+        transition: all 0.3s ease;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    ul.nav.navbar-nav li a:hover:before{
+        width: 90%;
+    }
 }
-ul.nav.navbar-nav li a:hover:before{
-    width: 90%;
-}
+
 /* 푸터 로고 소제목 */
 #tempaltemo_footer .pokemon.subtitle {
     margin-left: 20px;
@@ -138,25 +150,26 @@ p#description {
 }
 
 /*** Mypage > 결재 내역 ***/
-.PENDING {
-    color: black;
-}
-.SHIPPED {
-    color: #3565AE;
-}
-.IN_TRANSIT {
-    color: #5FBD58;
-}
-.DELIVERED {
-    color: #929294;
-}
-.FAILED {
-    color: crimson;
-}
+.PENDING { color: black !important; }
+.SHIPPED { color: #3565AE !important; }
+.IN_TRANSIT { color: #5FBD58 !important; }
+.DELIVERED { color: #929294 !important; }
+.FAILED { color: crimson !important; }
 
-.product_date{
+.bg_PENDING { background-color: black !important; opacity: 0.9 !important; }
+.bg_SHIPPED { background-color: #3565AE !important; opacity: 0.9 !important; }
+.bg_IN_TRANSIT { background-color: #5FBD58 !important; opacity: 0.9 !important; }
+.bg_DELIVERED { background-color: #929294 !important; opacity: 0.9 !important; }
+.bg_FAILED { background-color: crimson !important; opacity: 0.9 !important; }
+
+.product_date,
+.product_order_id{
     color: #aaaaac;
     font-size: 13px !important;
+}
+.product_detail_date{
+    color: #aaaaac;
+    font-size: 17px !important;
 }
 .product_img {
     width: 75px;
@@ -164,4 +177,3 @@ p#description {
 .product_total_price {
     font-weight: 600;
 }
-

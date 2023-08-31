@@ -5,6 +5,8 @@ import kr.co.chunjae.gochowoo.model.Purchase;
 import java.util.List;
 
 public interface PurchaseService {
-    List<Purchase> getAllPurchasesById(Long userId);
     List<Purchase> getAllPurchases();
+    List<Purchase> getAllPurchasesByUserId(Long userId);
+
+    Purchase getPurchaseByOrderId(Long orderId);
 }

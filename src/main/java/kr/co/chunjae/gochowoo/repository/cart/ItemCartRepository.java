@@ -20,7 +20,7 @@ public interface ItemCartRepository extends JpaRepository<ItemCart, Long> {
     @Query("update ItemCart c set c.amount = :amount where c.id = :id")
     void updateAmountById(@Param(value = "id") Long id, @Param(value = "amount")int amount);
 
-    Optional<ItemCart> findByItemId(Long id);
+    Optional<ItemCart> findByItemIdAndUserId(Long item_id, Long user_id);
 
     @Modifying(clearAutomatically = true)
     @Transactional

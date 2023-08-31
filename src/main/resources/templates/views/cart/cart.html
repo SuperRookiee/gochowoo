@@ -9,7 +9,6 @@
             const prices = document.getElementsByClassName("totalPrice");
             let totalPrice = 0;
             for (const price of prices) {
-                console.log(price.innerHTML)
                 totalPrice += +price.innerHTML;
             }
             totalPriceElem.innerText = totalPrice + "";

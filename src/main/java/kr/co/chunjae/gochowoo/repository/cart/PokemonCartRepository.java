@@ -20,7 +20,7 @@ public interface PokemonCartRepository extends JpaRepository<PokemonCart, Long> 
     @Query("update PokemonCart c set c.amount = :amount where c.id = :id")
     void updateAmountById(@Param(value = "id") Long id, @Param(value = "amount")int amount);
 
-    Optional<PokemonCart> findByPokemonId(Long id);
+    Optional<PokemonCart> findByPokemonIdAndUserId(Long pokemon_id, Long user_id);
 
     @Modifying(clearAutomatically = true)
     @Transactional

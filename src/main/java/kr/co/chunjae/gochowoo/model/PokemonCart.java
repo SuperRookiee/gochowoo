@@ -1,10 +1,7 @@
 package kr.co.chunjae.gochowoo.model;
 
 import kr.co.chunjae.gochowoo.model.base.Cart;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;

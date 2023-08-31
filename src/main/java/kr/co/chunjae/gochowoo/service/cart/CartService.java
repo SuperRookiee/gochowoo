@@ -15,7 +15,7 @@ public interface CartService  <T extends Cart> {
 
     void removeCart(Long id);
 
-    T findCartById(Long id);
+    T findCartByProductId(Long userId, Long productId);
 
     void deleteAllCart(Long id);
 }

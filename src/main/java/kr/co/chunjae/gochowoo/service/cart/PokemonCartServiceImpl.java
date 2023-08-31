@@ -28,8 +28,8 @@ public class PokemonCartServiceImpl implements PokemonCartService {
     }
 
     @Override
-    public PokemonCart findCartById(Long id) {
-        return pokemonCartRepository.findByPokemonId(id).orElse(null);
+    public PokemonCart findCartByProductId(Long productId, Long userId) {
+        return pokemonCartRepository.findByPokemonIdAndUserId(productId, userId).orElse(null);
     }
 
     @Override

@@ -29,8 +29,8 @@ public class ItemCartServiceImpl implements ItemCartService{
     }
 
     @Override
-    public ItemCart findCartById(Long id) {
-        return itemCartRepository.findByItemId(id).orElse(null);
+    public ItemCart findCartByProductId(Long productId, Long userId) {
+        return itemCartRepository.findByItemIdAndUserId(productId, userId).orElse(null);
     }
 
     @Override

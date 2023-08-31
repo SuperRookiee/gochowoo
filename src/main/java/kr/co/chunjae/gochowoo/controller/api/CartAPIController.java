@@ -32,12 +32,14 @@ public class CartAPIController {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
-        PokemonCart pokemonCart = pokemonCartService.findCartById(dto.getProductId());
+        System.out.println("dto : " + dto);
+        PokemonCart pokemonCart = pokemonCartService.findCartByProductId(dto.getProductId(), user.getId());
+        System.out.println("pokemonCart : " + pokemonCart);
         Pokemon pokemon = Pokemon.builder().id(dto.getProductId()).build();
         if (pokemonCart == null) {
-        pokemonCartService.addToCart(PokemonCart.builder().pokemon(pokemon).user(user).amount(dto.getAmount()).build());
+            pokemonCartService.addToCart(PokemonCart.builder().pokemon(pokemon).user(user).amount(dto.getAmount()).build());
         } else {
-            pokemonCartService.updateAmount(dto.getProductId(), pokemonCart.getAmount() + dto.getAmount());
+            pokemonCartService.updateAmount(pokemonCart.getId(), pokemonCart.getAmount() + dto.getAmount());
         }
         return ResponseEntity.noContent().build();
     }
@@ -49,12 +51,12 @@ public class CartAPIController {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
-        ItemCart itemCart = itemCartService.findCartById(dto.getProductId());
+        ItemCart itemCart = itemCartService.findCartByProductId(dto.getProductId(), user.getId());
         Item item = Item.builder().id(dto.getProductId()).build();
         if (itemCart == null) {
             itemCartService.addToCart(ItemCart.builder().item(item).user(user).amount(dto.getAmount()).build());
         } else {
-            itemCartService.updateAmount(dto.getProductId(), itemCart.getAmount() + dto.getAmount());
+            itemCartService.updateAmount(itemCart.getId(), itemCart.getAmount() + dto.getAmount());
         }
         return ResponseEntity.noContent().build();
     }

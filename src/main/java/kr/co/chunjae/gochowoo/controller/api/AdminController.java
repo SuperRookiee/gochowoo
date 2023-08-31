@@ -1,10 +1,8 @@
 package kr.co.chunjae.gochowoo.controller.api;
 
-import kr.co.chunjae.gochowoo.model.Order;
 import kr.co.chunjae.gochowoo.model.Purchase;
 import kr.co.chunjae.gochowoo.model.User;
 import kr.co.chunjae.gochowoo.service.UserService;
-import kr.co.chunjae.gochowoo.service.cart.OrderService;
 import kr.co.chunjae.gochowoo.service.order.PurchaseService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

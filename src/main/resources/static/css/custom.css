@@ -45,6 +45,13 @@ Custom Css
     font-family: Pokemon-Hollow, serif !important;
     color: var(--pokemon-blue) !important;
 }
+
+/* 헤더 NAV */
+.navbar-collapse {
+    align-items: center;
+    width: 100%
+}
+
 /* 메인 검색 */
 #icon_ball_b {
     width: 40px !important;
@@ -162,18 +169,46 @@ p#description {
 .bg_DELIVERED { background-color: #929294 !important; opacity: 0.9 !important; }
 .bg_FAILED { background-color: crimson !important; opacity: 0.9 !important; }
 
+#purchase_detail {
+    cursor: pointer;
+    white-space: nowrap;
+}
+.product_itemCard:hover {
+    background-color: rgba(200, 200, 200, 0.3);
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
 .product_date,
 .product_order_id{
     color: #aaaaac;
     font-size: 13px !important;
 }
+.product_amount {
+    font-size: 15px !important;
+}
+.product_total_price,
+.product_price{
+    font-weight: 600;
+}
+.product_total_price::after {
+    content: "(총 금액)";
+    font-size: 10px;
+    margin-left: 5px;
+}
+.product_price::after {
+    content: "(개당)";
+    font-size: 10px;
+    margin-left: 5px;
+}
 .product_detail_date{
     color: #aaaaac;
     font-size: 17px !important;
+    position: absolute;
+    width: auto;
+    float: right;
+    top: 1rem;
+    right: 1rem;
 }
 .product_img {
     width: 75px;
-}
-.product_total_price {
-    font-weight: 600;
 }

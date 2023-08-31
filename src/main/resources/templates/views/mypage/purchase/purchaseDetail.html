@@ -2,8 +2,28 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
         layout:decorate="~{layout/layout}">
-
 <main layout:fragment="content">
+    <script th:inline="javascript">
+        $(document).ready(() => {
+            const orders = [[${purchase}]].orderHistoryAsList;
+            let totalPrice = 0;
+
+            for (let i = 0; i < orders.length; i++) {
+                totalPrice += orders[i].price * orders[i].amount;
+                $('#priceCard').append('<label>+ ₽' + totalPrice + '</label><br>');
+            }
+
+            $("#Total").text('₽'+totalPrice);
+        });
+
+        const goToshop = (element) => {
+            const id = element.getAttribute('data-productId');
+            if (id.startsWith('p'))
+                location.href = '/shop/pokemon/'+id.substring(1);
+            else if (id.startsWith('i'))
+                location.href = '/shop/item/'+id.substring(1);
+        }
+    </script>
     <th:block th:include="fragments/nav"></th:block>
     <h1 class="text-center fw-bold">Purchase Details</h1>
     <section class="py-3">
@@ -11,19 +31,30 @@
             <div class="card">
                 <div class="card-body">
                     <h3><span th:text="${purchase.status.ko}" th:class="${purchase.status}">주문 상태</span></h3>
-                    <h5 class="product_detail_date px-1" th:text="(${#temporals.format(purchase.createdTime, 'yyyy') == #temporals.format(#temporals.createNow(), 'yyyy')} ? ${#temporals.format(purchase.createdTime, 'MM. dd.')}+' 결재' : ${#temporals.format(purchase.createdTime, 'yyyy. MM. dd.')}+' 결재')">날짜 표시</h5>
-
-                    <div class="d-flex p-2" th:each="product : ${purchase.orderHistoryAsList}">
-                        <div class="rounded">
-                            <img th:if="${product.productId.startsWith('p')}" class="product_img" th:src="@{'/img/pokemon/'+${product.name}+'.png'}" th:alt="${product.name}">
-                            <img th:if="${product.productId.startsWith('i')}" class="product_img" th:src="@{'/img/item/'+${product.name}+'.png'}" th:alt="${product.name}">
-                        </div>
-                        <div class="d-flex flex-column px-3">
-                            <label class="product_order_id">결제 확인 번호 : <span th:text="${purchase.createdTime}" >주문 번호</span></label>
-                            <span class="product_total_price" th:text="'₽' + ${#numbers.formatDecimal(product.price * product.amount, 0, 'COMMA', 0, 'POINT')}"></span>
+                    <h5 th:text="('결재 날짜 : '+${#temporals.format(purchase.createdTime, 'yyyy. MM. dd.')})" class="product_detail_date" >날짜 표시</h5>
+                    <div th:each="product : ${purchase.orderHistoryAsList}">
+                        <div class="product_itemCard d-flex p-2" onclick="goToshop(this)" th:data-productId="${product.productId}">
+                            <div class=" rounded py-3">
+                                <img th:if="${product.productId.startsWith('p')}" class="product_img" th:src="@{'/img/pokemon/'+${product.name}+'.png'}" th:alt="${product.name}">
+                                <img th:if="${product.productId.startsWith('i')}" class="product_img" th:src="@{'/img/item/'+${product.name}+'.png'}" th:alt="${product.name}">
+                            </div>
+                            <div class="d-flex flex-column px-3">
+                                <label><span th:text="${product.name}" >상품 명</span></label>
+                                <label class="product_order_id">결제 확인 번호 : <span th:text="'O'+${purchase.orderId}+'A'+${purchase.addressId}" >주문 번호</span></label>
+                                <label class="product_amount">수량 : <span th:text="${product.amount}">0</span></label>
+                                <span class="product_price" th:text="'₽' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span>
+                            </div>
                         </div>
                     </div>
-                    <div th:text="${}"></div>
+                </div>
+            </div>
+            <div class=" card my-3">
+                <div class="card-body fw-bold text-end">
+                    <h5 class="text-start position-absolute">영수증</h5>
+                    <div id="priceCard"></div>
+                    <label th:text="${purchase.coupon} == null ? '- 적용 쿠폰 없음' : '- '+${purchase.coupon}">0</label>
+                    <hr/>
+                    총 결재 금액 : <span id="Total" class="fw-bold"></span>
                 </div>
             </div>
         </div>

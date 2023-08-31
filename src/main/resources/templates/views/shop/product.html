@@ -4,17 +4,18 @@
       layout:decorate="~{layout/layout}">
 <main layout:fragment="content">
     <script>
-            const Toast = Swal.mixin({
+        const Toast = Swal.mixin({
             toast: true,
             position: 'top',
             showConfirmButton: false,
             timer: 1000,
             didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
         })
-        async function addToPokemonCart() {
+
+        async function addToPokemonCart(doToast = true) {
             const currentURL = window.location.href;
             const urlParts = currentURL.split('/');
             const id = urlParts[urlParts.length - 1];
@@ -29,19 +30,26 @@
                     amount,
                 }),
             })
+            if (response.status === 401) {
+                window.location.href="/user/login";
+                return false;
+            }
             if (response.ok) {
-                Toast.fire({
+                doToast && Toast.fire({
                     icon: "success",
                     title: "장바구니에 담겼어요",
-                })            } else {
-                Toast.fire({
+                })
+                return true;
+            } else {
+                doToast && Toast.fire({
                     icon: "error",
                     title: "뭔가 오류에요",
                 })
+                return false;
             }
         }
 
-        async function addToItemCart() {
+        async function addToItemCart(doToast = true) {
             const currentURL = window.location.href;
             const urlParts = currentURL.split('/');
             const id = urlParts[urlParts.length - 1];
@@ -56,15 +64,29 @@
                     amount,
                 }),
             })
+            if (response.status === 401) {
+                window.location.href="/user/login";
+                return false;
+            }
             if (response.ok) {
-                Toast.fire({
+                doToast && Toast.fire({
                     icon: "success",
                     title: "장바구니에 담겼어요",
-                })            } else {
-                Toast.fire({
+                })
+                return true;
+            } else {
+                doToast && Toast.fire({
                     icon: "error",
                     title: "뭔가 오류에요",
                 })
+                return false;
+            }
+        }
+
+        async function buyButtonHandler(callback) {
+            const ok = await callback(false);
+            if (ok) {
+                window.location.href = '/cart';
             }
         }
     </script>
@@ -185,8 +207,17 @@
                                     </div>
                                     <div class="row pb-3">
                                         <div class="col d-grid">
-                                            <button type="submit" class="btn btn-success btn-lg" name="submit"
-                                                    value="buy">Buy
+                                            <button type="button"
+                                                    th:if="${productKind eq 'pokemon'}"
+                                                    th:onclick="|buyButtonHandler(addToPokemonCart)|"
+                                                    class="btn btn-success btn-lg" name="submit" value="addtocard">
+                                                BUY
+                                            </button>
+                                            <button type="button"
+                                                    th:if="${productKind eq 'item'}"
+                                                    th:onclick="|buyButtonHandler(addToItemCart)|"
+                                                    class="btn btn-success btn-lg" name="submit" value="addtocard">
+                                                BUY
                                             </button>
                                         </div>
                                         <div class="col d-grid">
@@ -253,11 +284,14 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card-body pointer"  th:attr="data-product-kind=${productKind}, data-recent-id=${recent.id}"
+                        <div class="card-body pointer"
+                             th:attr="data-product-kind=${productKind}, data-recent-id=${recent.id}"
                              th:onclick="|recentProduct(this.getAttribute('data-product-kind'), this.getAttribute('data-recent-id'))|">
-                        <a class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
+                            <a class="h3 text-decoration-none" th:text="${recent.name}">이름</a>
                             <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li th:if="${productKind eq 'pokemon'}" th:class="'tx_'+${recent.type.eng}" th:text="${recent.type.ko}">타입</li>
+                                <li th:if="${productKind eq 'pokemon'}" th:class="'tx_'+${recent.type.eng}"
+                                    th:text="${recent.type.ko}">타입
+                                </li>
                                 <li th:if="${productKind eq 'item'}" th:text="${recent.type}">타입</li>
                                 <li class="pt-2">
                                     <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CommunityServiceImpl implements CommunityService{
+public class CommunityServiceImpl implements CommunityService {
     private final CommunityRepository communityRepository;
 
     public CommunityServiceImpl(CommunityRepository communityRepository) {
@@ -24,5 +24,14 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     public List<Community> getAllBoard() {
         return communityRepository.findAllByOrderByCreatedTimeDesc();
+    }
+
+    @Override
+    public Community getCommunityById(Long id) {
+        return communityRepository.findById(id).orElse(null);
+    }
+    @Override
+    public void saveCommunity(Community community) {
+        communityRepository.save(community);
     }
 }

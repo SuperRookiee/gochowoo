@@ -38,5 +38,4 @@ public class CommunityAPIController {
         return "redirect:/community";
     }
 
-
 }

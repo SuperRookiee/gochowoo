@@ -31,7 +31,7 @@
                         <tbody>
                             <tr th:each="community : ${communityList}">
                                 <td th:text="${community.id}">Id</td>
-                                <td th:text="${community.getTitle()}">제목</td>
+                                <td><a th:href="@{/community/{id}(id=${community.id})}" th:text="${community.getTitle()}">제목</a></td>
                                 <td th:text="${community.getWriter().getNickName()}">작성자</td>
                                 <td th:text="${community.getHits()}">조회수</td>
                                 <td th:text="${community.getCreatedTime()}">작성일</td>

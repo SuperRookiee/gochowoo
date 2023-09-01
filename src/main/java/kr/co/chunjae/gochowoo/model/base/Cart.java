@@ -1,6 +1,6 @@
 package kr.co.chunjae.gochowoo.model.base;
 
-import kr.co.chunjae.gochowoo.model.User;
+import kr.co.chunjae.gochowoo.model.User.User;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

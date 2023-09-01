@@ -32,12 +32,20 @@
                 </div>
                 <div class="navbar align-self-center d-flex">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
+                        <form action="https://pokemonkorea.co.kr/pokedex" method="get" class="modal-content modal-body border-0 p-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="inputModalSearch" name="word" placeholder="포켓몬 이름 또는 설명, 특성 키워드를 입력해주세요.">
+                                <input type="hidden" name="characters" value="">
+                                <input type="hidden" name="area" value="">
+                                <input type="hidden" name="snumber" value="1">
+                                <input type="hidden" name="snumber2" value="1010">
+                                <input type="hidden" name="sortselval" value="number asc,number_count asc">
+                                <input type="hidden" name="typetextcs" value="">
+                                <button class="input-group-text" type="submit">
+                                    <i class="fa fa-fw fa-search"></i>
+                                </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>

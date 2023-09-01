@@ -1,7 +1,7 @@
 package kr.co.chunjae.gochowoo.service.cart;
 
-import kr.co.chunjae.gochowoo.model.ItemCart;
-import kr.co.chunjae.gochowoo.repository.cart.ItemCartRepository;
+import kr.co.chunjae.gochowoo.model.Item.ItemCart;
+import kr.co.chunjae.gochowoo.repository.Cart.ItemCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

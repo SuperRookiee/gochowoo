@@ -1,7 +1,7 @@
 package kr.co.chunjae.gochowoo.service.order;
 
-import kr.co.chunjae.gochowoo.model.Purchase;
-import kr.co.chunjae.gochowoo.repository.order.PurchaseRepository;
+import kr.co.chunjae.gochowoo.model.Order.Purchase.Purchase;
+import kr.co.chunjae.gochowoo.repository.Order.Purchase.PurchaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

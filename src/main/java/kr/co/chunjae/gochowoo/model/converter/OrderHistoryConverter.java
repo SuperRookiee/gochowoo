@@ -2,7 +2,7 @@ package kr.co.chunjae.gochowoo.model.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.co.chunjae.gochowoo.model.OrderHistory;
+import kr.co.chunjae.gochowoo.model.Order.OrderHistory;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

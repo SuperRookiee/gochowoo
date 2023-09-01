@@ -15,7 +15,7 @@
 <!--        <p th:text="${'trace: ' + trace}"></p>-->
     <div id="Error" class="container p-5">
         <div class="text-center">
-            <div id="error_status" class="error mx-auto" data-text="404" th:text="${status}">400</div>
+            <div id="error_status" class="error mx-auto" th:data-text="${status}" th:text="${status}">400</div>
             <p class="Orbit-font text-gray-500 mb-0 fw-bold">'에러'라고 물으신다면, 대답해 드리는게 인지상정!</p>
             <p class="Orbit-font text-gray-400" th:text="${message}">...</p>
             <img th:src="@{/img/utils/로켓단.png}" class="w-50 m-3" alt="Bad Request">

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+    <th:block th:include="fragments/nav"></th:block>
+    <section class="container my-2">
+        <h1>제품 등록</h1>
+        <h5 th:text="${type}" class="text-muted"></h5>
+    </section>
+    <section class="container my-1">
+        <form th:action="|/api/admin/product/regist/insert/${type}|" method="post" onsubmit="return onSubmitHandler(this)" class="d-flex justify-content-center flex-column py-3">
+            <label for="name">상품 명:</label>
+            <input type="text" id="name" name="name" class="p-2 my-2" placeholder="ex) 피카츄">
+
+            <label for="number">상품 번호:</label>
+            <input type="text" id="number" name="number" class="p-2 my-2" placeholder="ex) 1">
+
+            <label for="price">상품 가격:</label>
+            <input type="text" id="price" name="price" class="p-2 my-2" placeholder="ex) 100">
+
+            <label for="type">타입 및 분류:</label>
+            <input type="text" id="type" name="type" class="p-2 my-2" placeholder="ex) NORMAL / 회복">
+
+            <label for="description">설명:</label>
+            <textarea id="description" name="description" rows="4" cols="50" class="p-2 my-2" placeholder="상세 정보"></textarea>
+
+            <button type="submit" class="btn btn-primary">Regist</button>
+        </form>
+    </section>
+</main>
+</html>

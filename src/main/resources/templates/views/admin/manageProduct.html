@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+<main layout:fragment="content">
+    <section class="container-fluid py-3">
+        <label class="pointer fw-bold position-absolute" onclick="history.back()">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Back
+        </label>
+    </section>
+    <section class="container-fluid py-2">
+        <h1 class="h1">Manage Product Status</h1>
+    </section>
+    <section class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row pb-2 px-1">
+                    <h3 class="col-10">Pokémon</h3>
+                    <button type="submit" class="col-2 btn btn-outline-dark px-2" onclick="location.href='/admin/product/regist/pokemon'">포켓몬 추가</button>
+                </div>
+                <table class="table table-bordered" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>도감 번호</th>
+                            <th>포켓몬 이름</th>
+                            <th>가격</th>
+                            <th>타입</th>
+                            <th>도감 설명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pokemon : ${pokemonList}">
+                            <td ><input type="checkbox" th:value="${pokemon}"></td>
+                            <td th:text="${pokemon.number}"></td>
+                            <td th:text="${pokemon.name}"></td>
+                            <td th:text="${pokemon.price}"></td>
+                            <td><b><span th:text="${pokemon.type} +'/'+ ${pokemon.type.ko}" th:class="'tx_'+${pokemon.type.eng}">타입</span></b></td>
+                            <td th:text="${pokemon.description}" class="text-truncate"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid py-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row pb-2 px-1">
+                    <div class="row pb-2 px-1">
+                        <h3 class="col-10">Item</h3>
+                        <button type="submit" class="col-2 btn btn-outline-dark px-2" onclick="location.href='/admin/product/regist/item'">아이템 추가</button>
+                    </div>
+                </div>
+                <table class="table table-bordered" id="dataTable_second">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>일련 번호</th>
+                            <th>아이템 이름</th>
+                            <th>가격</th>
+                            <th>아이템 분류</th>
+                            <th>아이템 설명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${itemList}">
+                            <td ><input type="checkbox" th:value="${item}"></td>
+                            <td th:text="${item.number}"></td>
+                            <td th:text="${item.name}"></td>
+                            <td th:text="${item.price}"></td>
+                            <td><b><span th:text="${item.type}">타입</span></b></td>
+                            <td th:text="${item.description}" class="text-truncate"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+</html>

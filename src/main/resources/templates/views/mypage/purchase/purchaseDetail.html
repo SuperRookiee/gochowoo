@@ -33,16 +33,17 @@
                     <h3><span th:text="${purchase.status.ko}" th:class="${purchase.status}">주문 상태</span></h3>
                     <h5 th:text="('결재 날짜 : '+${#temporals.format(purchase.createdTime, 'yyyy. MM. dd.')})" class="product_detail_date" >날짜 표시</h5>
                     <div th:each="product : ${purchase.orderHistoryAsList}">
-                        <div class="product_itemCard d-flex p-2" onclick="goToshop(this)" th:data-productId="${product.productId}">
+                        <div class="hover-card d-flex p-2" onclick="goToshop(this)" th:data-productId="${product.productId}">
                             <div class=" rounded py-3">
                                 <img th:if="${product.productId.startsWith('p')}" class="product_img" th:src="@{'/img/pokemon/'+${product.name}+'.png'}" th:alt="${product.name}">
                                 <img th:if="${product.productId.startsWith('i')}" class="product_img" th:src="@{'/img/item/'+${product.name}+'.png'}" th:alt="${product.name}">
                             </div>
-                            <div class="d-flex flex-column px-3">
-                                <label><span th:text="${product.name}" >상품 명</span></label>
-                                <label class="product_order_id">결제 확인 번호 : <span th:text="'O'+${purchase.orderId}+'A'+${purchase.addressId}" >주문 번호</span></label>
-                                <label class="product_amount">수량 : <span th:text="${product.amount}">0</span></label>
-                                <span class="product_price" th:text="'₽' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span>
+                            <div class="d-flex flex-column px-3 pointer">
+                                <label class="pointer"><span th:text="${product.name}" >상품 명</span></label>
+                                <!-- <label class="pointer"><span th:text="${product.productId}" >일련 번호</span></label> -->
+                                <label class="product_order_id pointer">결제 확인 번호 : <span th:text="'O'+${purchase.orderId}+'A'+${purchase.addressId}" >주문 번호</span></label>
+                                <label class="product_amount pointer">수량 : <span th:text="${product.amount}">0</span></label>
+                                <span class="product_price pointer" th:text="'₽' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span>
                             </div>
                         </div>
                     </div>

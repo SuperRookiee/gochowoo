@@ -1,4 +1,4 @@
-package kr.co.chunjae.gochowoo.controller.api.Admin;
+package kr.co.chunjae.gochowoo.controller.Admin;
 
 import kr.co.chunjae.gochowoo.model.Order.Purchase.Purchase;
 import kr.co.chunjae.gochowoo.model.User.User;
@@ -22,9 +22,13 @@ public class AdminController {
 
     @GetMapping("")
     String showAdminPage(Model model) {
+        return "views/admin/adminHome";
+    }
+    @GetMapping("/order")
+    String showAdminOrderPage(Model model) {
         List<Purchase> purchaseList = purchaseService.getAllPurchases();
         model.addAttribute("purchaseList", purchaseList);
-        return "/views/admin/admin";
+        return "views/admin/manageOrder";
     }
 
     @GetMapping("/userInfo/{id}")

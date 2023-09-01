@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+<main layout:fragment="content">
+    <section class="container">
+        <div class="row mt-3">
+            <h1 class="h1">
+                MANAGEMENT <i class="fa-solid fa-screwdriver-wrench fa-2xs"></i>
+            </h1>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row p-3 d-flex justify-content-between">
+                <div onclick="location.href='/admin/order'" class="card col-5 m-1 p-0 pointer hover-card">
+                    <div class="view">
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.webp"
+                             alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Manage Order Status</h4>
+                        <p class="card-text py-3">
+                            <span>주문 처리과정을 추적하고 업데이트하여,</span><br/>
+                            <span>관리자와 고객이 주문의 진행 상황을 관리할 수 있습니다.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div onclick="location.href='/admin/insertProduct'" class="card col-5 m-1 p-0 Unsupported">
+                    <div class="view">
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).webp"
+                             alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">상품 등록 </h4>
+                        <p class="card-text">상품 목록을 관리합니다.</p>
+                        <p class="card-text text-decoration-line-through">(추후 추가 예정)</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Card -->
+    </section>
+</main>
+</html>

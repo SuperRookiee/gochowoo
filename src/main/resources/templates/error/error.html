@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+<!--        <span class="errorHead">Error!</span><br />-->
+<!--        <p th:text="${'path: ' + path}"></p>-->
+<!--        <p th:text="${'status: ' + status}"></p>-->
+<!--        <p th:text="${'timestamp: ' + timestamp}"></p>-->
+<!--        <p th:text="${'error: ' + error}"></p>-->
+<!--        <p th:text="${'errors: ' + errors}"></p>-->
+<!--        <p th:text="${'exception: ' + exception}"></p>-->
+<!--        <p th:text="${'message: ' + message}"></p>-->
+<!--        <p th:text="${'trace: ' + trace}"></p>-->
+    <div id="Error" class="container p-5">
+        <div class="text-center">
+            <div id="error_status" class="error mx-auto" data-text="404" th:text="${status}">400</div>
+            <p class="Orbit-font text-gray-500 mb-0 fw-bold">'에러'라고 물으신다면, 대답해 드리는게 인지상정!</p>
+            <p class="Orbit-font text-gray-400" th:text="${message}">...</p>
+            <img th:src="@{/img/utils/로켓단.png}" class="w-50 m-3" alt="Bad Request">
+            <button onclick="location.href='/'" class="btn btn-danger m-2 Orbit-font">
+                <label class="p-0 pointer"><img th:src="@{/img/utils/에러_잉어킹.gif}" alt=""></label>
+                <label class="pointer">Pokémon GoChoWoo <br/> 돌아가기</label>
+            </button>
+        </div>
+    </div>
+</main>
+</html>

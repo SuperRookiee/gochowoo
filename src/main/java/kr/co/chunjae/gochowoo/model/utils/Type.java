@@ -11,7 +11,7 @@ public enum Type {
     DRAGON("드래곤", "dragon"),
     ELECTRIC("전기", "electric"),
     FIRE("불", "fire"),
-    FAIRY("요정", "fairy"),
+    FAIRY("페어리", "fairy"),
     FIGHTING("격투", "fighting"),
     FLYING("비행", "flying"),
     GHOST("고스트", "ghost"),

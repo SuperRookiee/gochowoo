@@ -25,6 +25,10 @@ Custom Css
     font-family: Orbit, sans-serif;
 }
 
+.Orbit-font {
+    font-family: Orbit, sans-serif !important;
+}
+
 .pointer {
     cursor: pointer;
 }
@@ -56,6 +60,10 @@ Custom Css
 #icon_ball_b {
     width: 40px !important;
 }
+#templatemo_search {
+    opacity: 90%;
+}
+
 /* 메인 헤더 로고 소제목 */
 .pokemon.subtitle {
     margin-left: 4rem;
@@ -103,6 +111,11 @@ ul.nav.navbar-nav li a {
 
 .hidden {
     display: none;
+}
+
+.Unsupported {
+    filter: blur(1px);
+    pointer-events: none;
 }
 
 .Products,
@@ -173,7 +186,7 @@ p#description {
     cursor: pointer;
     white-space: nowrap;
 }
-.product_itemCard:hover {
+.hover-card:hover {
     background-color: rgba(200, 200, 200, 0.3);
     cursor: pointer;
     border-radius: 0.5rem;

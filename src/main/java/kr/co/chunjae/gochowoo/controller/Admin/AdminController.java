@@ -28,34 +28,34 @@ public class AdminController {
     ItemService itemService;
 
     @GetMapping("")
-    String showAdminPage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
+    public String showAdminPage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
         if(userId == null) {
             return "redirect:/user/login";
         }
-        return "views/admin/adminHome";
+        return "views/admin/adminIndex";
     }
     @GetMapping("/order")
-    String showAdminOrderPage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
+    public String showAdminOrderPage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
         if(userId == null) {
             return "redirect:/user/login";
         }
         List<Purchase> purchaseList = purchaseService.getAllPurchases();
         model.addAttribute("purchaseList", purchaseList);
-        return "views/admin/manageOrder";
+        return "views/admin/order/manageOrder";
     }
 
     @GetMapping("/userInfo/{id}")
-    String showUserInfo(@PathVariable String id, Model model) {
+    public String showUserInfo(@PathVariable String id, Model model) {
         User user = userService.getUserById(Long.parseLong(id));
         if (user == null) {
             return "redirect:/admin";
         }
         model.addAttribute("user", user);
-        return "/views/admin/userInfo";
+        return "/views/admin/order/userInfo";
     }
 
     @GetMapping("/product")
-    String showAdminProductPage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
+    public String showAdminProductPage(@SessionAttribute(name = "id", required = false) Long userId, Model model) {
         if(userId == null) {
             return "redirect:/user/login";
         }
@@ -64,12 +64,18 @@ public class AdminController {
         model.addAttribute("pokemonList", pokemonList);
         model.addAttribute("itemList", itemList);
 
-        return "views/admin/manageProduct";
+        return "views/admin/product/manageProduct";
     }
 
     @GetMapping("/product/regist/{type}")
-    String insertProduct(@PathVariable String type, Model model) {
+    public String insertProduct(@PathVariable String type, Model model) {
+        if(type.equals("pokemon")) {
+            model.addAttribute("product", new Pokemon());
+        }
+        else if (type.equals("item")) {
+            model.addAttribute("product", new Item());
+        }
         model.addAttribute("type", type);
-        return "views/admin/registProduct";
+        return "views/admin/product/registProduct";
     }
 }

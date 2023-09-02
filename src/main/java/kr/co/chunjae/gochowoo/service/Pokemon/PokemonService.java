@@ -11,4 +11,6 @@ public interface PokemonService {
     Pokemon getPokemonById(Long id);
 
     List<Pokemon> getLatestPokemon();
+
+    Pokemon addPokemon(Pokemon pokemon);
 }

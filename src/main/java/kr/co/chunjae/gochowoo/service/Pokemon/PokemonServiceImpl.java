@@ -31,4 +31,10 @@ public class PokemonServiceImpl implements PokemonService {
     public List<Pokemon> getLatestPokemon() {
         return pokemonRepository.findTop8ByOrderByIdDesc();
     }
+
+    @Override
+    public Pokemon addPokemon(Pokemon pokemon) {
+        pokemonRepository.save(pokemon);
+        return pokemon;
+    }
 }

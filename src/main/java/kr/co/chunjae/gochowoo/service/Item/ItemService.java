@@ -9,4 +9,6 @@ public interface ItemService {
     Item getItemById(Long id);
 
     List<Item> getLatestItem();
+
+    Item addItem(Item item);
 }

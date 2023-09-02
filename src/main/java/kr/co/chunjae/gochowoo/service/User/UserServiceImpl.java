@@ -1,7 +1,7 @@
 package kr.co.chunjae.gochowoo.service.User;
 
-import kr.co.chunjae.gochowoo.model.utils.Team;
 import kr.co.chunjae.gochowoo.model.User.User;
+import kr.co.chunjae.gochowoo.model.utils.Team;
 import kr.co.chunjae.gochowoo.repository.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

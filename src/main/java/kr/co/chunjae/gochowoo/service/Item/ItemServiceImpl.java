@@ -29,4 +29,10 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> getLatestItem() {
         return itemRepository.findTop8ByOrderByIdDesc();
     }
+
+    @Override
+    public Item addItem(Item item) {
+        itemRepository.save(item);
+        return item;
+    }
 }

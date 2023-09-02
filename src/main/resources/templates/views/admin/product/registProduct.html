@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+    <th:block th:include="fragments/nav"></th:block>
+    <section class="container my-2">
+        <h1>제품 등록</h1>
+        <h5 th:text="${type}" class="text-muted"></h5>
+    </section>
+    <section class="container my-1">
+        <form th:action="|/api/admin/product/insert/${type}|" method="post" class="d-flex justify-content-center flex-column py-3"
+              th:object="${product}" enctype="multipart/form-data">
+<!--              onsubmit="return onSubmitHandler(this)" th:object="${product}" enctype="multipart/form-data">-->
+            <label for="name" class="fw-bold">상품 명</label>
+            <input type="text" id="name" th:field="*{name}" class="p-2 mb-2" placeholder="ex) 피카츄 / 마스터볼">
+
+            <label for="number" class="fw-bold">상품 번호</label>
+            <input type="text" id="number" th:field="*{number}" class="p-2 mb-2" placeholder="ex) 1">
+
+            <label for="price" class="fw-bold">상품 가격</label>
+            <input type="text" id="price" th:field="*{price}" class="p-2 mb-2" placeholder="ex) 100">
+
+            <label for="type" class="fw-bold">타입 및 분류</label>
+            <input type="text" id="type" th:field="*{type}" class="p-2 mb-2" placeholder="ex) NORMAL / 회복">
+
+            <label for="description" class="fw-bold">설명</label>
+            <textarea id="description" th:field="*{description}" rows="4" cols="50" class="p-2 mb-2" placeholder="상세 정보"></textarea>
+
+            <div class="form-group files" id="upload">
+                <label for="image" class="fw-bold">이미지</label>
+                <input type="file" id="image" name="image" accept="image/png">
+            </div>
+            <figure class="image-container d-flex align-items-center">
+                <img id="chosen-image" src="" alt="">
+                <figcaption id="file-name"></figcaption>
+                <span id="cancel" onclick="clearFile()" class="m-2 pointer"><i class="fa-solid fa-eraser"></i></span>
+            </figure>
+            <button type="submit" class="btn btn-primary">Regist</button>
+        </form>
+    </section>
+    <script>
+        const uploadButton = document.getElementById("image");
+        const chosenImage = document.getElementById("chosen-image");
+        const fileName = document.getElementById("file-name");
+
+        uploadButton.onchange = () => {
+            const reader = new FileReader();
+            reader.readAsDataURL(uploadButton.files[0]);
+            reader.onload = () => {
+                chosenImage.setAttribute("src",reader.result);
+            }
+            fileName.textContent = uploadButton.files[0].name;
+
+            $('#upload').hide();
+            $('#cancel').show();
+        }
+
+        const clearFile = () => {
+            uploadButton.value = "";
+            chosenImage.setAttribute("src", "");
+            fileName.textContent = "";
+            $('#upload').show();
+            $('#cancel').hide();
+        }
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        const onSubmitHandler = () => {
+            return true
+            if (!$('#name').val()) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '상품명을 입력해주세요'
+                });
+                return false;
+            }
+            if (!$('#number').val()) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '상품 번호를 입력해주세요'
+                });
+                return false;
+            }
+            if (isNaN($('#price').val()) || !$('#price').val()) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '올바른 상품 가격을 입력해주세요'
+                });
+                return false;
+            }
+            if (!$('#type').val()) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '타입 및 분류를 입력해주세요'
+                });
+                return false;
+            }
+            if (!$('#description').val()) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '상품 설명을 입력해주세요'
+                });
+                return false;
+            }
+            if (!$('#image').val()) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '이미지를 등록해주세요'
+                });
+                return false;
+            }
+
+            return true;
+        };
+    </script>
+
+</main>
+</html>

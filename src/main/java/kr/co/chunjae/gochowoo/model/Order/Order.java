@@ -1,8 +1,8 @@
 package kr.co.chunjae.gochowoo.model.Order;
 
-import kr.co.chunjae.gochowoo.model.utils.ShippingStatus;
 import kr.co.chunjae.gochowoo.model.User.UserAddress;
 import kr.co.chunjae.gochowoo.model.base.BaseEntity;
+import kr.co.chunjae.gochowoo.model.utils.ShippingStatus;
 import lombok.*;
 
 import javax.persistence.*;

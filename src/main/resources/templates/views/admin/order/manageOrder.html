@@ -4,6 +4,11 @@
         layout:decorate="~{layout/layout}">
 
 <main layout:fragment="content">
+    <script>
+        $(document).ready(() => {
+            DataTable();
+        })
+    </script>
     <section class="container-fluid py-3">
         <label class="pointer fw-bold position-absolute" onclick="history.back()">
             <i class="fa-solid fa-arrow-rotate-left"></i> Back

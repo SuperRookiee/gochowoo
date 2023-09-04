@@ -11,4 +11,7 @@ public interface ItemService {
     List<Item> getLatestItem();
 
     Item addItem(Item item);
+
+    Item findItemByName(String name);
+    Item findItemByNumber(Integer number);
 }

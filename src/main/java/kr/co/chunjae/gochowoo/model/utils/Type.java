@@ -3,6 +3,10 @@ package kr.co.chunjae.gochowoo.model.utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 @AllArgsConstructor
 public enum Type {
@@ -27,4 +31,10 @@ public enum Type {
 
     final String ko;
     final String eng;
+
+    public static List<String> getAllTypes() {
+        return Arrays.stream(Type.values())
+                .map(Type::name)
+                .collect(Collectors.toList());
+    }
 }

@@ -13,4 +13,7 @@ public interface PokemonService {
     List<Pokemon> getLatestPokemon();
 
     Pokemon addPokemon(Pokemon pokemon);
+
+    Pokemon findPokemonByName(String name);
+    Pokemon findPokemonByNumber(Integer number);
 }

@@ -226,10 +226,17 @@ p#description {
     width: 75px;
 }
 
+/* 관리자 제품등록 */
+#valid_name,
+#valid_number {
+    display: none;
+    font-size: 10px;
+    color: red;
+    margin-left: 10px;
+}
 /* 파일 */
-.files input {
+.files #file_drop {
     outline: 2px dashed #92b0b3;
-    outline-offset: -10px;
     -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
     transition: outline-offset .15s ease-in-out, background-color .15s linear;
     padding: 120px 0px 85px 35%;
@@ -237,7 +244,7 @@ p#description {
     margin: 0;
     width: 100% !important;
 }
-.files input:focus{
+.files #file_drop:focus{
     outline: 2px dashed #92b0b3;  outline-offset: -10px;
     -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
     transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
@@ -257,8 +264,19 @@ p#description {
     background-repeat: no-repeat;
 }
 
+.files #file_drop #upload_img {
+    position: absolute;
+    width: 12rem;
+    top: 50%;
+    left: calc(50% - 12rem/2);
+}
+.files #file_drop #upload_img strong {
+    color: var(--pokemon-blue);
+}
+
 #chosen-image {
     width: 10rem !important;
+    margin-right: 10px;
 }
 
 #cancel {

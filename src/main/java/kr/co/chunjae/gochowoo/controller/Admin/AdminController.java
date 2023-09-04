@@ -4,6 +4,7 @@ import kr.co.chunjae.gochowoo.model.Item.Item;
 import kr.co.chunjae.gochowoo.model.Order.Purchase.Purchase;
 import kr.co.chunjae.gochowoo.model.Pokemon.Pokemon;
 import kr.co.chunjae.gochowoo.model.User.User;
+import kr.co.chunjae.gochowoo.model.utils.Type;
 import kr.co.chunjae.gochowoo.service.Item.ItemService;
 import kr.co.chunjae.gochowoo.service.Pokemon.PokemonService;
 import kr.co.chunjae.gochowoo.service.User.UserService;
@@ -68,14 +69,18 @@ public class AdminController {
     }
 
     @GetMapping("/product/regist/{type}")
-    public String insertProduct(@PathVariable String type, Model model) {
+    public String insertProduct(@PathVariable String type, @SessionAttribute(name = "id", required = false) Long userId, Model model) {
+        if(userId == null) { return "redirect:/user/login"; }
+
         if(type.equals("pokemon")) {
+            model.addAttribute("Types", Type.getAllTypes());
             model.addAttribute("product", new Pokemon());
         }
         else if (type.equals("item")) {
             model.addAttribute("product", new Item());
         }
         model.addAttribute("type", type);
+
         return "views/admin/product/registProduct";
     }
 }

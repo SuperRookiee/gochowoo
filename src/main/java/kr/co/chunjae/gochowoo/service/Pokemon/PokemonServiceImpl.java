@@ -37,4 +37,14 @@ public class PokemonServiceImpl implements PokemonService {
         pokemonRepository.save(pokemon);
         return pokemon;
     }
+
+    @Override
+    public Pokemon findPokemonByName(String name) {
+        return pokemonRepository.findByName(name);
+    }
+
+    @Override
+    public Pokemon findPokemonByNumber(Integer number) {
+        return pokemonRepository.findByNumber(number);
+    }
 }

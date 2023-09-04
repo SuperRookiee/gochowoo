@@ -35,4 +35,14 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.save(item);
         return item;
     }
+
+    @Override
+    public Item findItemByName(String name) {
+        return itemRepository.findByName(name);
+    }
+
+    @Override
+    public Item findItemByNumber(Integer number) {
+        return itemRepository.findByNumber(number);
+    }
 }

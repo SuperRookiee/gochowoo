@@ -19,7 +19,7 @@ public class Item {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private int number;
+    private Integer number;
 
     @Column(nullable = false, unique = true, length = 30)
     private String name;
@@ -31,5 +31,5 @@ public class Item {
     private String description;
 
     @Column
-    private int price;
+    private Integer price;
 }

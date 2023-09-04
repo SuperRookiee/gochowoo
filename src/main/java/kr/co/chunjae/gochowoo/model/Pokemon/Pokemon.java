@@ -21,7 +21,7 @@ public class Pokemon {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private int number;
+    private Integer number;
 
     @Column(nullable = false, unique = true, length = 30)
     private String name;
@@ -34,5 +34,5 @@ public class Pokemon {
     private String description;
 
     @Column
-    private int price;
+    private Integer price;
 }

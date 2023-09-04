@@ -24,6 +24,8 @@ public class User extends BaseEntity {
     private Long cash = 0L;
     @Column
     private Team team;
+    @Column @Builder.Default
+    private Character deleted = 'N';
 
     public void updateCash(int cash) {
         this.cash += cash;

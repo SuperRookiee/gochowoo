@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String password) {
         User user = userRepository.findByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password) && (user.getDeleted() == null || user.getDeleted().equals('N'))) {
             return user;
         }
         return null;
@@ -43,9 +43,8 @@ public class UserServiceImpl implements UserService {
 
     public User withdrawUser(String email, String password) {
         User user = userRepository.findByEmail(email);
-
         if (user != null && user.getPassword().equals(password)) {
-            userRepository.delete(user);
+            userRepository.deleteUserById(user.getId());
         }
         return null;
     }
@@ -75,12 +74,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUniqueEmail(String email) {
-        return userRepository.findByEmail(email)==null;
+        return userRepository.findByEmail(email) == null;
     }
 
     @Override
     public boolean isUniqueNickName(String nickName) {
-        return userRepository.findByNickName(nickName)==null;
+        return userRepository.findByNickName(nickName) == null;
     }
 
 

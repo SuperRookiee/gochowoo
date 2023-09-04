@@ -130,4 +130,10 @@ public class UserAPIController {
         }
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/withdraw")
+    public String withdraw(@RequestParam String email, @RequestParam String password) {
+        userService.withdrawUser(email, password);
+        return "redirect:/user/login";
+    }
 }

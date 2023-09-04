@@ -104,6 +104,17 @@
                 </div>
             </div>
         </form>
+        <form action="/api/user/withdraw" method="post" style="border: solid 1px red; padding: 8px">
+            <div class="mb-3">
+                <label for="userEmail" class="form-label">이메일</label>
+                <input id="userEmail" class="form-control" type="email" readonly name="email" th:value="${user.email}">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">비밀번호</label>
+                <input name="password" type="password" id="password" class="form-control">
+            </div>
+            <button class="bg_FAILED"  type="submit">회원탈퇴</button>
+        </form>
     </section>
 </main>
 </html>

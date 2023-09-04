@@ -5,6 +5,8 @@ import kr.co.chunjae.gochowoo.model.Item.Item;
 import java.util.List;
 
 public interface ItemService {
+    List<Item> getAllItemByNewest();
+
     List<Item> getAllItem();
     Item getItemById(Long id);
 

@@ -23,6 +23,11 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
+    public List<Pokemon> getAllPokemonByNewest() {
+        return pokemonRepository.findAllByOrderByIdDesc();
+    }
+
+    @Override
     public Pokemon getPokemonById(Long id) {
         return pokemonRepository.findById(id).orElseThrow(() -> new RuntimeException("Pokemon not found with ID: " + id));
     }

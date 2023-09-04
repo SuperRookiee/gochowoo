@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class CommunityController {
     @GetMapping("/write")
     public String showWritePage(HttpSession session) {
         User user = (User)session.getAttribute("user");
-        if (user == null) return "redirect:/user/login";
+        if (user == null) return "redirect:/user/login?callback=/community";
         return "views/community/writeBoard";
     }
 
@@ -45,13 +46,18 @@ public class CommunityController {
     }
 
     @GetMapping("/update/{id}")
-    public String updateBoard(@PathVariable Long id, Model model) {
+    public String updateBoard(@PathVariable Long id, Model model, HttpServletRequest request) {
         Community community = communityService.getCommunityById(id);
-        if (community != null) {
-            String replaced = community.getContent().replace("<br>", "\r\n"); // 엔터키를 <br>태그로 db에 저장
-            community.setContent(replaced);
-            model.addAttribute("community", community);
+        HttpSession session = request.getSession();
+        String sessionUserEmail = (String) session.getAttribute("email");
+
+        if (community == null || !community.getWriter().getEmail().equals(sessionUserEmail)) {
+            return "redirect:/error"; // error 페이지
         }
+
+        String replaced = community.getContent().replace("<br>", "\r\n"); // 엔터키를 <br>태그로 db에 저장
+        community.setContent(replaced);
+        model.addAttribute("community", community);
         return "views/community/updateBoard";
     }
 

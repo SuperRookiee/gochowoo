@@ -32,7 +32,7 @@ public class UserAPIController {
     }
 
     @PostMapping("/login")
-    public String login(Model model, @RequestParam String email, @RequestParam String password, HttpServletRequest request) {
+    public String login(Model model, @RequestParam String email, @RequestParam String password, @RequestParam String callback,HttpServletRequest request) {
         User user = userService.login(email, password);
 
 
@@ -45,14 +45,17 @@ public class UserAPIController {
         session.setAttribute("nickName", user.getNickName());
         session.setAttribute("cash", user.getCash());
         session.setAttribute("user", user);
-        return "/index";
+        if (callback == null || callback.isEmpty()) {
+            return "redirect:/";
+        }
+        return "redirect:"+callback;
     }
 
     @PostMapping("/logout")
     public String logout(HttpSession session, Model model) {
         session.invalidate(); // 세션 무효화
         model.addAttribute("logoutSuccess", true);
-        return "redirect:/mypage";
+        return "redirect:/user/login";
     }
 
     @GetMapping("/profile")
@@ -132,8 +135,13 @@ public class UserAPIController {
     }
 
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam String email, @RequestParam String password) {
-        userService.withdrawUser(email, password);
-        return "redirect:/user/login";
+    public String withdraw(@RequestParam String email, @RequestParam String password, HttpServletRequest request
+    ) {
+        boolean ok = userService.withdrawUser(email, password);
+        if (ok) {
+            request.getSession().invalidate();
+            return "redirect:/user/login";
+        }
+        return "redirect:/mypage";
     }
 }

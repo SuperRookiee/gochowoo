@@ -24,7 +24,7 @@ public class AdminFilter implements Filter {
                 return ;
             }
         }
-        httpResponse.sendRedirect("/user/login");
+        httpResponse.sendRedirect("/");
     }
 
     @Override

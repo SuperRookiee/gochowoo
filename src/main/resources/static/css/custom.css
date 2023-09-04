@@ -25,6 +25,11 @@ Custom Css
     font-family: Orbit, sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .Orbit-font {
     font-family: Orbit, sans-serif !important;
 }
@@ -61,7 +66,7 @@ Custom Css
     width: 40px !important;
 }
 #templatemo_search {
-    opacity: 90%;
+    opacity: 80%;
 }
 
 /* 메인 헤더 로고 소제목 */

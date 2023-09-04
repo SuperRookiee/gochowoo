@@ -227,7 +227,9 @@
                 }),
             })
             if (response.status === 401) {
-                window.location.href = "/user/login";
+                const url = new URL(window.location.href);
+                const callback = url.pathname;
+                window.location.href = `/user/login?callback=${callback}`;
                 return false;
             }
             if (response.ok) {
@@ -263,7 +265,9 @@
                 }),
             })
             if (response.status === 401) {
-                window.location.href = "/user/login";
+                const url = new URL(window.location.href);
+                const callback = url.pathname;
+                window.location.href = `/user/login?callback=${callback}`;
                 return false;
             }
             if (response.ok) {

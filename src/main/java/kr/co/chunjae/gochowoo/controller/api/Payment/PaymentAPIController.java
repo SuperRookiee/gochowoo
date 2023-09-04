@@ -71,7 +71,6 @@ public class PaymentAPIController {
         }
         Gson gson = new Gson();
         String orderHistory = gson.toJson(orderHistoryList);
-        System.out.println(orderHistory);
         itemCartService.deleteAllCart(currentUserState.getId());
         pokemonCartService.deleteAllCart(currentUserState.getId());
         currentUserState.setCash(currentUserState.getCash() - totalPrice.get());

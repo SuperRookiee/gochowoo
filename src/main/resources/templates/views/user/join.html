@@ -26,7 +26,7 @@
             if (!response.ok) {
                 Toast.fire({
                     icon: "error",
-                    title: `${type} 중복입니다.`
+                    title: `사용할 수 없는 ${type}입니다.`
                 })
             }
             console.log(`/api/user/check/${type}`);

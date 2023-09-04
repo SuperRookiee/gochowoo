@@ -40,4 +40,9 @@ public class CommunityServiceImpl implements CommunityService {
     public List<Community> getAllBoardByUserId(Long userId) {
         return communityRepository.findAllByWriter(User.builder().id(userId).build());
     }
+
+    @Override
+    public void deleteCommunityById(Long boardId) {
+        communityRepository.deleteById(boardId);
+    }
 }

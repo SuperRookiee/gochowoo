@@ -16,10 +16,13 @@
                     <div class="mb-3">
                         <label for="password" class="form-label">비밀번호</label>
                         <input name="password" type="password" id="password" class="form-control">
+<!--                        <input type="checkbox" id="keep" name="" value="off">-->
+<!--                        <label for="keep" class="">로그인 상태 유지</label>-->
                     </div>
+                    <input type="hidden" name="callback" th:value="${callback!=null?callback:''}">
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
-                <p class="mt-3" align="center" >계정이 없으세요?<br> <a href="/user/join">넌 내꺼야!</a></p>
+                <p class="mt-3" align="center">계정이 없으세요?<br> <a class="btn btn-success" href="/user/join">넌 내꺼야!</a></p>
             </div>
         </div>
     </div>

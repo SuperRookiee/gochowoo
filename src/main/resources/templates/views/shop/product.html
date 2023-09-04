@@ -33,7 +33,9 @@
                 }),
             })
             if (response.status === 401) {
-                window.location.href = "/user/login";
+                const url = new URL(window.location.href);
+                const callback = url.pathname;
+                window.location.href = `/user/login?callback=${callback}`;
                 return false;
             }
             if (response.ok) {
@@ -76,7 +78,9 @@
                 }),
             })
             if (response.status === 401) {
-                window.location.href = "/user/login";
+                const url = new URL(window.location.href);
+                const callback = url.pathname;
+                window.location.href = `/user/login?callback=${callback}`;
                 return false;
             }
             if (response.ok) {
@@ -179,12 +183,13 @@
                                 <h1 class="h2" th:text="${p.name}">제품명</h1>
                                 <p class="h3 py-2" th:text="'₽' + ${p.price}">₽1000</p>
                                 <p class="py-2">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
+                                    <!--<i class="fa fa-star text-warning"></i>-->
                                     <i class="fa fa-star text-secondary"></i>
-                                    <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <span class="list-inline-item text-dark">Rating 0.0 | 0 Comments</span>
                                 </p>
                                 <ul class="list-inline" th:if="${productKind eq 'pokemon'}">
                                     <li class="list-inline-item">

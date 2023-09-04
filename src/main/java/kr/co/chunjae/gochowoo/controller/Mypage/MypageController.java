@@ -33,7 +33,7 @@ public class MypageController {
     public String showShopPage(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         if(email == null) {
-            return "views/user/login";
+            return "redirect:/user/login?callback=/mypage";
         }
         User user = userService.userInfo(email);
         model.addAttribute("user", user);
@@ -47,18 +47,17 @@ public class MypageController {
             model.addAttribute("purchaseList", purchaseList);
             return "views/mypage/purchase/purchase";
         }
-        return "views/user/login";
+        return "redirect:/user/login?callback=/mypage";
     }
 
     @GetMapping("/purchase/{id}")
     public String showPurchaseDetailPage(@SessionAttribute(name = "id", required = false) Long userId, Model model, @PathVariable Long id) {
         if (userId != null) {
             Purchase purchase = purchaseService.getPurchaseByOrderId(id);
-            System.out.println(purchase);
             model.addAttribute("purchase", purchase);
             return "views/mypage/purchase/purchaseDetail";
         }
-        return "views/user/login";
+        return "redirect:/user/login?callback=/mypage";
     }
 
     @GetMapping("/cash")
@@ -80,7 +79,7 @@ public class MypageController {
     public String showPostPage(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            return "redirect:/user/login";
+            return "redirect:/user/login?callback=/mypage";
         }
         List<Community> postList = communityService.getAllBoardByUserId(user.getId());
         model.addAttribute("postList", postList);

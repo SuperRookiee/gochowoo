@@ -16,16 +16,16 @@
             <input type="text" id="name" th:field="*{name}" class="p-2 mb-2" oninput="validName(this)" placeholder="ex) 피카츄 / 마스터볼">
 
             <label for="number" class="fw-bold">도감 번호/ 상품 번호 <span id="valid_number">*사용 불가능</span></label>
-            <input type="text" id="number" th:field="*{number}" class="p-2 mb-2" oninput="validNumber(this)" placeholder="ex) 1">
+            <input type="number" min="1" id="number" th:field="*{number}" class="p-2 mb-2" oninput="validNumber(this)" placeholder="ex) 1">
 
             <label for="price" class="fw-bold">상품 가격</label>
-            <input type="text" id="price" th:field="*{price}" class="p-2 mb-2" value="" placeholder="ex) 100">
+            <input type="number" min="0" id="price" th:field="*{price}" class="p-2 mb-2" value="" placeholder="ex) 100">
 
             <label for="type" class="fw-bold">타입 및 분류</label>
             <th:block th:if="${type} == 'pokemon'">
                 <select id="type" th:field="*{type}" class="p-2 mb-2">
                     <th:block th:each="t : ${Types}">
-                        <option th:value="${t}" th:text="${t}"></option>
+                        <option th:value="${t}" th:text="${t}" th:class="'tx_'+${t.toLowerCase()}"></option>
                     </th:block>
                 </select>
             </th:block>
@@ -166,7 +166,7 @@
             if(nameCheck !== false) {
                 Toast.fire({
                     icon: 'error',
-                    title: '중복된 상품명입니다'
+                    title: '잘못된 상품명입니다'
                 });
                 return false;
             }
@@ -180,7 +180,7 @@
             if(numberCheck !== false) {
                 Toast.fire({
                     icon: 'error',
-                    title: '중복된 도감/상품 번호입니다'
+                    title: '잘못된 도감/상품 번호입니다'
                 });
                 return false;
             }

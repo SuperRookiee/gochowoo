@@ -33,9 +33,7 @@ public class CartAPIController {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
-        System.out.println("dto : " + dto);
         PokemonCart pokemonCart = pokemonCartService.findCartByProductId(dto.getProductId(), user.getId());
-        System.out.println("pokemonCart : " + pokemonCart);
         Pokemon pokemon = Pokemon.builder().id(dto.getProductId()).build();
         if (pokemonCart == null) {
             pokemonCartService.addToCart(PokemonCart.builder().pokemon(pokemon).user(user).amount(dto.getAmount()).build());

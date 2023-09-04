@@ -26,7 +26,6 @@ public class UserAddressAPIController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        System.out.println(recipient + phoneNumber);
         UserAddress userAddress = UserAddress.builder().address(address).user(user).recipient(recipient).phoneNumber(phoneNumber).deliveryRequest(deliveryRequest).build();
         userAddressService.addUserAddress(userAddress);
         return ResponseEntity.ok().build();

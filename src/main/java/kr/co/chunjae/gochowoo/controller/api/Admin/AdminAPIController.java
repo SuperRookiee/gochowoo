@@ -40,7 +40,6 @@ public class AdminAPIController {
 
             File file = new File(path + pokemon.getName()+".png");
             image.transferTo(file);
-
              pokemonService.addPokemon(pokemon);
         } else {
             return "redirect:/error";

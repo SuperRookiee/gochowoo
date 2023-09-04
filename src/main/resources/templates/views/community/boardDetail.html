@@ -4,34 +4,10 @@
         layout:decorate="~{layout/layout}">
 
 <main layout:fragment="content">
-    <!--<script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 1000,
-            // timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-        function onSubmitHandler (formElem) {
-            const elems = Object.values(formElem);
-            for (const elem of elems) {
-                if (elem.name && !elem.value) {
-                    Toast.fire({
-                        icon: "error",
-                        title: '입력하세요'
-                    })
-                    return false;
-                }
-            }
-            return true;
-        }
-    </script>-->
     <div class="container mt-4">
-      <!--  <h1 th:include=""></h1>-->
+        <section class="pointer fw-bold" onclick="location.href='/community'">
+            <i class="fa-solid fa-arrow-rotate-left"></i> 목록으로
+        </section>
         <h1 th:text="${community.title}">board title</h1>
         <p class="text-muted">작성자 : <span th:text="${community.writer.nickName}">nickname</span></p>
         <p class="text-muted">조회 수 : <span th:text="${community.hits}">0</span></p>

@@ -20,7 +20,7 @@ public class UserAddressController {
     @GetMapping("/mypage/shipping")
     public String showShippingPage(HttpSession session, Model model) {
         User user = (User)session.getAttribute("user");
-        if (user == null) return "redirect:/user/login";
+        if (user == null) return "redirect:/user/login?callback=/mypage/shipping";
         List<UserAddress> addressList =  userAddressService.getMyAllUserAddress(user.getId());
         model.addAttribute("addressList", addressList);
         return "views/mypage/shipping/shipping";

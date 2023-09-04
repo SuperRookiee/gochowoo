@@ -60,8 +60,8 @@ public class AdminController {
         if(userId == null) {
             return "redirect:/user/login";
         }
-        List<Pokemon> pokemonList = pokemonService.getAllPokemon();
-        List<Item> itemList = itemService.getAllItem();
+        List<Pokemon> pokemonList = pokemonService.getAllPokemonByNewest();
+        List<Item> itemList = itemService.getAllItemByNewest();
         model.addAttribute("pokemonList", pokemonList);
         model.addAttribute("itemList", itemList);
 

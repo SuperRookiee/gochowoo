@@ -16,6 +16,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<Item> getAllItemByNewest() {
+        return itemRepository.findAllByOrderByIdDesc();
+    }
+
+    @Override
     public List<Item> getAllItem() {
         return itemRepository.findAll();
     }

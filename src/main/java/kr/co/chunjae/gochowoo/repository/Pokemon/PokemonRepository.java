@@ -13,4 +13,6 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
     Pokemon findByName(String name);
 
     Pokemon findByNumber(Integer number);
+
+    List<Pokemon> findAllByOrderByIdDesc();
 }

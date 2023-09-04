@@ -11,4 +11,6 @@ public interface CommunityService {
     Community getCommunityById(Long id);
     void saveCommunity(Community community);
     List<Community> getAllBoardByUserId(Long userId);
+
+    void deleteCommunityById(Long board_id);
 }

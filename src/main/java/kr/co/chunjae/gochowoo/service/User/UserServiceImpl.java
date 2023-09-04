@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -41,12 +44,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findCashByEmail(email);
     }
 
-    public User withdrawUser(String email, String password) {
+    public boolean withdrawUser(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             userRepository.deleteUserById(user.getId());
+            return true;
         }
-        return null;
+        return false;
     }
 
     @Override
@@ -82,5 +86,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByNickName(nickName) == null;
     }
 
+    public void createCookie(String username, HttpServletResponse response) {
+        Cookie cookie = new Cookie("user", username);
+        cookie.setMaxAge(30 * 24 * 60 * 60); // 쿠키 유효 기간 (30일)
+        response.addCookie(cookie);
+    }
+    public void removeCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("user", "");
+        cookie.setMaxAge(0); // 쿠키를 즉시 만료시킴
+        response.addCookie(cookie);
+    }
 
 }

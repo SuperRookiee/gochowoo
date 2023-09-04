@@ -35,7 +35,7 @@ public class CartController {
     public String showCartPage(HttpServletRequest request, Model model) {
         HttpSession httpSession = request.getSession();
         User user = (User) httpSession.getAttribute("user");
-        if (user == null) {return "redirect:/user/login";}
+        if (user == null) {return "redirect:/user/login?callback=/cart";}
         List<PokemonCart> pokemonCartList = pokemonCartService.getAllCarts(user.getId());
         List<ItemCart> itemCartList = itemCartService.getAllCarts(user.getId());
         List<UserAddress> addressList =  userAddressService.getMyAllUserAddress(user.getId());

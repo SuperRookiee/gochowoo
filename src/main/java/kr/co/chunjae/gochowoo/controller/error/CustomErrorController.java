@@ -29,7 +29,7 @@ public class CustomErrorController implements ErrorController {
                     errorMessage = "서버가 예상치 못한 상황을 마주했어요";
                     break;
                 default:
-                    errorMessage = "오류가 발생했어요 ㅠㅠ";
+                    errorMessage = "오류가 발생했어요 ㅠ.ㅠ";
             }
 
             model.addAttribute("status", statusCode);

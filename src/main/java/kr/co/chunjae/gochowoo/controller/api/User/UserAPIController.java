@@ -55,7 +55,7 @@ public class UserAPIController {
         return "redirect:/mypage";
     }
 
-    @GetMapping ("/profile")
+    @GetMapping("/profile")
     public String userProfile(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email");
 
@@ -113,10 +113,21 @@ public class UserAPIController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/check/email")
+    public ResponseEntity<Void> isUniqueEmail(@RequestParam String email) {
+        boolean isUnique = userService.isUniqueEmail(email);
+        if (!isUnique) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
+    }
 
-    /*public String withdrawUser(@RequestParam String email, @RequestParam String password) {
-
-        UserRepository userRepository;
-        User userToWithdraw = UserRepository.findById(email);
-    }*/
+    @GetMapping("/check/nickName")
+    public ResponseEntity<Void> isUniqueNickName(@RequestParam String nickName) {
+        boolean isUnique = userService.isUniqueNickName(nickName);
+        if (!isUnique) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
+    }
 }

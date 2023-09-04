@@ -73,5 +73,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public boolean isUniqueEmail(String email) {
+        return userRepository.findByEmail(email)==null;
+    }
+
+    @Override
+    public boolean isUniqueNickName(String nickName) {
+        return userRepository.findByNickName(nickName)==null;
+    }
+
 
 }

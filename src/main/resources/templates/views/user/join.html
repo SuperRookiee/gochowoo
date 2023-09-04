@@ -4,16 +4,80 @@
         layout:decorate="~{layout/layout}">
 <main layout:fragment="content">
     <script>
-        function inputFieldOnFocusHandler (elem) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1000,
+            // timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        function inputFieldOnFocusHandler(elem) {
             const desc = elem.getAttribute('aria-describedby');
             document.getElementById(desc).classList.toggle("hidden");
         }
+
+        async function isUnique(type, value) {
+            const response = await fetch(`/api/user/check/${type}?${type}=${value}`)
+            if (!response.ok) {
+                Toast.fire({
+                    icon: "error",
+                    title: `${type} 중복입니다.`
+                })
+            }
+            console.log(`/api/user/check/${type}`);
+            return response.ok;
+        }
+
+        async function onSubmitHandler(event) {
+            event.preventDefault();
+            const formElem = document.getElementById("formElem");
+            for (const elem of Object.values(formElem)) {
+                if (!elem.name) continue;
+                const inputValue = elem.value;
+                if (!inputValue) {
+                    elem.focus();
+                    Toast.fire({
+                        icon: "error",
+                        title: "이 필드를 채워주세요."
+                    })
+                    return;
+                }
+            }
+            // const regexPattern = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[a-z\d@$!%*?&]/;
+            const password = document.getElementById("passwordInput");
+            const passwordCheck = document.getElementById("passwordCheck");
+            if (password.value !== passwordCheck.value) {
+                passwordCheck.focus();
+                Toast.fire({
+                    icon: "error",
+                    title: "비밀번호가 일치하지 않습니다."
+                })
+                return;
+            }
+            const email = document.getElementById("emailInput").value;
+            const nickName = document.getElementById("nickNameInput").value;
+            const isUniqueEmail = await isUnique("email", email);
+            const isUniqueNickName = await isUnique("nickName", nickName);
+            if (isUniqueEmail && isUniqueNickName) {
+                formElem.submit();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const formElem = document.getElementById("formElem");
+            formElem.addEventListener("submit", onSubmitHandler);
+        })
     </script>
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <h2 class="mb-4">회원가입</h2>
-                <form action="/api/user/join" method="post">
+                <form action="/api/user/join" id="formElem" method="post">
                     <div class="mb-3">
                         <label for="emailInput" class="form-label">이메일</label>
                         <input name="email" type="email" class="form-control" id="emailInput"
@@ -25,7 +89,7 @@
                                onfocus="inputFieldOnFocusHandler(this)"
                                onblur="inputFieldOnFocusHandler(this)"
                                aria-describedby="passwordHelpBlock">
-                        <div id="passwordHelpBlock" class="form-text hidden" >
+                        <div id="passwordHelpBlock" class="form-text hidden">
                             Your password must be 8-20 characters long, contain letters and numbers, and must not
                             contain spaces, special characters, or emoji.
                         </div>

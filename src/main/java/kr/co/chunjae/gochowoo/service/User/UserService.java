@@ -14,4 +14,7 @@ public interface UserService {
 
     User getUserById(Long id);
 
+    boolean isUniqueEmail(String nickName);
+    boolean isUniqueNickName(String nickName);
+
 }

@@ -10,8 +10,8 @@ import kr.co.chunjae.gochowoo.model.User.UserAddress;
 import kr.co.chunjae.gochowoo.model.utils.ShippingStatus;
 import kr.co.chunjae.gochowoo.service.User.UserService;
 import kr.co.chunjae.gochowoo.service.cart.ItemCartService;
-import kr.co.chunjae.gochowoo.service.cart.OrderService;
 import kr.co.chunjae.gochowoo.service.cart.PokemonCartService;
+import kr.co.chunjae.gochowoo.service.order.PurchaseService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +30,7 @@ public class PaymentAPIController {
     private final UserService userService;
     private final PokemonCartService pokemonCartService;
     private final ItemCartService itemCartService;
-    private final OrderService orderService;
+    private final PurchaseService.OrderService orderService;
 
     @PostMapping("/payment")
     public String buy(HttpSession session, @RequestParam Long address) {
